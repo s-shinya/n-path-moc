@@ -143,7 +143,7 @@ $weekend: rgba(250, 246, 225, 0.5);
     border-bottom: 1px solid #bbb;
     cursor: pointer;
     font-size: 14px;
-    background-color: rgb(240, 240, 240);
+    // background-color: rgb(240, 240, 240);//dataヘッダーの色
     border-left:  2px solid #bbb;
   }
 
@@ -155,13 +155,12 @@ $weekend: rgba(250, 246, 225, 0.5);
   }
 
   .rct-header-root {
-    background: #2A4365;//ヘッダーの色
+    // background: #2A4365;//ヘッダーの色
     border-bottom: 1px solid #bbb;
   }
 
   .rct-calendar-header {
     border: 1px solid #bbb,
-
   }
 
 }

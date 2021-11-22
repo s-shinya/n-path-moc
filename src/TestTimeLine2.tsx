@@ -5,7 +5,8 @@ import React, { useCallback, useState, VFC } from 'react';
 // import 'react-calendar-timeline/lib/Timeline.css'
 import './Style.scss'
 import moment, { Moment } from 'moment'
-import TimeLine, { CustomMarker, DateHeader, SidebarHeader, TimelineHeaders, TimelineMarkers, TodayMarker, ReactCalendarTimelineProps, ReactCalendarGroupRendererProps, ReactCalendarItemRendererProps } from 'react-calendar-timeline';
+import TimeLine, { CustomMarker, DateHeader, SidebarHeader, TimelineHeaders, ReactCalendarTimelineProps, ReactCalendarGroupRendererProps, ReactCalendarItemRendererProps, CustomHeader } from 'react-calendar-timeline';
+import { CALENDAR_PERIOD } from './TimeLine/Const';
 
 type ItemRendererProps = ReactCalendarItemRendererProps
 const ItemRenderer:VFC<ItemRendererProps> = (props) => {
@@ -101,11 +102,14 @@ type Props = {
     dateRange: {visibleTimeStart:Moment, visibleTimeEnd:Moment};
     primaryDateHeaderLabelFormat: string;
     secondaryDateHeaderLabelFormat: string;
+    sidebarTitle: string;
     isRightSidebar: boolean;
+    rightSidebarTitle?: string;
+    calendarPeriod: number;
     onItemSelect: ReactCalendarTimelineProps['onItemSelect'];
 }
 export const TestTimeLine2: VFC<Props> = (props) => {
-    const {items, groups, dateRange, primaryDateHeaderLabelFormat, secondaryDateHeaderLabelFormat, isRightSidebar, onItemSelect} = props;
+    const {items, groups, dateRange, primaryDateHeaderLabelFormat, secondaryDateHeaderLabelFormat, sidebarTitle, rightSidebarTitle, isRightSidebar, calendarPeriod ,onItemSelect} = props;
 
     return (
         <>
@@ -159,58 +163,50 @@ export const TestTimeLine2: VFC<Props> = (props) => {
                     top:0,
                     zIndex:10000,
                 }}
+                calendarHeaderStyle={{backgroundColor: '#2A4365'}}
             >
                 <SidebarHeader variant="left">
                     {({ getRootProps }) => {
                         return (
                             <div {...getRootProps()}>
-                                <div style={{height:'100%',display:'flex',alignItems:'center',justifyContent:'center'}}>
-                                    <span style={{color:'#fff',fontWeight:'bold'}}>工事案件名</span>
+                                <div style={{backgroundColor: '#2A4365', height:'100%',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                                    <span style={{color:'#fff',fontWeight:'bold'}}>{sidebarTitle}</span>
                                 </div>
                             </div>
                         )
-                        }}
+                    }}
                 </SidebarHeader>
                 {isRightSidebar &&
                     <SidebarHeader variant="right">
                         {({ getRootProps }) => {
                             return (
                                 <div {...getRootProps()}>
-                                    <div style={{height:'100%',display:'flex',alignItems:'center',justifyContent:'center'}}>
-                                        <span style={{color:'#fff',fontWeight:'bold', display:'flex',justifyContent:'center',alignItems:'center'}}>窓口</span>
+                                    <div style={{backgroundColor: '#2A4365', height:'100%',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                                        <span style={{color:'#fff',fontWeight:'bold', display:'flex',justifyContent:'center',alignItems:'center'}}>{rightSidebarTitle}</span>
                                     </div>
                                 </div>
                             )
-                            }}
+                        }}
                     </SidebarHeader>
                 }
+                {calendarPeriod !== CALENDAR_PERIOD.WEEK ?
+                    <DateHeader 
+                        unit="primaryHeader" 
+                        labelFormat={primaryDateHeaderLabelFormat}
+                    />
+                :
+                    <DateHeader 
+                        unit="week" 
+                        style={{color: 'white'}}
+                        labelFormat={primaryDateHeaderLabelFormat}
+                    />
+                
+                }
                 <DateHeader 
-                    unit="primaryHeader" 
-                    // labelFormat="yyyy/MM"
-                    // labelFormat="DD"
-                    labelFormat={primaryDateHeaderLabelFormat}
+                    labelFormat={secondaryDateHeaderLabelFormat}
+                    style={{backgroundColor: 'rgb(240, 240, 240)'}}
                 />
-                <DateHeader labelFormat={secondaryDateHeaderLabelFormat}/>
-                {/* <DateHeader
-                    unit="day"
-                    labelFormat="MM/DD"
-                    style={{ height: 50 }}
-                    // data={{someData: 'example'}}
-                    // intervalRenderer={({ getIntervalProps, intervalContext, data }) => {
-                    //     return (
-                    //         <div {...getIntervalProps()}>
-                    //             {intervalContext.intervalText}
-                    //             {data.example}
-                    //         </div>
-                    //     )
-                    // }}
-                /> */}
             </TimelineHeaders>
-
-            {/* <TimelineMarkers>
-                <CustomMarker date={today} />
-            </TimelineMarkers> */}
-
         </TimeLine>
         </>
     )
