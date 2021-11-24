@@ -14,8 +14,21 @@ const ItemRenderer:VFC<ItemRendererProps> = (props) => {
     const { left: leftResizeProps, right: rightResizeProps } = getResizeProps();
     const backgroundColor = itemContext.selected ? (itemContext.dragging ? item.selectedBgColor : item.selectedBgColor) : item.bgColor;
     const textColor = itemContext.selected ? '#975A16' : item.color;
-    const startLabel = (item.start_label) ? item.start_label : null;
-    const endLabel = (item.end_label) ? item.end_label : null;
+    const startLabel = (item.start_label) ? item.start_label.date() : null;
+    let startLabelBgColor = '#FEEBC8';
+    let startLabelBorder = "1px solid #FBD38D";
+    if(item.is_start_hide){
+        startLabelBgColor = '#EDF2F7';
+        startLabelBorder = "1px solid #E2E8F0";
+    }
+    const endLabel = (item.end_label) ? item.end_label.date() : null;
+    let endLabelBgColor = '#FEEBC8';
+    let endLabelBorder = "1px solid #FBD38D";
+    if(item.is_end_hide){
+        endLabelBgColor = '#EDF2F7';
+        endLabelBorder = "1px solid #E2E8F0";
+    }
+
 
     return (
         <div
@@ -69,12 +82,12 @@ const ItemRenderer:VFC<ItemRendererProps> = (props) => {
                         }}
                     >
                         <div
-                            style={{display:'flex', alignItems:'center', justifyContent:'center', backgroundColor:'#FEEBC8',borderRadius: '50%', height: '16px', width:'16px', border: '1px solid #FBD38D'}}
+                            style={{display:'flex', alignItems:'center', justifyContent:'center', backgroundColor:startLabelBgColor, borderRadius: '50%', height: '16px', width:'16px', border: startLabelBorder}}
                         >
                             <p style={{margin:0, fontSize:'11px'}}>{startLabel}</p>
                         </div>
                         <div
-                            style={{display:'flex', alignItems:'center', justifyContent:'center', backgroundColor:'#FEEBC8',borderRadius: '50%', height: '16px', width:'16px', border: '1px solid #FBD38D'}}
+                            style={{display:'flex', alignItems:'center', justifyContent:'center', backgroundColor:endLabelBgColor,borderRadius: '50%', height: '16px', width:'16px', border: endLabelBorder}}
                         >
                             <p style={{margin:0, fontSize:'11px'}}>{endLabel}</p>
                         </div>

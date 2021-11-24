@@ -176,8 +176,10 @@ const items = [
         bgColor: "#FEB2B2",
         selectedBgColor: "rgb(255, 193, 7)",
         color: "#63171B",
-        start_label:moment('2021-10-31 00:00:00').date(),//ライン上部に表示する日付
-        end_label: moment('2021-11-20 00:00:00').date(),
+        start_label:moment('2021-10-31 00:00:00'),//ライン上部に表示する日付
+        is_start_hide: true,
+        end_label: moment('2021-11-20 00:00:00'),
+        is_end_hide: false,
     },
     {
         id: 2,
@@ -188,8 +190,10 @@ const items = [
         bgColor: "#9DECF9",
         selectedBgColor: "rgb(255, 193, 7)",
         color: "#065666",
-        start_label: moment('2021-11-10 00:00:00').date(),
-        end_label: moment('2021-10-11 00:00:00').date(),
+        start_label: moment('2021-11-10 00:00:00'),
+        is_start_hide: false,
+        end_label: moment('2021-10-11 00:00:00'),
+        is_end_hide: false,
     },
     {
         id: 4,
@@ -200,8 +204,10 @@ const items = [
         bgColor: "#9DECF9",
         selectedBgColor: "rgb(255, 193, 7)",
         color: "#065666",
-        start_label: moment('2021-11-10 00:00:00').date(),
-        end_label: moment('2021-10-11 00:00:00').date(),
+        start_label: moment('2021-11-10 00:00:00'),
+        is_start_hide: false,
+        end_label: moment('2021-10-11 00:00:00'),
+        is_end_hide: false,
     },
     {
         id: 3,
@@ -212,8 +218,10 @@ const items = [
         bgColor: "#9AE6B4",
         selectedBgColor: "rgb(255, 193, 7)",
         color: "#1C4532",
-        start_label: moment('2021-11-13 00:00:00').date(),
-        end_label: moment('2021-12-01 00:00:00').date(),
+        start_label: moment('2021-11-13 00:00:00'),
+        is_start_hide: false,
+        end_label: moment('2021-12-01 00:00:00'),
+        is_end_hide: true,
     },
 ]
 const items2 = [
