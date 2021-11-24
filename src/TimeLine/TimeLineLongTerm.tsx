@@ -196,7 +196,7 @@ const items = [
         id: 1,
         group: 1,
         title: '',
-        start_time: moment('2020-12-31 00:00:00').valueOf(),//ライン表示の開始日（画面跨ぐ場合は考慮する）
+        start_time: moment('2021-01-01 00:00:00').valueOf(),//ライン表示の開始日（画面跨ぐ場合は考慮する）
         end_time: moment('2021-03-10 23:59:59').valueOf(),
         bgColor: "#FEB2B2",
         selectedBgColor: "rgb(255, 193, 7)",
@@ -233,7 +233,7 @@ const items = [
         group: 3,
         title: '',
         start_time: moment('2021-11-10 00:00:00').valueOf(),
-        end_time: moment('2022-01-02 23:59:59').valueOf(),
+        end_time: moment('2021-12-31 23:59:59').valueOf(),
         bgColor: "#9AE6B4",
         selectedBgColor: "rgb(255, 193, 7)",
         color: "#1C4532",

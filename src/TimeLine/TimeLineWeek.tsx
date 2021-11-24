@@ -171,13 +171,13 @@ const items = [
         id: 1,
         group: 1,
         title: '山陽特殊製鋼姫路',
-        start_time: moment('2021-11-22 00:00:00').valueOf(),//ライン表示の開始日（画面跨ぐ場合は考慮する）
-        end_time: moment('2021-11-28 23:59:59').valueOf(),
+        start_time: moment('2021-11-21 00:00:00').valueOf(),//ライン表示の開始日（画面跨ぐ場合は考慮する）
+        end_time: moment('2021-11-27 23:59:59').valueOf(),
         bgColor: "#FEB2B2",
         selectedBgColor: "rgb(255, 193, 7)",
         color: "#63171B",
-        start_label:moment('2021-11-22 00:00:00').date(),//ライン上部に表示する日付
-        end_label: moment('2021-11-28 00:00:00').date(),
+        start_label:moment('2021-11-21 00:00:00').date(),//ライン上部に表示する日付
+        end_label: moment('2021-11-27 00:00:00').date(),
     },
     {
         id: 2,

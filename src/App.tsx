@@ -15,7 +15,7 @@ function App() {
     MONTH : 1,
     WEEK : 2,
   };
-  const [type, setType] = useState(TAB_TYPE.WEEK);
+  const [type, setType] = useState(TAB_TYPE.LONG_TERM);
   
 
 

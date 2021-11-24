@@ -208,7 +208,7 @@ const items = [
         group: 3,
         title: '中部国際医療センター',
         start_time: moment('2021-11-13 00:00:00').valueOf(),
-        end_time: moment('2021-12-01 23:59:59').valueOf(),
+        end_time: moment('2021-11-30 23:59:59').valueOf(),
         bgColor: "#9AE6B4",
         selectedBgColor: "rgb(255, 193, 7)",
         color: "#1C4532",
