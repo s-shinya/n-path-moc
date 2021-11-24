@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import './App.css';
+import './Style.scss'
+// import '@fullcalendar/common/main.css'
+import './TimeLine/fullcalenndar.css'
+
+import { PersonalCalendar } from './TimeLine/PersonalCalendar';
 // import { TestTimeLine2 } from './TestTimeLine2';
 // import { TestTimeLine } from './TestTimeLine';
 // import { TimeLinePage } from './TimeLinePage';
@@ -14,8 +19,9 @@ function App() {
     LONG_TERM : 0,
     MONTH : 1,
     WEEK : 2,
+    PERSONAL : 3,
   };
-  const [type, setType] = useState(TAB_TYPE.LONG_TERM);
+  const [type, setType] = useState(TAB_TYPE.PERSONAL);
   
 
 
@@ -32,6 +38,9 @@ function App() {
         <button type="button"
           onClick={()=>setType(TAB_TYPE.WEEK)}
         >週</button>
+        <button type="button"
+          onClick={()=>setType(TAB_TYPE.PERSONAL)}
+        >個人</button>
       </div>
       {/* <CalendarTimeLine/> */}
       {/* <CustomTimeline /> */}
@@ -47,6 +56,11 @@ function App() {
       }
       {type === TAB_TYPE.WEEK && 
         <TimeLineWeek />
+      }
+      {type === TAB_TYPE.PERSONAL && 
+        <div style={{width:"70%", margin: "1em auto"}}>{/** webの時横幅調整 */}
+            <PersonalCalendar />
+        </div>
       }
     </div>
   );
