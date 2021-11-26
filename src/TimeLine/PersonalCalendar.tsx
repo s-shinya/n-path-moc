@@ -15,6 +15,7 @@ const INITIAL_EVENTS: EventInput[] = [
         end: "2021-11-02",// 終了日 + 1日
         color: '#FEB2B2',
         textColor: '#63171B',
+        borderColor: '#63171B'
         // start: "2021-11-01 11:10",
         // end: "2021-11-05 11:10",
         // allDay : false
@@ -26,6 +27,7 @@ const INITIAL_EVENTS: EventInput[] = [
         end: "2021-11-05",
         color: '#9AE6B4',
         textColor: '#1C4532',
+        borderColor: '#1C4532',
     },
     {
         id: "3",
@@ -34,6 +36,7 @@ const INITIAL_EVENTS: EventInput[] = [
         end: "2021-11-09",
         color: '#9DECF9',
         textColor: '#065666',
+        borderColor: '#065666',
     },
 ];
 
