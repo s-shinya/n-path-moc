@@ -3,7 +3,6 @@
 import React, { useCallback, useState, VFC } from 'react';
 // make sure you include the timeline stylesheet or the timeline will not be styled
 // import 'react-calendar-timeline/lib/Timeline.css'
-import './Style.scss'
 import moment, { Moment } from 'moment'
 import TimeLine, { CustomMarker, DateHeader, SidebarHeader, TimelineHeaders, TimelineMarkers, TodayMarker, ReactCalendarTimelineProps, ReactCalendarGroupRendererProps } from 'react-calendar-timeline';
 

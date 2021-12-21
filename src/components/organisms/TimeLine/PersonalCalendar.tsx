@@ -4,6 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import interactionPlugin, { DateClickArg } from "@fullcalendar/interaction"; // 日付クリックイベントに必要
 import allLocales from '@fullcalendar/core/locales-all'; //日本語表記に必要
 import { useCallback, VFC } from "react";
+import '../../../TimeLine/fullcalenndar.css'
 
 
 const INITIAL_EVENTS: EventInput[] = [
@@ -39,7 +40,7 @@ const INITIAL_EVENTS: EventInput[] = [
     },
 ];
 
-export const PersonalCalendar: VFC = () => {
+const PersonalCalendar: VFC = () => {
     const [currentEvents, setCurrentEvents] = useState<EventApi[]>([]);
     const handleChangeEvents = useCallback((events: EventApi[]) => {
       console.log("events:", events);  // 確認用
@@ -105,8 +106,11 @@ export const PersonalCalendar: VFC = () => {
                 editable={true}
                 eventClick={handleEventClick}
                 height="auto"
+                // titleFormat={}
             />
         // </div>
     )
 
 }
+
+export default PersonalCalendar
