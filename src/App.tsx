@@ -2,7 +2,7 @@ import React, {  } from 'react';
 // import '@fullcalendar/common/main.css'
 import './App.css';
 import './Style.scss'
-// import './TimeLine/fullcalenndar.css'
+import './TimeLine/fullcalenndar.css'
 
 // import '../public/css/fullcalenndar.css'
 // import '../public/css/timeline.scss'
