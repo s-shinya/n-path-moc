@@ -39,21 +39,53 @@ import { CALENDAR_PERIOD } from '../../constants/const';
 import CButton from '../Atoms/CButton';
 import CInput from '../Atoms/CInput';
 import { useWindowSize } from '../../hooks/useWindowSize';
-import { LONG_TERM_GROUP_DATA, LONG_TERM_ITEM_DATA } from '../../constants/testData';
-import { TimeLineGroupsType, TimeLineItemsType, TimeLineType } from '../../types/TimeLineType';
+import { LONG_TERM_GROUPS_DATA, LONG_TERM_ITEMS_DATA, MONTH_GROUPS_DATA_BY_PEOPLE, MONTH_ITEMS_DATA_BY_PEOPLE } from '../../constants/testData';
+import { TimeLineGroupsType, TimeLineItemsType } from '../../types/TimeLineType';
+import moment, { Moment } from 'moment'
 
 
 
 const PlanPage:VFC = () => {
-    const [tabIndex, setTabIndex] = useState<number>(CALENDAR_PERIOD.MONTH);
+    const [tabIndex, setTabIndex] = useState<number>(CALENDAR_PERIOD.LONG_TERM);
     const { winH } = useWindowSize();
-    const [groupList,setGroupList] = useState<TimeLineGroupsType>(LONG_TERM_GROUP_DATA)
-    const [itemList,setItemList] = useState<TimeLineItemsType>(LONG_TERM_ITEM_DATA);
+    const [groupList,setGroupList] = useState<TimeLineGroupsType>([])
+    const [itemList,setItemList] = useState<TimeLineItemsType>([]);
+
+    useEffect(()=>{
+        setGroupList(LONG_TERM_GROUPS_DATA);
+        setItemList(LONG_TERM_ITEMS_DATA);
+    },[])
+
+    /**
+     * データ取得
+     */
+    const getData = (type: number, startDate: Moment, finishDate: Moment) => {
+        console.log('新しいデータを取得します');
+        console.log(type);
+    };
+
+    /**
+     * タブの切り替えでデータ切り替え
+     */
+    const onChangeTab = (idx:number) => {
+        switch(idx){
+            case CALENDAR_PERIOD.LONG_TERM:
+                setGroupList(LONG_TERM_GROUPS_DATA);
+                setItemList(LONG_TERM_ITEMS_DATA);
+                break;
+            case CALENDAR_PERIOD.MONTH:
+                setGroupList(MONTH_GROUPS_DATA_BY_PEOPLE);
+                setItemList(MONTH_ITEMS_DATA_BY_PEOPLE);
+                break;
+        }
+        setTabIndex(idx)
+    }
+
 
     return (
         <>
             <MainTemplate>
-                <Tabs index={tabIndex} onChange={(index) => setTabIndex(index)}>
+                <Tabs index={tabIndex} onChange={(index) => onChangeTab(index)}>
                     <TabList 
                         display="flex" 
                         justifyContent="space-between"
@@ -102,12 +134,18 @@ const PlanPage:VFC = () => {
                                     mainAreaH={winH}
                                     groups={groupList}
                                     items={itemList}
+                                    getData={getData}
                                 />
                             }
                         </TabPanel>
                         <TabPanel>
                             {tabIndex === CALENDAR_PERIOD.MONTH &&
-                                <TimeLineMonth mainAreaH={winH}/>
+                                <TimeLineMonth 
+                                    mainAreaH={winH}
+                                    groups={groupList}
+                                    items={itemList}
+                                    getData={getData}
+                                />
                             }
                         </TabPanel>
                         <TabPanel>

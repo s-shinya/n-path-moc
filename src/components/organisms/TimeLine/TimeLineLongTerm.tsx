@@ -9,39 +9,32 @@ import { Flex, Box, Text, Stack } from '@chakra-ui/react';
 import ColorBox from '../../Atoms/ColorBox';
 import { TimeLineType } from '../../../types/TimeLineType';
 
-type Props = TimeLineType & {
-    mainAreaH: number;
-}
-const TimeLineLongTerm: VFC<Props> = (props) => {
-    const {mainAreaH, groups, items} = props
+const TimeLineLongTerm: VFC<TimeLineType> = (props) => {
+    const {mainAreaH, groups, items, getData} = props;
     const [dateRange, setDateRange] = useState<{visibleTimeStart:Moment, visibleTimeEnd:Moment}>({
         visibleTimeStart:moment().startOf("year"),//1年ごと
         visibleTimeEnd:moment().endOf("year")
     });
 
-    const getItemList = useCallback((startDate) => {
-        // setItemList(items2);
-    },[])
-
     const handlePrev = useCallback(()=>{
-        //1ヶ月ごと
-        const startDate = dateRange.visibleTimeStart.add(-1, 'year');
-        getItemList(startDate)
+        const startDate: Moment = dateRange.visibleTimeStart.add(-1, 'year');
+        const finishDate: Moment = dateRange.visibleTimeEnd.add(-1, 'year')
+        getData(CALENDAR_PERIOD.LONG_TERM, startDate, finishDate)
         setDateRange({...dateRange, ...{
             visibleTimeStart: startDate,
-            visibleTimeEnd: dateRange.visibleTimeEnd.add(-1, 'year')
+            visibleTimeEnd: finishDate
         }})
-    }, [dateRange, getItemList])
+    }, [dateRange, getData])
 
     const handleNext = useCallback(()=>{
-        //1ヶ月ごと
-        const startDate = dateRange.visibleTimeStart.add(1, 'year');
-        getItemList(startDate)
+        const startDate: Moment = dateRange.visibleTimeStart.add(1, 'year');
+        const finishDate: Moment = dateRange.visibleTimeEnd.add(1, 'year')
+        getData(CALENDAR_PERIOD.LONG_TERM, startDate, finishDate)
         setDateRange({...dateRange, ...{
             visibleTimeStart: startDate,
-            visibleTimeEnd: dateRange.visibleTimeEnd.add(1, 'year')
+            visibleTimeEnd: finishDate
         }})
-    }, [dateRange, getItemList])
+    }, [dateRange, getData])
 
     const onItemSelect = useCallback((itemId, e, time) => {
         alert(`onItemSelect：${itemId}`)

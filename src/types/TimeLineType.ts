@@ -1,14 +1,16 @@
 import { Moment } from 'moment'
 
 export type TimeLineType = {
-    groups:TimeLineGroupsType
-    items:TimeLineItemsType
+    mainAreaH: number;
+    groups:TimeLineGroupsType;
+    items:TimeLineItemsType;
+    getData:(type:number, startDate:Moment, finishDate:Moment)=>void;
 };
 
 export type TimeLineGroupsType = {
     id: number; 
     title: string; 
-    rightTitle?: string
+    rightTitle?: string;
 }[];
 
 export type TimeLineItemsType = {
