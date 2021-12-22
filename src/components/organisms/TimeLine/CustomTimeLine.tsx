@@ -156,6 +156,7 @@ const ItemRenderer:VFC<ItemRendererProps> = (props) => {
 // }
 
 type Props = {
+    stickyTimeLineHeaderTop?: number;
     groups: { id: number; title: string; }[];
     items: { id: number; group: number; title: string; start_time: number; end_time: number; bgColor: string; selectedBgColor: string; color: string; }[]; 
     dateRange: {visibleTimeStart:Moment, visibleTimeEnd:Moment};
@@ -168,10 +169,22 @@ type Props = {
     onItemSelect: ReactCalendarTimelineProps['onItemSelect'];
 }
 const CustomTimeLine: VFC<Props> = (props) => {
-    const {items, groups, dateRange, primaryDateHeaderLabelFormat, secondaryDateHeaderLabelFormat, sidebarTitle, rightSidebarTitle, isRightSidebar, calendarPeriod ,onItemSelect} = props;
+    const {
+        stickyTimeLineHeaderTop, //スティッキーヘッダーで固定する高さ
+        groups,
+        items,
+        dateRange,
+        primaryDateHeaderLabelFormat,
+        secondaryDateHeaderLabelFormat,
+        sidebarTitle,
+        rightSidebarTitle,
+        isRightSidebar,
+        calendarPeriod ,
+        onItemSelect
+    } = props;
 
     return (
-        <>
+        <Box bg='white'>
             <TimeLine
                 // groupRenderer= {GroupRenderer}
                 selected={[]}//選択状態にさせないようにする
@@ -219,7 +232,7 @@ const CustomTimeLine: VFC<Props> = (props) => {
                 <TimelineHeaders 
                     style={{//header固定
                         position: 'sticky',
-                        // top:200,
+                        top: stickyTimeLineHeaderTop,
                         zIndex:10000,
                     }}
                     calendarHeaderStyle={{backgroundColor: '#2A4365'}}
@@ -267,7 +280,7 @@ const CustomTimeLine: VFC<Props> = (props) => {
                     />
                 </TimelineHeaders>
             </TimeLine>
-        </>
+        </Box>
     )
 }
 

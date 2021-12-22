@@ -237,7 +237,11 @@ const items2 = [
 ]
 
 
-const TimeLineMonth: VFC = () => {
+type Props = {
+    stickyTimeLineHeaderTop: number;
+}
+const TimeLineMonth: VFC<Props> = (props) => {
+    const {stickyTimeLineHeaderTop} = props;
     const [groupList,setGroupList] = useState(groups)
     const [itemList,setItemList] = useState(items);
     const [dateRange, setDateRange] = useState<{visibleTimeStart:Moment, visibleTimeEnd:Moment}>({
@@ -273,14 +277,8 @@ const TimeLineMonth: VFC = () => {
         alert(`onItemSelect：${itemId}`)
     }, [])
 
-    
-
-
     return (
-        <div style={{
-            backgroundColor:'#E2E8F0',
-            height:'100%'
-        }}>
+        <>
             <div>月計画</div>
             <PageTurnButtons 
                 handlePrev={handlePrev}
@@ -291,6 +289,7 @@ const TimeLineMonth: VFC = () => {
                 backgroundColor: '#fff'//タイムラインの背景は白にする
             }}>
                 <CustomTimeLine 
+                    stickyTimeLineHeaderTop={stickyTimeLineHeaderTop}
                     groups={groupList}
                     items={itemList}
                     dateRange={dateRange}
@@ -302,7 +301,7 @@ const TimeLineMonth: VFC = () => {
                     onItemSelect={onItemSelect}
                 />
             </div>
-        </div>
+        </>
     )
 }
 

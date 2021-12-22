@@ -1,4 +1,4 @@
-import React, { useState, VFC } from 'react';
+import React, { useState, VFC, useRef, useEffect } from 'react';
 // import '../organisms/TimeLine/Style.scss'
 // import '../organisms/TimeLine/fullcalenndar.css'
 // import '../../Style.scss'
@@ -42,13 +42,21 @@ import CInput from '../Atoms/CInput';
 
 
 const PlanPage:VFC = () => {
-    const [tabIndex, setTabIndex] = useState(CALENDAR_PERIOD.LONG_TERM);
+    const [tabIndex, setTabIndex] = useState<number>(CALENDAR_PERIOD.LONG_TERM);
+
+    //スティッキーヘッダーで固定する高さ
+    const [mainAreaTop, setMainAreaTop] = useState<number>(0);
+    const mainAreaRef= useRef<null | HTMLDivElement>(null);
+    useEffect(() => {
+        if(mainAreaRef.current?.getBoundingClientRect().bottom) setMainAreaTop(mainAreaRef.current.getBoundingClientRect().bottom);
+    }, []);
 
     return (
         <>
             <MainTemplate>
                 <Tabs index={tabIndex} onChange={(index) => setTabIndex(index)}>
                     <TabList 
+                        ref={mainAreaRef}
                         display="flex" 
                         justifyContent="space-between"
                         alignItems="center"
@@ -89,20 +97,20 @@ const PlanPage:VFC = () => {
                             >適用</CButton>
                         </Flex>
                     </TabList>
-                    <TabPanels pt={10}>
-                        <TabPanel>
+                    <TabPanels pt={10} bg='yellow.100'>
+                        <TabPanel bg='red.100'>
                             {tabIndex === CALENDAR_PERIOD.LONG_TERM &&
-                                <TimeLineLongTerm/>
+                                <TimeLineLongTerm stickyTimeLineHeaderTop={mainAreaTop}/>
                             }
                         </TabPanel>
                         <TabPanel>
                             {tabIndex === CALENDAR_PERIOD.MONTH &&
-                                <TimeLineMonth/>
+                                <TimeLineMonth stickyTimeLineHeaderTop={mainAreaTop}/>
                             }
                         </TabPanel>
                         <TabPanel>
                             {tabIndex === CALENDAR_PERIOD.WEEK &&
-                                <TimeLineWeek/>
+                                <TimeLineWeek stickyTimeLineHeaderTop={mainAreaTop}/>
                             }
                         </TabPanel>
                         <TabPanel>

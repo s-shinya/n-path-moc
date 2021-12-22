@@ -263,8 +263,11 @@ const items2 = [
     },
 ]
 
-
-const TimeLineLongTerm: VFC = () => {
+type Props = {
+    stickyTimeLineHeaderTop: number;
+}
+const TimeLineLongTerm: VFC<Props> = (props) => {
+    const {stickyTimeLineHeaderTop} = props
     const [groupList,setGroupList] = useState(groups)
     const [itemList,setItemList] = useState(items);
     const [dateRange, setDateRange] = useState<{visibleTimeStart:Moment, visibleTimeEnd:Moment}>({
@@ -300,14 +303,8 @@ const TimeLineLongTerm: VFC = () => {
         alert(`onItemSelect：${itemId}`)
     }, [])
 
-    
-
-
     return (
-        <div style={{
-            backgroundColor:'#E2E8F0',
-            height:'100%'
-        }}>
+        <>
             <Flex justifyContent='space-between' mb={2}>
                 <Box></Box>
                 <ColorTimeLineLabels/>
@@ -318,23 +315,22 @@ const TimeLineLongTerm: VFC = () => {
             </Flex>
 
             {/* タイムラインの背景は白にする */}
-            <Box bg='white'>
-                <CustomTimeLine 
-                    groups={groupList}
-                    items={itemList}
-                    dateRange={dateRange}
-                    // primaryDateHeaderLabelFormat="yyyy/MM"
-                    // secondaryDateHeaderLabelFormat="DD"
-                    primaryDateHeaderLabelFormat="yyyy"
-                    secondaryDateHeaderLabelFormat="MM"
-                    sidebarTitle="工事案件名"
-                    isRightSidebar={true}
-                    rightSidebarTitle="窓口"
-                    calendarPeriod={CALENDAR_PERIOD.LONG_TERM}
-                    onItemSelect={onItemSelect}
-                />
-            </Box>
-        </div>
+            <CustomTimeLine 
+                stickyTimeLineHeaderTop={stickyTimeLineHeaderTop}
+                groups={groupList}
+                items={itemList}
+                dateRange={dateRange}
+                // primaryDateHeaderLabelFormat="yyyy/MM"
+                // secondaryDateHeaderLabelFormat="DD"
+                primaryDateHeaderLabelFormat="yyyy"
+                secondaryDateHeaderLabelFormat="MM"
+                sidebarTitle="工事案件名"
+                isRightSidebar={true}
+                rightSidebarTitle="窓口"
+                calendarPeriod={CALENDAR_PERIOD.LONG_TERM}
+                onItemSelect={onItemSelect}
+            />
+        </>
     )
 }
 export default TimeLineLongTerm;
