@@ -3,8 +3,10 @@
 import React, { useCallback, useState, VFC } from 'react';
 import moment, { Moment } from 'moment'
 import CustomTimeLine from './CustomTimeLine';
-import PageTurnButtons from '../../molecules/PageTurnButtons/PageTurnButtons';
+import PageTurnButtons from '../../molecules/PageTurnButtons';
 import { CALENDAR_PERIOD } from '../../../constants/const';
+import { Flex, Box } from '@chakra-ui/react';
+import ColorTimeLineLabels from '../../molecules/ColorTimeLineLabels';
 
 // const groups = [
 //     { 
@@ -306,15 +308,17 @@ const TimeLineLongTerm: VFC = () => {
             backgroundColor:'#E2E8F0',
             height:'100%'
         }}>
-            <div>長期計画</div>
-            <PageTurnButtons 
-                handlePrev={handlePrev}
-                handleNext={handleNext}
-            />
-            <div style={{
-                // padding:'16px',
-                backgroundColor: '#fff'//タイムラインの背景は白にする
-            }}>
+            <Flex justifyContent='space-between' mb={2}>
+                <Box></Box>
+                <ColorTimeLineLabels/>
+                <PageTurnButtons 
+                    handlePrev={handlePrev}
+                    handleNext={handleNext}
+                />
+            </Flex>
+
+            {/* タイムラインの背景は白にする */}
+            <Box bg='white'>
                 <CustomTimeLine 
                     groups={groupList}
                     items={itemList}
@@ -329,7 +333,7 @@ const TimeLineLongTerm: VFC = () => {
                     calendarPeriod={CALENDAR_PERIOD.LONG_TERM}
                     onItemSelect={onItemSelect}
                 />
-            </div>
+            </Box>
         </div>
     )
 }

@@ -27,7 +27,8 @@ import {
     TabPanels,
     TabPanel,
     Flex,
-    Button
+    Box,
+    Select
 } from "@chakra-ui/react";
 import MainTemplate from '../templates/MainTemplate';
 import TimeLineLongTerm  from '../organisms/TimeLine/TimeLineLongTerm';
@@ -36,6 +37,7 @@ import TimeLineWeek  from '../organisms/TimeLine/TimeLineWeek';
 import PersonalCalendar  from '../organisms/TimeLine/PersonalCalendar';
 import { CALENDAR_PERIOD } from '../../constants/const';
 import CButton from '../Atoms/CButton';
+import CInput from '../Atoms/CInput';
 
 
 
@@ -64,7 +66,23 @@ const PlanPage:VFC = () => {
                             <Tab _focus={{focus:"none"}}>個人</Tab>
                         </Flex>
                         <Flex mr={4}>
-                            {/* TODO:日付入れる */}
+                            <Box mr={4}>
+                                <CInput
+                                    type='date'
+                                    size='sm'
+                                    onChange={(e)=>{console.log(e.target.value)}}
+                                />
+                            </Box>
+                            <Box mr={4}>
+                                <Select 
+                                    placeholder='部署' 
+                                    size='sm' 
+                                    onChange={(e)=>{console.log(e.target.value)}}
+                                >
+                                    <option value='1'>東京事業所</option>
+                                    <option value='2'>名古屋事業所</option>
+                                </Select>
+                            </Box>
                             <CButton 
                                 size='sm'
                                 onClick={()=>alert('クリック')}
@@ -86,7 +104,6 @@ const PlanPage:VFC = () => {
                             {tabIndex === CALENDAR_PERIOD.WEEK &&
                                 <TimeLineWeek/>
                             }
-                            <TimeLineWeek/>
                         </TabPanel>
                         <TabPanel>
                             {tabIndex === CALENDAR_PERIOD.DATE &&

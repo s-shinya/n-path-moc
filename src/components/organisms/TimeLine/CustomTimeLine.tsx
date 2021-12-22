@@ -6,6 +6,7 @@ import React, { useCallback, useState, VFC } from 'react';
 import moment, { Moment } from 'moment'
 import TimeLine, { CustomMarker, DateHeader, SidebarHeader, TimelineHeaders, ReactCalendarTimelineProps, ReactCalendarGroupRendererProps, ReactCalendarItemRendererProps, CustomHeader, Id, ItemContext, GetItemsProps, GetResizeProps, ItemRendererGetResizePropsReturnType } from 'react-calendar-timeline';
 import { CALENDAR_PERIOD } from '../../../constants/const';
+import { Box } from '@chakra-ui/react';
 
 // type ItemRendererProps = ReactCalendarItemRendererProps
 // type ItemRendererProps = any
@@ -86,7 +87,7 @@ const ItemRenderer:VFC<ItemRendererProps> = (props) => {
                 borderRadius: 4,
                 borderLeftWidth: itemContext.selected ? 3 : 1,
                 borderRightWidth: itemContext.selected ? 3 : 1,
-                position:'relative'
+                position:'relative',
             },
             // onMouseDown: () => {
             //     alert("on item click"+ item);
@@ -146,6 +147,7 @@ const ItemRenderer:VFC<ItemRendererProps> = (props) => {
 // type GroupProps = ReactCalendarGroupRendererProps;
 // const GroupRenderer: VFC<GroupProps> = (props) => {
 //     const { group, isRightSidebar  } = props;
+//     // group.rightTitle
 //     return (
 //         <div onClick={()=>console.log(props)}>
 //             <span>{group.title}</span>
@@ -170,101 +172,101 @@ const CustomTimeLine: VFC<Props> = (props) => {
 
     return (
         <>
-        <TimeLine
-            // groupRenderer= {GroupRenderer}
-            selected={[]}//選択状態にさせないようにする
-            itemRenderer = {ItemRenderer}
-            groups={groups}
-            items={items}
-            // sidebarWidth={300}
-            // rightSidebarWidth={100}
-            rightSidebarWidth={(isRightSidebar) ? 100 : 0}
-            canMove={false} //itemを動かす
-            canResize={false} //itemの伸び縮み方向
-            canChangeGroup={false}//グループ間の移動禁止
-            onItemSelect={onItemSelect}//選択時（対象データを編集データとして保持）
-            // onItemDeselect={(e)=>{}}//選択解除時（変更内容を登録）
-            // onBoundsChange={()=>{}//カレンダー変えた時
-            onTimeChange={(visibleTimeStart, visibleTimeEnd, updateScrollCanvas)=>{//左右に引っ張ってscrollさせない
-                updateScrollCanvas(dateRange.visibleTimeStart.valueOf(), dateRange.visibleTimeEnd.valueOf());
-            }}
-            // onItemClick={(itemId, e, time)=>{}}//クリック時
-
-            // minResizeWidth={40}
-            lineHeight={48}//行の高さ
-            itemHeightRatio={0.35}//itemの高さ
-            stackItems={true}//アイテムを互いに積み重ねて、時間が衝突したときに視覚的に重ならないようにします
-
-
-            // // visibleTimeStart={dateRange.visibleTimeStart.valueOf()}//日にち固定でzoom不可
-            // // visibleTimeEnd={dateRange.visibleTimeEnd.valueOf()}//日にち固定でzoom不可
-            // // defaultTimeStart={moment().add(-15, 'day')}
-            // // defaultTimeEnd={moment().add(15, 'day')}
-            // defaultTimeStart={dateRange.visibleTimeStart}
-            // defaultTimeEnd={dateRange.visibleTimeEnd}
-            visibleTimeStart={dateRange.visibleTimeStart.valueOf()}
-            visibleTimeEnd={dateRange.visibleTimeEnd.valueOf()}
-            // // minZoom={60 * 60 * 24 * 1000}//1日
-            // minZoom={60 * 60 * 24 * 7 * 1000}//7日
-            // maxZoom={60 * 60 * 24 * 30 * 2 * 1000}//2ヶ月
-            // // maxZoom={365.24 * 86400 * 1000}//1年
-            minZoom={dateRange.visibleTimeEnd.valueOf() - dateRange.visibleTimeStart.valueOf()}//zoomさせない
-            maxZoom={dateRange.visibleTimeEnd.valueOf() - dateRange.visibleTimeStart.valueOf()}//zoomさせない
-            // sidebarContent={<div>left</div>}
-            // rightSidebarContent={<div>right</div>}
-            // itemTouchSendsClick={false}
-        >
-            <TimelineHeaders 
-                style={{//header固定
-                    position: 'sticky',
-                    top:0,
-                    zIndex:10000,
+            <TimeLine
+                // groupRenderer= {GroupRenderer}
+                selected={[]}//選択状態にさせないようにする
+                itemRenderer = {ItemRenderer}
+                groups={groups}
+                items={items}
+                // sidebarWidth={300}
+                // rightSidebarWidth={100}
+                rightSidebarWidth={(isRightSidebar) ? 100 : 0}
+                canMove={false} //itemを動かす
+                canResize={false} //itemの伸び縮み方向
+                canChangeGroup={false}//グループ間の移動禁止
+                onItemSelect={onItemSelect}//選択時（対象データを編集データとして保持）
+                // onItemDeselect={(e)=>{}}//選択解除時（変更内容を登録）
+                // onBoundsChange={()=>{}//カレンダー変えた時
+                onTimeChange={(visibleTimeStart, visibleTimeEnd, updateScrollCanvas)=>{//左右に引っ張ってscrollさせない
+                    updateScrollCanvas(dateRange.visibleTimeStart.valueOf(), dateRange.visibleTimeEnd.valueOf());
                 }}
-                calendarHeaderStyle={{backgroundColor: '#2A4365'}}
+                // onItemClick={(itemId, e, time)=>{}}//クリック時
+
+                // minResizeWidth={40}
+                lineHeight={48}//行の高さ
+                itemHeightRatio={0.35}//itemの高さ
+                stackItems={true}//アイテムを互いに積み重ねて、時間が衝突したときに視覚的に重ならないようにします
+
+
+                // // visibleTimeStart={dateRange.visibleTimeStart.valueOf()}//日にち固定でzoom不可
+                // // visibleTimeEnd={dateRange.visibleTimeEnd.valueOf()}//日にち固定でzoom不可
+                // // defaultTimeStart={moment().add(-15, 'day')}
+                // // defaultTimeEnd={moment().add(15, 'day')}
+                // defaultTimeStart={dateRange.visibleTimeStart}
+                // defaultTimeEnd={dateRange.visibleTimeEnd}
+                visibleTimeStart={dateRange.visibleTimeStart.valueOf()}
+                visibleTimeEnd={dateRange.visibleTimeEnd.valueOf()}
+                // // minZoom={60 * 60 * 24 * 1000}//1日
+                // minZoom={60 * 60 * 24 * 7 * 1000}//7日
+                // maxZoom={60 * 60 * 24 * 30 * 2 * 1000}//2ヶ月
+                // // maxZoom={365.24 * 86400 * 1000}//1年
+                minZoom={dateRange.visibleTimeEnd.valueOf() - dateRange.visibleTimeStart.valueOf()}//zoomさせない
+                maxZoom={dateRange.visibleTimeEnd.valueOf() - dateRange.visibleTimeStart.valueOf()}//zoomさせない
+                // sidebarContent={<div>left</div>}
+                // rightSidebarContent={<div>right</div>}
+                // itemTouchSendsClick={false}
             >
-                <SidebarHeader variant="left">
-                    {({ getRootProps }) => {
-                        return (
-                            <div {...getRootProps()}>
-                                <div style={{backgroundColor: '#2A4365', height:'100%',display:'flex',alignItems:'center',justifyContent:'center'}}>
-                                    <span style={{color:'#fff',fontWeight:'bold'}}>{sidebarTitle}</span>
-                                </div>
-                            </div>
-                        )
+                <TimelineHeaders 
+                    style={{//header固定
+                        position: 'sticky',
+                        // top:200,
+                        zIndex:10000,
                     }}
-                </SidebarHeader>
-                {isRightSidebar &&
-                    <SidebarHeader variant="right">
+                    calendarHeaderStyle={{backgroundColor: '#2A4365'}}
+                >
+                    <SidebarHeader variant="left">
                         {({ getRootProps }) => {
                             return (
                                 <div {...getRootProps()}>
                                     <div style={{backgroundColor: '#2A4365', height:'100%',display:'flex',alignItems:'center',justifyContent:'center'}}>
-                                        <span style={{color:'#fff',fontWeight:'bold', display:'flex',justifyContent:'center',alignItems:'center'}}>{rightSidebarTitle}</span>
+                                        <span style={{color:'#fff',fontWeight:'bold'}}>{sidebarTitle}</span>
                                     </div>
                                 </div>
                             )
                         }}
                     </SidebarHeader>
-                }
-                {calendarPeriod !== CALENDAR_PERIOD.WEEK ?
+                    {isRightSidebar &&
+                        <SidebarHeader variant="right">
+                            {({ getRootProps }) => {
+                                return (
+                                    <div {...getRootProps()}>
+                                        <div style={{backgroundColor: '#2A4365', height:'100%',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                                            <span style={{color:'#fff',fontWeight:'bold', display:'flex',justifyContent:'center',alignItems:'center'}}>{rightSidebarTitle}</span>
+                                        </div>
+                                    </div>
+                                )
+                            }}
+                        </SidebarHeader>
+                    }
+                    {calendarPeriod !== CALENDAR_PERIOD.WEEK ?
+                        <DateHeader 
+                            unit="primaryHeader" 
+                            labelFormat={primaryDateHeaderLabelFormat}
+                        />
+                    :
+                        <DateHeader 
+                            unit="week" 
+                            style={{color: 'white'}}
+                            labelFormat={primaryDateHeaderLabelFormat}
+                        />
+                    
+                    }
                     <DateHeader 
-                        unit="primaryHeader" 
-                        labelFormat={primaryDateHeaderLabelFormat}
+                        labelFormat={secondaryDateHeaderLabelFormat}
+                        style={{backgroundColor: 'rgb(240, 240, 240)'}}
                     />
-                :
-                    <DateHeader 
-                        unit="week" 
-                        style={{color: 'white'}}
-                        labelFormat={primaryDateHeaderLabelFormat}
-                    />
-                
-                }
-                <DateHeader 
-                    labelFormat={secondaryDateHeaderLabelFormat}
-                    style={{backgroundColor: 'rgb(240, 240, 240)'}}
-                />
-            </TimelineHeaders>
-        </TimeLine>
+                </TimelineHeaders>
+            </TimeLine>
         </>
     )
 }

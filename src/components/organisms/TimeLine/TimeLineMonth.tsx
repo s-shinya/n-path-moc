@@ -3,7 +3,7 @@
 import React, { useCallback, useState, VFC } from 'react';
 import moment, { Moment } from 'moment'
 import CustomTimeLine from './CustomTimeLine';
-import PageTurnButtons from '../../molecules/PageTurnButtons/PageTurnButtons';
+import PageTurnButtons from '../../molecules/PageTurnButtons';
 import { CALENDAR_PERIOD } from '../../../constants/const';
 
 // const groups = [
