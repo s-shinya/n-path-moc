@@ -1,12 +1,13 @@
 /* tslint:disable @typescript-eslint/no-unused-vars */
 
-import React, { useCallback, useState, VFC } from 'react';
+import React, { useCallback, useEffect, useRef, useState, VFC } from 'react';
 // make sure you include the timeline stylesheet or the timeline will not be styled
 // import 'react-calendar-timeline/lib/Timeline.css'
 import moment, { Moment } from 'moment'
 import TimeLine, { CustomMarker, DateHeader, SidebarHeader, TimelineHeaders, ReactCalendarTimelineProps, ReactCalendarGroupRendererProps, ReactCalendarItemRendererProps, CustomHeader, Id, ItemContext, GetItemsProps, GetResizeProps, ItemRendererGetResizePropsReturnType } from 'react-calendar-timeline';
 import { CALENDAR_PERIOD } from '../../../constants/const';
 import { Box } from '@chakra-ui/react';
+import { useWindowSize } from '../../../hooks/useWindowSize';
 
 // type ItemRendererProps = ReactCalendarItemRendererProps
 // type ItemRendererProps = any
@@ -156,7 +157,7 @@ const ItemRenderer:VFC<ItemRendererProps> = (props) => {
 // }
 
 type Props = {
-    stickyTimeLineHeaderTop?: number;
+    mainAreaH: number; //表示領域の高さ
     groups: { id: number; title: string; }[];
     items: { id: number; group: number; title: string; start_time: number; end_time: number; bgColor: string; selectedBgColor: string; color: string; }[]; 
     dateRange: {visibleTimeStart:Moment, visibleTimeEnd:Moment};
@@ -170,7 +171,7 @@ type Props = {
 }
 const CustomTimeLine: VFC<Props> = (props) => {
     const {
-        stickyTimeLineHeaderTop, //スティッキーヘッダーで固定する高さ
+        mainAreaH, //メイン描画部分のtop
         groups,
         items,
         dateRange,
@@ -182,9 +183,22 @@ const CustomTimeLine: VFC<Props> = (props) => {
         calendarPeriod ,
         onItemSelect
     } = props;
+    
+    //タイムライン表示のtopの位置
+    const [timeLineTop, setTimeLineTop] = useState<number>(0);
+    const timeLineRef= useRef<null | HTMLDivElement>(null);
+    useEffect(() => {
+        if(timeLineRef.current?.getBoundingClientRect().bottom) setTimeLineTop(timeLineRef.current.getBoundingClientRect().top);
+    }, []);
 
     return (
-        <Box bg='white'>
+        <Box 
+            ref={timeLineRef}
+            position='relative' 
+            maxH={mainAreaH - timeLineTop} 
+            overflowY='scroll'
+            bg='white' 
+            >
             <TimeLine
                 // groupRenderer= {GroupRenderer}
                 selected={[]}//選択状態にさせないようにする
@@ -232,7 +246,7 @@ const CustomTimeLine: VFC<Props> = (props) => {
                 <TimelineHeaders 
                     style={{//header固定
                         position: 'sticky',
-                        top: stickyTimeLineHeaderTop,
+                        top: 0,
                         zIndex:10000,
                     }}
                     calendarHeaderStyle={{backgroundColor: '#2A4365'}}

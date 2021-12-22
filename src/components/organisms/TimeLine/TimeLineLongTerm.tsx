@@ -264,10 +264,10 @@ const items2 = [
 ]
 
 type Props = {
-    stickyTimeLineHeaderTop: number;
+    mainAreaH: number;
 }
 const TimeLineLongTerm: VFC<Props> = (props) => {
-    const {stickyTimeLineHeaderTop} = props
+    const {mainAreaH} = props
     const [groupList,setGroupList] = useState(groups)
     const [itemList,setItemList] = useState(items);
     const [dateRange, setDateRange] = useState<{visibleTimeStart:Moment, visibleTimeEnd:Moment}>({
@@ -316,7 +316,7 @@ const TimeLineLongTerm: VFC<Props> = (props) => {
 
             {/* タイムラインの背景は白にする */}
             <CustomTimeLine 
-                stickyTimeLineHeaderTop={stickyTimeLineHeaderTop}
+                mainAreaH={mainAreaH}
                 groups={groupList}
                 items={itemList}
                 dateRange={dateRange}
