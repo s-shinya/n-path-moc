@@ -17,7 +17,7 @@ const TimeLineMonth: VFC<TimeLineType> = (props) => {
     });
     const [disableYType, setDisableYType] = useState(DISABLE_TIMELINE_Y_TYPE.CONSTRUCTION);
 
-    const handlePrev = useCallback(()=>{
+    const onClickPrev = useCallback(()=>{
         const startDate: Moment = dateRange.visibleTimeStart.add(-1, 'month');
         const finishDate: Moment = dateRange.visibleTimeEnd.add(-1, 'month')
         getData(CALENDAR_PERIOD.MONTH, startDate, finishDate)
@@ -27,7 +27,7 @@ const TimeLineMonth: VFC<TimeLineType> = (props) => {
         }})
     }, [dateRange, getData])
 
-    const handleNext = useCallback(()=>{
+    const onClickNext = useCallback(()=>{
         const startDate: Moment = dateRange.visibleTimeStart.add(1, 'month');
         const finishDate: Moment = dateRange.visibleTimeEnd.add(1, 'month')
         getData(CALENDAR_PERIOD.MONTH, startDate, finishDate)
@@ -68,8 +68,8 @@ const TimeLineMonth: VFC<TimeLineType> = (props) => {
                 </Stack>
                 <Box w='30%' textAlign='right'>
                     <PageTurnButtons 
-                        handlePrev={handlePrev}
-                        handleNext={handleNext}
+                        onClickPrev={onClickPrev}
+                        onClickNext={onClickNext}
                     />
                 </Box>
             </Flex>

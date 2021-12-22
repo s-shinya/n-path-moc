@@ -4,22 +4,22 @@ import CButton from "../Atoms/CButton";
 import { Box } from '@chakra-ui/react';
 
 type Props = {
-    handlePrev: () => void;
-    handleNext: () => void;
+    onClickPrev: () => void;
+    onClickNext: () => void;
 }
 const PageTurnButtons:VFC<Props> = (props) => {
-    const {handlePrev, handleNext} = props;
+    const {onClickPrev, onClickNext} = props;
     return (
         <Box>
             <CButton
                 borderRightRadius={0}
                 borderLeftRadius={4}
-                onClick={handlePrev}
+                onClick={onClickPrev}
             ><ChevronLeftIcon boxSize={6}/></CButton>
             <CButton
                 borderRightRadius={4}
                 borderLeftRadius={0}
-                onClick={handleNext}
+                onClick={onClickNext}
             ><ChevronRightIcon boxSize={6}/></CButton>
         </Box>
     )

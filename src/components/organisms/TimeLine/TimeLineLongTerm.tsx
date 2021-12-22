@@ -16,7 +16,7 @@ const TimeLineLongTerm: VFC<TimeLineType> = (props) => {
         visibleTimeEnd:moment().endOf("year")
     });
 
-    const handlePrev = useCallback(()=>{
+    const onClickPrev = useCallback(()=>{
         const startDate: Moment = dateRange.visibleTimeStart.add(-1, 'year');
         const finishDate: Moment = dateRange.visibleTimeEnd.add(-1, 'year')
         getData(CALENDAR_PERIOD.LONG_TERM, startDate, finishDate)
@@ -26,7 +26,7 @@ const TimeLineLongTerm: VFC<TimeLineType> = (props) => {
         }})
     }, [dateRange, getData])
 
-    const handleNext = useCallback(()=>{
+    const onClickNext = useCallback(()=>{
         const startDate: Moment = dateRange.visibleTimeStart.add(1, 'year');
         const finishDate: Moment = dateRange.visibleTimeEnd.add(1, 'year')
         getData(CALENDAR_PERIOD.LONG_TERM, startDate, finishDate)
@@ -60,8 +60,8 @@ const TimeLineLongTerm: VFC<TimeLineType> = (props) => {
                 </Stack>
                 <Box w='30%' textAlign='right'>
                     <PageTurnButtons 
-                        handlePrev={handlePrev}
-                        handleNext={handleNext}
+                        onClickPrev={onClickPrev}
+                        onClickNext={onClickNext}
                     />
                 </Box>
             </Flex>

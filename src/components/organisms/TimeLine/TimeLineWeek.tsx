@@ -254,7 +254,7 @@ const TimeLineWeek: VFC<Props> = (props) => {
         // setItemList(items2);
     },[])
 
-    const handlePrev = useCallback(()=>{
+    const onClickPrev = useCallback(()=>{
         //1週間ごと
         const startDate = dateRange.visibleTimeStart.add(-1, 'week');
         getItemList(startDate)
@@ -264,7 +264,7 @@ const TimeLineWeek: VFC<Props> = (props) => {
         }})
     }, [dateRange, getItemList])
 
-    const handleNext = useCallback(()=>{
+    const onClickNext = useCallback(()=>{
         //1週間ごと
         const startDate = dateRange.visibleTimeStart.add(1, 'week');
         getItemList(startDate)
@@ -304,8 +304,8 @@ const TimeLineWeek: VFC<Props> = (props) => {
                 </Stack>
                 <Box w='30%' textAlign='right'>
                     <PageTurnButtons 
-                        handlePrev={handlePrev}
-                        handleNext={handleNext}
+                        onClickPrev={onClickPrev}
+                        onClickNext={onClickNext}
                     />
                 </Box>
             </Flex>
