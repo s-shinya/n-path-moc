@@ -305,31 +305,29 @@ const TimeLineLongTerm: VFC<Props> = (props) => {
 
     return (
         <>
-            <Flex justifyContent='space-between' mb={2}>
-                <Box></Box>
-                
-                <Stack direction='row'>
-                    <Flex justifyContent='center' alignItems='center'>
+            <Flex justifyContent='space-between' alignItems='center' mb={2}>
+                <Box w='30%'></Box>
+                <Stack direction='row' w='30%' justifyContent="center">
+                    <Flex alignItems='center'>
                         <ColorBox bg='blue'/>
                         <Text ml={1}>工事受注案件</Text>
                     </Flex>
-                    <Flex justifyContent='center' alignItems='center'>
+                    <Flex alignItems='center'>
                         <ColorBox bg='green'/>
                         <Text ml={1}>工事受注活動案件</Text>
                     </Flex>
-                    <Flex justifyContent='center' alignItems='center'>
+                    <Flex alignItems='center'>
                         <ColorBox bg='red'/>
                         <Text ml={1}>工事完了案件</Text>
                     </Flex>
                 </Stack>
-
-                <PageTurnButtons 
-                    handlePrev={handlePrev}
-                    handleNext={handleNext}
-                />
+                <Box w='30%' textAlign='right'>
+                    <PageTurnButtons 
+                        handlePrev={handlePrev}
+                        handleNext={handleNext}
+                    />
+                </Box>
             </Flex>
-
-            {/* タイムラインの背景は白にする */}
             <CustomTimeLine 
                 mainAreaH={mainAreaH}
                 groups={groupList}

@@ -6,6 +6,7 @@ const styles = {
     global: (props:any) => ({
         body: {
             bg: mode('#E2E8F0', '#E2E8F0')(props),//backgroundColor
+            // bg: mode('#fff', '#E2E8F0')(props),//backgroundColor
         }
     })
     }
