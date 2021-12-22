@@ -10,20 +10,20 @@ const INITIAL_EVENTS: EventInput[] = [
     {
         id: "1",
         title: "山陽特殊製鋼姫路",
-        start: "2021-11-01",
-        end: "2021-11-02",// 終了日 + 1日
+        start: "2021-12-01",
+        end: "2021-12-02",// 終了日 + 1日
         color: '#FEB2B2',
         textColor: '#63171B',
         borderColor: '#63171B'
-        // start: "2021-11-01 11:10",
-        // end: "2021-11-05 11:10",
+        // start: "2021-12-01 12:10",
+        // end: "2021-12-05 12:10",
         // allDay : false
     },
     {
         id: "2",
         title: "広島西郵便局",
-        start: "2021-11-01",
-        end: "2021-11-05",
+        start: "2021-12-01",
+        end: "2021-12-05",
         color: '#9AE6B4',
         textColor: '#1C4532',
         borderColor: '#1C4532',
@@ -31,11 +31,11 @@ const INITIAL_EVENTS: EventInput[] = [
     {
         id: "3",
         title: "広島西郵便局",
-        start: "2021-11-07",
-        end: "2021-11-09",
-        color: '#9DECF9',
-        textColor: '#065666',
-        borderColor: '#065666',
+        start: "2021-12-07",
+        end: "2021-12-09",
+        color: '#9AE6B4',
+        textColor: '#1C4532',
+        borderColor: '#1C4532',
     },
 ];
 

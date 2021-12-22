@@ -198,7 +198,7 @@ const CustomTimeLine: VFC<Props> = (props) => {
             maxH={mainAreaH - timeLineTop} 
             overflowY='scroll'
             bg='white' 
-            >
+        >
             <TimeLine
                 // groupRenderer= {GroupRenderer}
                 selected={[]}//選択状態にさせないようにする

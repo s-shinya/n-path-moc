@@ -43,7 +43,7 @@ import { useWindowSize } from '../../hooks/useWindowSize';
 
 
 const PlanPage:VFC = () => {
-    const [tabIndex, setTabIndex] = useState<number>(CALENDAR_PERIOD.LONG_TERM);
+    const [tabIndex, setTabIndex] = useState<number>(CALENDAR_PERIOD.MONTH);
     const { winH } = useWindowSize();
 
     return (
@@ -51,7 +51,6 @@ const PlanPage:VFC = () => {
             <MainTemplate>
                 <Tabs index={tabIndex} onChange={(index) => setTabIndex(index)}>
                     <TabList 
-                        // ref={mainAreaRef}
                         display="flex" 
                         justifyContent="space-between"
                         alignItems="center"

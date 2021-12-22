@@ -5,8 +5,8 @@ import moment, { Moment } from 'moment'
 import CustomTimeLine from './CustomTimeLine';
 import PageTurnButtons from '../../molecules/PageTurnButtons';
 import { CALENDAR_PERIOD } from '../../../constants/const';
-import { Flex, Box } from '@chakra-ui/react';
-import ColorTimeLineLabels from '../../molecules/ColorTimeLineLabels';
+import { Flex, Box, Text, Stack } from '@chakra-ui/react';
+import ColorBox from '../../Atoms/ColorBox';
 
 // const groups = [
 //     { 
@@ -307,7 +307,22 @@ const TimeLineLongTerm: VFC<Props> = (props) => {
         <>
             <Flex justifyContent='space-between' mb={2}>
                 <Box></Box>
-                <ColorTimeLineLabels/>
+                
+                <Stack direction='row'>
+                    <Flex justifyContent='center' alignItems='center'>
+                        <ColorBox bg='blue'/>
+                        <Text ml={1}>工事受注案件</Text>
+                    </Flex>
+                    <Flex justifyContent='center' alignItems='center'>
+                        <ColorBox bg='green'/>
+                        <Text ml={1}>工事受注活動案件</Text>
+                    </Flex>
+                    <Flex justifyContent='center' alignItems='center'>
+                        <ColorBox bg='red'/>
+                        <Text ml={1}>工事完了案件</Text>
+                    </Flex>
+                </Stack>
+
                 <PageTurnButtons 
                     handlePrev={handlePrev}
                     handleNext={handleNext}

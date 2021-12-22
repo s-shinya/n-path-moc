@@ -5,6 +5,8 @@ import moment, { Moment } from 'moment'
 import CustomTimeLine from './CustomTimeLine';
 import PageTurnButtons  from '../../molecules/PageTurnButtons';
 import { CALENDAR_PERIOD } from '../../../constants/const';
+import { Box, Flex, Stack, Text } from '@chakra-ui/react';
+import ColorBox from '../../Atoms/ColorBox';
 
 // const groups = [
 //     { 
@@ -170,56 +172,56 @@ const items = [
         id: 1,
         group: 1,
         title: '山陽特殊製鋼姫路',
-        start_time: moment('2021-11-21 00:00:00').valueOf(),//ライン表示の開始日（画面跨ぐ場合は考慮する）
-        end_time: moment('2021-11-27 23:59:59').valueOf(),
+        start_time: moment('2021-12-26  00:00:00').valueOf(),//ライン表示の開始日（画面跨ぐ場合は考慮する）
+        end_time: moment('2022-01-01  23:59:59').valueOf(),
         bgColor: "#FEB2B2",
         selectedBgColor: "rgb(255, 193, 7)",
         color: "#63171B",
-        start_label:moment('2021-11-20 00:00:00'),//ライン上部に表示する日付
+        start_label:moment('2021-12-25 00:00:00'),//ライン上部に表示する日付
         is_start_hide: true,
-        end_label: moment('2021-12-01 00:00:00'),
+        end_label: moment('2022-01-02 00:00:00'),
         is_end_hide: true,
     },
     {
         id: 2,
         group: 2,
         title: '広島西郵便局',
-        start_time: moment('2021-11-22 00:00:00').valueOf(),
-        end_time: moment('2021-11-23 23:59:59').valueOf(),
-        bgColor: "#9DECF9",
+        start_time: moment('2021-12-27 00:00:00').valueOf(),
+        end_time: moment('2021-12-28 23:59:59').valueOf(),
+        bgColor: "#FEB2B2",
         selectedBgColor: "rgb(255, 193, 7)",
-        color: "#065666",
-        start_label: moment('2021-11-22 00:00:00'),
+        color: "#63171B",
+        start_label: moment('2021-12-27 00:00:00'),
         is_start_hide: false,
-        end_label: moment('2021-11-23 00:00:00'),
+        end_label: moment('2021-12-28  00:00:00'),
         is_end_hide: false,
     },
     {
         id: 4,
         group: 3,
         title: '広島西郵便局',
-        start_time: moment('2021-11-22 00:00:00').valueOf(),
-        end_time: moment('2021-11-23 23:59:59').valueOf(),
-        bgColor: "#9DECF9",
+        start_time: moment('2021-12-27 00:00:00').valueOf(),
+        end_time: moment('2021-12-28 23:59:59').valueOf(),
+        bgColor: "#FEB2B2",
         selectedBgColor: "rgb(255, 193, 7)",
-        color: "#065666",
-        start_label: moment('2021-11-22 00:00:00'),
+        color: "#63171B",
+        start_label: moment('2021-12-27 00:00:00'),
         is_start_hide: false,
-        end_label: moment('2021-11-23 00:00:00'),
+        end_label: moment('2021-12-28 00:00:00'),
         is_end_hide: false,
     },
     {
         id: 3,
         group: 3,
         title: '中部国際医療センター',
-        start_time: moment('2021-11-24 00:00:00').valueOf(),
-        end_time: moment('2021-11-27 23:59:59').valueOf(),
+        start_time: moment('2021-12-29 00:00:00').valueOf(),
+        end_time: moment('2022-01-01 23:59:59').valueOf(),
         bgColor: "#9AE6B4",
         selectedBgColor: "rgb(255, 193, 7)",
         color: "#1C4532",
-        start_label: moment('2021-11-24 00:00:00'),
+        start_label: moment('2021-12-29 00:00:00'),
         is_start_hide: false,
-        end_label: moment('2021-11-27 00:00:00'),
+        end_label: moment('2022-01-01 00:00:00'),
         is_end_hide: false,
     },
 ]
@@ -278,28 +280,35 @@ const TimeLineWeek: VFC<Props> = (props) => {
 
     return (
         <>
-            <div>週計画</div>
-            <PageTurnButtons 
-                handlePrev={handlePrev}
-                handleNext={handleNext}
-            />
-            <div style={{
-                // padding:'16px',
-                backgroundColor: '#fff'//タイムラインの背景は白にする
-            }}>
-                <CustomTimeLine 
-                    mainAreaH={mainAreaH}
-                    groups={groupList}
-                    items={itemList}
-                    dateRange={dateRange}
-                    primaryDateHeaderLabelFormat="yyyy-MM"
-                    secondaryDateHeaderLabelFormat="DD"
-                    isRightSidebar={false}
-                    sidebarTitle="ユーザー名"
-                    calendarPeriod={CALENDAR_PERIOD.WEEK}
-                    onItemSelect={onItemSelect}
+            <Flex justifyContent='space-between' mb={2}>
+                <Box></Box>
+                <Stack direction='row'>
+                    <Flex justifyContent='center' alignItems='center'>
+                        <ColorBox bg='green'/>
+                        <Text ml={1}>工事受注活動案件</Text>
+                    </Flex>
+                    <Flex justifyContent='center' alignItems='center'>
+                        <ColorBox bg='red'/>
+                        <Text ml={1}>工事完了案件</Text>
+                    </Flex>
+                </Stack>
+                <PageTurnButtons 
+                    handlePrev={handlePrev}
+                    handleNext={handleNext}
                 />
-            </div>
+            </Flex>
+            <CustomTimeLine 
+                mainAreaH={mainAreaH}
+                groups={groupList}
+                items={itemList}
+                dateRange={dateRange}
+                primaryDateHeaderLabelFormat="yyyy-MM"
+                secondaryDateHeaderLabelFormat="DD"
+                isRightSidebar={false}
+                sidebarTitle="ユーザー名"
+                calendarPeriod={CALENDAR_PERIOD.WEEK}
+                onItemSelect={onItemSelect}
+            />
         </>
     )
 }
