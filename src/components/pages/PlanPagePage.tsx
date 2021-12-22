@@ -39,12 +39,16 @@ import { CALENDAR_PERIOD } from '../../constants/const';
 import CButton from '../Atoms/CButton';
 import CInput from '../Atoms/CInput';
 import { useWindowSize } from '../../hooks/useWindowSize';
+import { LONG_TERM_GROUP_DATA, LONG_TERM_ITEM_DATA } from '../../constants/testData';
+import { TimeLineGroupsType, TimeLineItemsType, TimeLineType } from '../../types/TimeLineType';
 
 
 
 const PlanPage:VFC = () => {
     const [tabIndex, setTabIndex] = useState<number>(CALENDAR_PERIOD.MONTH);
     const { winH } = useWindowSize();
+    const [groupList,setGroupList] = useState<TimeLineGroupsType>(LONG_TERM_GROUP_DATA)
+    const [itemList,setItemList] = useState<TimeLineItemsType>(LONG_TERM_ITEM_DATA);
 
     return (
         <>
@@ -94,7 +98,11 @@ const PlanPage:VFC = () => {
                     <TabPanels pt={10}>
                         <TabPanel>
                             {tabIndex === CALENDAR_PERIOD.LONG_TERM &&
-                                <TimeLineLongTerm mainAreaH={winH}/>
+                                <TimeLineLongTerm 
+                                    mainAreaH={winH}
+                                    groups={groupList}
+                                    items={itemList}
+                                />
                             }
                         </TabPanel>
                         <TabPanel>

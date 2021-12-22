@@ -25,9 +25,9 @@ interface TimelineItemBase<DateType> {
     itemProps?: React.HTMLAttributes<HTMLDivElement> | undefined;
 
     //カスタム
-    color?:string;
-    selectedBgColor?:string;
-    bgColor?:string;
+    color:string;
+    selectedBgColor:string;
+    bgColor:string;
     is_start_hide?:boolean;
     start_label?: Moment;
     is_end_hide?: boolean;
@@ -174,8 +174,25 @@ const ItemRenderer:VFC<ItemRendererProps> = (props) => {
 
 type Props = {
     mainAreaH: number; //表示領域の高さ
-    groups: { id: number; title: string; }[];
-    items: { id: number; group: number; title: string; start_time: number; end_time: number; bgColor: string; selectedBgColor: string; color: string; }[]; 
+    groups: {
+        id: number; 
+        title: string; 
+        rightTitle?: string
+    }[];
+    items: { 
+        id: number; 
+        group: number; 
+        title: string; 
+        start_time: number; 
+        end_time: number; 
+        bgColor: string; 
+        selectedBgColor: string; 
+        color: string; 
+        is_start_hide?:boolean;
+        start_label?: Moment;
+        is_end_hide?: boolean;
+        end_label?: Moment;
+    }[]; 
     dateRange: {visibleTimeStart:Moment, visibleTimeEnd:Moment};
     primaryDateHeaderLabelFormat: string;
     secondaryDateHeaderLabelFormat: string;
