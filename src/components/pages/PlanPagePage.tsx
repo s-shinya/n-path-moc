@@ -39,7 +39,7 @@ import PersonalCalendar  from '../organisms/TimeLine/PersonalCalendar';
 import { CALENDAR_PERIOD } from '../../constants/const';
 import CButton from '../Atoms/CButton';
 import { useWindowSize } from '../../hooks/useWindowSize';
-import { LONG_TERM_GROUPS_DATA, LONG_TERM_ITEMS_DATA, MONTH_GROUPS_DATA_BY_PEOPLE, MONTH_ITEMS_DATA_BY_PEOPLE } from '../../constants/testData';
+import { LONG_TERM_GROUPS_DATA, LONG_TERM_ITEMS_DATA, MONTH_GROUPS_DATA_BY_PEOPLE, MONTH_ITEMS_DATA_BY_PEOPLE, WEEK_GROUPS_DATA_BY_PEOPLE, WEEK_ITEMS_DATA_BY_PEOPLE } from '../../constants/testData';
 import { TimeLineGroupsType, TimeLineItemsType } from '../../types/TimeLineType';
 import moment, { Moment } from 'moment'
 
@@ -87,6 +87,14 @@ const PlanPage:VFC = () => {
                 setDateRange({...dateRange, ...{
                     visibleTimeStart:moment().startOf('month'),
                     visibleTimeEnd:moment().endOf('month')
+                }})
+                break;
+            case CALENDAR_PERIOD.WEEK:
+                setGroupList(WEEK_GROUPS_DATA_BY_PEOPLE);
+                setItemList(WEEK_ITEMS_DATA_BY_PEOPLE);
+                setDateRange({...dateRange, ...{
+                    visibleTimeStart:moment().startOf('week'),
+                    visibleTimeEnd:moment().endOf('week')
                 }})
                 break;
         }
@@ -173,7 +181,14 @@ const PlanPage:VFC = () => {
                         </TabPanel>
                         <TabPanel>
                             {tabIndex === CALENDAR_PERIOD.WEEK &&
-                                <TimeLineWeek mainAreaH={winH}/>
+                                <TimeLineWeek 
+                                    mainAreaH={winH}
+                                    groups={groupList}
+                                    items={itemList}
+                                    dateRange={dateRange}
+                                    handleSetDateRange={handleSetDateRange}
+                                    getData={getTimeLineData}
+                                />
                             }
                         </TabPanel>
                         <TabPanel>
