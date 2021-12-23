@@ -75,7 +75,6 @@ const ItemRenderer:VFC<ItemRendererProps> = (props) => {
         endLabelBorder = "1px solid #E2E8F0";
     }
 
-
     return (
         <div
             {...getItemProps({
@@ -106,7 +105,8 @@ const ItemRenderer:VFC<ItemRendererProps> = (props) => {
                     whiteSpace: "nowrap",
                 }}
             >
-                {itemContext.title}
+                {/* {itemContext.title} */}
+                {item.title}
             </div>
                 
                 {/* ラベル */}

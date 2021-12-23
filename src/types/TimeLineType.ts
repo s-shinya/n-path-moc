@@ -9,8 +9,10 @@ export type TimeLineType = {
         visibleTimeEnd:Moment,
     };
     handleSetDateRange: (visibleTimeStart:Moment, visibleTimeEnd:Moment)=>void,
-    getData: (type:number, startDate:Moment, finishDate:Moment)=>void;
+    getData: GetTimelineDataType;
 };
+
+export type GetTimelineDataType = (startDate:Moment, finishDate:Moment, dataType?: string)=>void;
 
 export type TimeLineGroupsType = {
     id: number; 

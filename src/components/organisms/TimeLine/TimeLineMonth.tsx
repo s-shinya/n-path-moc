@@ -13,17 +13,22 @@ const TimeLineMonth: VFC<TimeLineType> = (props) => {
     const {mainAreaH, groups, items, dateRange, handleSetDateRange, getData} = props;
     const [disableYType, setDisableYType] = useState(DISABLE_TIMELINE_Y_TYPE.CONSTRUCTION);
 
-    const onClickPrev = ()=>{
+    const onChangeRadio = (v:string) => {
+        getData(dateRange.visibleTimeStart, dateRange.visibleTimeEnd, v)
+        setDisableYType(v);
+    }
+
+    const onClickPrev = () => {
         const startDate: Moment = dateRange.visibleTimeStart.add(-1, 'month');
         const finishDate: Moment = dateRange.visibleTimeEnd.add(-1, 'month');
-        getData(CALENDAR_PERIOD.MONTH, startDate, finishDate)
+        getData(startDate, finishDate, disableYType)
         handleSetDateRange(startDate, finishDate);
     }
 
-    const onClickNext = ()=>{
+    const onClickNext = () => {
         const startDate: Moment = dateRange.visibleTimeStart.add(1, 'month');
         const finishDate: Moment = dateRange.visibleTimeEnd.add(1, 'month');
-        getData(CALENDAR_PERIOD.MONTH, startDate, finishDate)
+        getData(startDate, finishDate, disableYType)
         handleSetDateRange(startDate, finishDate);
     }
 
@@ -38,7 +43,7 @@ const TimeLineMonth: VFC<TimeLineType> = (props) => {
                 <Box w='30%'>
                     <RadioGroup 
                         value={disableYType}
-                        onChange={(v)=>setDisableYType(v)} 
+                        onChange={(v)=>onChangeRadio(v)} 
                     >
                         <Stack direction='row'>
                             <Radio bg='white' borderColor='gray.300' value='1'>工事案件別</Radio>
@@ -71,7 +76,7 @@ const TimeLineMonth: VFC<TimeLineType> = (props) => {
                 primaryDateHeaderLabelFormat="yyyy-MM"
                 secondaryDateHeaderLabelFormat="DD"
                 isRightSidebar={false}
-                sidebarTitle="ユーザー名"
+                sidebarTitle={disableYType === DISABLE_TIMELINE_Y_TYPE.CONSTRUCTION ? '工事案件名' : 'ユーザー名'}
                 calendarPeriod={CALENDAR_PERIOD.MONTH}
                 onItemSelect={onItemSelect}
             />

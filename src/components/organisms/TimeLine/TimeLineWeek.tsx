@@ -16,7 +16,7 @@ const TimeLineWeek: VFC<TimeLineType> = (props) => {
     const onClickPrev = ()=>{
         const startDate: Moment = dateRange.visibleTimeStart.add(-1, 'week');
         const finishDate: Moment = dateRange.visibleTimeEnd.add(-1, 'week');
-        getData(CALENDAR_PERIOD.WEEK, startDate, finishDate)
+        getData(startDate, finishDate)
         handleSetDateRange(startDate, finishDate);
     }
 
@@ -24,7 +24,7 @@ const TimeLineWeek: VFC<TimeLineType> = (props) => {
         //1週間ごと
         const startDate: Moment = dateRange.visibleTimeStart.add(1, 'week');
         const finishDate: Moment = dateRange.visibleTimeEnd.add(1, 'week');
-        getData(CALENDAR_PERIOD.WEEK, startDate, finishDate)
+        getData(startDate, finishDate)
         handleSetDateRange(startDate, finishDate);
     }
 
@@ -71,7 +71,7 @@ const TimeLineWeek: VFC<TimeLineType> = (props) => {
                 primaryDateHeaderLabelFormat="yyyy-MM"
                 secondaryDateHeaderLabelFormat="DD"
                 isRightSidebar={false}
-                sidebarTitle="ユーザー名"
+                sidebarTitle={disableYType === DISABLE_TIMELINE_Y_TYPE.CONSTRUCTION ? '工事案件名' : 'ユーザー名'}
                 calendarPeriod={CALENDAR_PERIOD.WEEK}
                 onItemSelect={onItemSelect}
             />

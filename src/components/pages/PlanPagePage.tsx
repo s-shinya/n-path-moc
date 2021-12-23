@@ -36,11 +36,11 @@ import TimeLineLongTerm  from '../organisms/TimeLine/TimeLineLongTerm';
 import TimeLineMonth  from '../organisms/TimeLine/TimeLineMonth';
 import TimeLineWeek  from '../organisms/TimeLine/TimeLineWeek';
 import PersonalCalendar  from '../organisms/TimeLine/PersonalCalendar';
-import { CALENDAR_PERIOD } from '../../constants/const';
+import { CALENDAR_PERIOD, DISABLE_TIMELINE_Y_TYPE } from '../../constants/const';
 import CButton from '../Atoms/CButton';
 import { useWindowSize } from '../../hooks/useWindowSize';
-import { LONG_TERM_GROUPS_DATA, LONG_TERM_ITEMS_DATA, MONTH_GROUPS_DATA_BY_PEOPLE, MONTH_ITEMS_DATA_BY_PEOPLE, WEEK_GROUPS_DATA_BY_PEOPLE, WEEK_ITEMS_DATA_BY_PEOPLE } from '../../constants/testData';
-import { TimeLineGroupsType, TimeLineItemsType } from '../../types/TimeLineType';
+import { LONG_TERM_GROUPS_DATA, LONG_TERM_ITEMS_DATA, MONTH_GROUPS_DATA_BY_CONSTRUCTION, MONTH_GROUPS_DATA_BY_PEOPLE, MONTH_ITEMS_DATA_BY_CONSTRUCTION, MONTH_ITEMS_DATA_BY_PEOPLE, WEEK_GROUPS_DATA_BY_PEOPLE, WEEK_ITEMS_DATA_BY_PEOPLE } from '../../constants/testData';
+import { GetTimelineDataType, TimeLineGroupsType, TimeLineItemsType } from '../../types/TimeLineType';
 import moment, { Moment } from 'moment'
 
 
@@ -63,9 +63,36 @@ const PlanPage:VFC = () => {
     /**
      * データ取得
      */
-    const getTimeLineData = (type: number, startDate: Moment, finishDate: Moment) => {
+    const getTimeLineData:GetTimelineDataType = (
+        startDate, 
+        finishDate, 
+        dataType = DISABLE_TIMELINE_Y_TYPE.CONSTRUCTION
+    ) => {
         console.log('新しいデータを取得します');
-        console.log(type);
+        console.log(tabIndex);
+        console.log(dataType);
+
+        //TODO:本来はAPIで出し訳
+        switch(tabIndex){
+            case CALENDAR_PERIOD.MONTH:
+                if(dataType === DISABLE_TIMELINE_Y_TYPE.CONSTRUCTION){
+                    setGroupList(MONTH_GROUPS_DATA_BY_CONSTRUCTION);
+                    setItemList(MONTH_ITEMS_DATA_BY_CONSTRUCTION);
+                }else{
+                    setGroupList(MONTH_GROUPS_DATA_BY_PEOPLE);
+                    setItemList(MONTH_ITEMS_DATA_BY_PEOPLE);
+                }
+                break;
+            case CALENDAR_PERIOD.WEEK:
+                if(dataType === DISABLE_TIMELINE_Y_TYPE.CONSTRUCTION){
+                    setGroupList(MONTH_GROUPS_DATA_BY_CONSTRUCTION);
+                    setItemList(MONTH_ITEMS_DATA_BY_CONSTRUCTION);
+                }else{
+                    setGroupList(WEEK_GROUPS_DATA_BY_PEOPLE);
+                    setItemList(WEEK_ITEMS_DATA_BY_PEOPLE);
+                }
+                break;
+        }
     };
 
     /**
@@ -82,8 +109,8 @@ const PlanPage:VFC = () => {
                 }})
                 break;
             case CALENDAR_PERIOD.MONTH:
-                setGroupList(MONTH_GROUPS_DATA_BY_PEOPLE);
-                setItemList(MONTH_ITEMS_DATA_BY_PEOPLE);
+                setGroupList(MONTH_GROUPS_DATA_BY_CONSTRUCTION);
+                setItemList(MONTH_ITEMS_DATA_BY_CONSTRUCTION);
                 setDateRange({...dateRange, ...{
                     visibleTimeStart:moment().startOf('month'),
                     visibleTimeEnd:moment().endOf('month')

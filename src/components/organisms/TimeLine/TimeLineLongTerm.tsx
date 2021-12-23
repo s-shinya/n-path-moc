@@ -15,14 +15,14 @@ const TimeLineLongTerm: VFC<TimeLineType> = (props) => {
     const onClickPrev = ()=>{
         const startDate: Moment = dateRange.visibleTimeStart.add(-1, 'year');
         const finishDate: Moment = dateRange.visibleTimeEnd.add(-1, 'year')
-        getData(CALENDAR_PERIOD.LONG_TERM, startDate, finishDate)
+        getData(startDate, finishDate)
         handleSetDateRange(startDate, finishDate);
     }
 
     const onClickNext = ()=>{
         const startDate: Moment = dateRange.visibleTimeStart.add(1, 'year');
         const finishDate: Moment = dateRange.visibleTimeEnd.add(1, 'year')
-        getData(CALENDAR_PERIOD.LONG_TERM, startDate, finishDate)
+        getData(startDate, finishDate)
         handleSetDateRange(startDate, finishDate);
     }
 
