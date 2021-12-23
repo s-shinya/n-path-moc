@@ -12,7 +12,7 @@ export type TimeLineType = {
     getData: GetTimelineDataType;
 };
 
-export type GetTimelineDataType = (startDate:Moment, finishDate:Moment, dataType?: string)=>void;
+export type GetTimelineDataType = (startDate:Moment, finishDate:Moment, yDataType?: string)=>void;
 
 export type TimeLineGroupsType = {
     id: number; 

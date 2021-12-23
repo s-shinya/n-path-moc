@@ -39,7 +39,7 @@ import PersonalCalendar  from '../organisms/TimeLine/PersonalCalendar';
 import { CALENDAR_PERIOD, DISABLE_TIMELINE_Y_TYPE } from '../../constants/const';
 import CButton from '../Atoms/CButton';
 import { useWindowSize } from '../../hooks/useWindowSize';
-import { LONG_TERM_GROUPS_DATA, LONG_TERM_ITEMS_DATA, MONTH_GROUPS_DATA_BY_CONSTRUCTION, MONTH_GROUPS_DATA_BY_PEOPLE, MONTH_ITEMS_DATA_BY_CONSTRUCTION, MONTH_ITEMS_DATA_BY_PEOPLE, WEEK_GROUPS_DATA_BY_PEOPLE, WEEK_ITEMS_DATA_BY_PEOPLE } from '../../constants/testData';
+import { LONG_TERM_GROUPS_DATA, LONG_TERM_ITEMS_DATA, MONTH_GROUPS_DATA_BY_CONSTRUCTION, MONTH_GROUPS_DATA_BY_PEOPLE, MONTH_ITEMS_DATA_BY_CONSTRUCTION, MONTH_ITEMS_DATA_BY_PEOPLE, WEEK_GROUPS_DATA_BY_CONSTRUCTION, WEEK_GROUPS_DATA_BY_PEOPLE, WEEK_ITEMS_DATA_BY_CONSTRUCTION, WEEK_ITEMS_DATA_BY_PEOPLE } from '../../constants/testData';
 import { GetTimelineDataType, TimeLineGroupsType, TimeLineItemsType } from '../../types/TimeLineType';
 import moment, { Moment } from 'moment'
 
@@ -66,16 +66,16 @@ const PlanPage:VFC = () => {
     const getTimeLineData:GetTimelineDataType = (
         startDate, 
         finishDate, 
-        dataType = DISABLE_TIMELINE_Y_TYPE.CONSTRUCTION
+        yDataType = DISABLE_TIMELINE_Y_TYPE.CONSTRUCTION
     ) => {
         console.log('新しいデータを取得します');
         console.log(tabIndex);
-        console.log(dataType);
+        console.log(yDataType);
 
         //TODO:本来はAPIで出し訳
         switch(tabIndex){
             case CALENDAR_PERIOD.MONTH:
-                if(dataType === DISABLE_TIMELINE_Y_TYPE.CONSTRUCTION){
+                if(yDataType === DISABLE_TIMELINE_Y_TYPE.CONSTRUCTION){
                     setGroupList(MONTH_GROUPS_DATA_BY_CONSTRUCTION);
                     setItemList(MONTH_ITEMS_DATA_BY_CONSTRUCTION);
                 }else{
@@ -84,9 +84,9 @@ const PlanPage:VFC = () => {
                 }
                 break;
             case CALENDAR_PERIOD.WEEK:
-                if(dataType === DISABLE_TIMELINE_Y_TYPE.CONSTRUCTION){
-                    setGroupList(MONTH_GROUPS_DATA_BY_CONSTRUCTION);
-                    setItemList(MONTH_ITEMS_DATA_BY_CONSTRUCTION);
+                if(yDataType === DISABLE_TIMELINE_Y_TYPE.CONSTRUCTION){
+                    setGroupList(WEEK_GROUPS_DATA_BY_CONSTRUCTION);
+                    setItemList(WEEK_ITEMS_DATA_BY_CONSTRUCTION);
                 }else{
                     setGroupList(WEEK_GROUPS_DATA_BY_PEOPLE);
                     setItemList(WEEK_ITEMS_DATA_BY_PEOPLE);

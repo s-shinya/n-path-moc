@@ -13,18 +13,22 @@ const TimeLineWeek: VFC<TimeLineType> = (props) => {
     const {mainAreaH, groups, items, dateRange, handleSetDateRange, getData} = props;
     const [disableYType, setDisableYType] = useState(DISABLE_TIMELINE_Y_TYPE.CONSTRUCTION);
 
+    const onChangeRadio = (v:string) => {
+        getData(dateRange.visibleTimeStart, dateRange.visibleTimeEnd, v)
+        setDisableYType(v);
+    }
+
     const onClickPrev = ()=>{
         const startDate: Moment = dateRange.visibleTimeStart.add(-1, 'week');
         const finishDate: Moment = dateRange.visibleTimeEnd.add(-1, 'week');
-        getData(startDate, finishDate)
+        getData(startDate, finishDate, disableYType)
         handleSetDateRange(startDate, finishDate);
     }
 
     const onClickNext = ()=>{
-        //1週間ごと
         const startDate: Moment = dateRange.visibleTimeStart.add(1, 'week');
         const finishDate: Moment = dateRange.visibleTimeEnd.add(1, 'week');
-        getData(startDate, finishDate)
+        getData(startDate, finishDate, disableYType)
         handleSetDateRange(startDate, finishDate);
     }
 
@@ -38,7 +42,7 @@ const TimeLineWeek: VFC<TimeLineType> = (props) => {
                 <Box w='30%'>
                     <RadioGroup 
                         value={disableYType}
-                        onChange={(v)=>setDisableYType(v)} 
+                        onChange={(v)=>onChangeRadio(v)} 
                     >
                         <Stack direction='row'>
                             <Radio bg='white' borderColor='gray.300' value='1'>工事案件別</Radio>
