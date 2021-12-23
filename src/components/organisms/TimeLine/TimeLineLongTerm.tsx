@@ -10,31 +10,21 @@ import ColorBox from '../../Atoms/ColorBox';
 import { TimeLineType } from '../../../types/TimeLineType';
 
 const TimeLineLongTerm: VFC<TimeLineType> = (props) => {
-    const {mainAreaH, groups, items, getData} = props;
-    const [dateRange, setDateRange] = useState<{visibleTimeStart:Moment, visibleTimeEnd:Moment}>({
-        visibleTimeStart:moment().startOf("year"),//1年ごと
-        visibleTimeEnd:moment().endOf("year")
-    });
+    const {mainAreaH, groups, items, dateRange, handleSetDateRange, getData} = props;
 
-    const onClickPrev = useCallback(()=>{
+    const onClickPrev = ()=>{
         const startDate: Moment = dateRange.visibleTimeStart.add(-1, 'year');
         const finishDate: Moment = dateRange.visibleTimeEnd.add(-1, 'year')
         getData(CALENDAR_PERIOD.LONG_TERM, startDate, finishDate)
-        setDateRange({...dateRange, ...{
-            visibleTimeStart: startDate,
-            visibleTimeEnd: finishDate
-        }})
-    }, [dateRange, getData])
+        handleSetDateRange(startDate, finishDate);
+    }
 
-    const onClickNext = useCallback(()=>{
+    const onClickNext = ()=>{
         const startDate: Moment = dateRange.visibleTimeStart.add(1, 'year');
         const finishDate: Moment = dateRange.visibleTimeEnd.add(1, 'year')
         getData(CALENDAR_PERIOD.LONG_TERM, startDate, finishDate)
-        setDateRange({...dateRange, ...{
-            visibleTimeStart: startDate,
-            visibleTimeEnd: finishDate
-        }})
-    }, [dateRange, getData])
+        handleSetDateRange(startDate, finishDate);
+    }
 
     const onItemSelect = useCallback((itemId, e, time) => {
         alert(`onItemSelect：${itemId}`)

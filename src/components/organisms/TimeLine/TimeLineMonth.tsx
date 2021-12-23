@@ -10,32 +10,22 @@ import ColorBox from '../../Atoms/ColorBox';
 import { TimeLineType } from '../../../types/TimeLineType';
 
 const TimeLineMonth: VFC<TimeLineType> = (props) => {
-    const {mainAreaH, groups, items, getData} = props
-    const [dateRange, setDateRange] = useState<{visibleTimeStart:Moment, visibleTimeEnd:Moment}>({
-        visibleTimeStart:moment().startOf("month"),//1ヶ月ごと
-        visibleTimeEnd:moment().endOf("month")
-    });
+    const {mainAreaH, groups, items, dateRange, handleSetDateRange, getData} = props;
     const [disableYType, setDisableYType] = useState(DISABLE_TIMELINE_Y_TYPE.CONSTRUCTION);
 
-    const onClickPrev = useCallback(()=>{
+    const onClickPrev = ()=>{
         const startDate: Moment = dateRange.visibleTimeStart.add(-1, 'month');
-        const finishDate: Moment = dateRange.visibleTimeEnd.add(-1, 'month')
+        const finishDate: Moment = dateRange.visibleTimeEnd.add(-1, 'month');
         getData(CALENDAR_PERIOD.MONTH, startDate, finishDate)
-        setDateRange({...dateRange, ...{
-            visibleTimeStart: startDate,
-            visibleTimeEnd: finishDate
-        }})
-    }, [dateRange, getData])
+        handleSetDateRange(startDate, finishDate);
+    }
 
-    const onClickNext = useCallback(()=>{
+    const onClickNext = ()=>{
         const startDate: Moment = dateRange.visibleTimeStart.add(1, 'month');
-        const finishDate: Moment = dateRange.visibleTimeEnd.add(1, 'month')
+        const finishDate: Moment = dateRange.visibleTimeEnd.add(1, 'month');
         getData(CALENDAR_PERIOD.MONTH, startDate, finishDate)
-        setDateRange({...dateRange, ...{
-            visibleTimeStart: startDate,
-            visibleTimeEnd: finishDate
-        }})
-    }, [dateRange, getData])
+        handleSetDateRange(startDate, finishDate);
+    }
 
 
     const onItemSelect = useCallback((itemId, e, time) => {

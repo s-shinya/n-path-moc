@@ -28,7 +28,8 @@ import {
     TabPanel,
     Flex,
     Box,
-    Select
+    Select,
+    Input
 } from "@chakra-ui/react";
 import MainTemplate from '../templates/MainTemplate';
 import TimeLineLongTerm  from '../organisms/TimeLine/TimeLineLongTerm';
@@ -37,7 +38,6 @@ import TimeLineWeek  from '../organisms/TimeLine/TimeLineWeek';
 import PersonalCalendar  from '../organisms/TimeLine/PersonalCalendar';
 import { CALENDAR_PERIOD } from '../../constants/const';
 import CButton from '../Atoms/CButton';
-import CInput from '../Atoms/CInput';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import { LONG_TERM_GROUPS_DATA, LONG_TERM_ITEMS_DATA, MONTH_GROUPS_DATA_BY_PEOPLE, MONTH_ITEMS_DATA_BY_PEOPLE } from '../../constants/testData';
 import { TimeLineGroupsType, TimeLineItemsType } from '../../types/TimeLineType';
@@ -47,6 +47,10 @@ import moment, { Moment } from 'moment'
 
 const PlanPage:VFC = () => {
     const [tabIndex, setTabIndex] = useState<number>(CALENDAR_PERIOD.LONG_TERM);
+    const [dateRange, setDateRange] = useState<{visibleTimeStart:Moment, visibleTimeEnd:Moment}>({
+        visibleTimeStart:moment().startOf("year"),//1年ごと
+        visibleTimeEnd:moment().endOf("year")
+    });
     const { winH } = useWindowSize();
     const [groupList,setGroupList] = useState<TimeLineGroupsType>([])
     const [itemList,setItemList] = useState<TimeLineItemsType>([]);
@@ -59,7 +63,7 @@ const PlanPage:VFC = () => {
     /**
      * データ取得
      */
-    const getData = (type: number, startDate: Moment, finishDate: Moment) => {
+    const getTimeLineData = (type: number, startDate: Moment, finishDate: Moment) => {
         console.log('新しいデータを取得します');
         console.log(type);
     };
@@ -72,15 +76,29 @@ const PlanPage:VFC = () => {
             case CALENDAR_PERIOD.LONG_TERM:
                 setGroupList(LONG_TERM_GROUPS_DATA);
                 setItemList(LONG_TERM_ITEMS_DATA);
+                setDateRange({...dateRange, ...{
+                    visibleTimeStart:moment().startOf('year'),
+                    visibleTimeEnd:moment().endOf('year')
+                }})
                 break;
             case CALENDAR_PERIOD.MONTH:
                 setGroupList(MONTH_GROUPS_DATA_BY_PEOPLE);
                 setItemList(MONTH_ITEMS_DATA_BY_PEOPLE);
+                setDateRange({...dateRange, ...{
+                    visibleTimeStart:moment().startOf('month'),
+                    visibleTimeEnd:moment().endOf('month')
+                }})
                 break;
         }
         setTabIndex(idx)
     }
 
+    /**
+     * 期間を設定
+     */
+    const handleSetDateRange = (visibleTimeStart:Moment, visibleTimeEnd:Moment) => {
+        setDateRange({...dateRange, ...{visibleTimeStart, visibleTimeEnd,}})
+    }
 
     return (
         <>
@@ -105,10 +123,11 @@ const PlanPage:VFC = () => {
                         </Flex>
                         <Flex mr={4}>
                             <Box mr={4}>
-                                <CInput
-                                    type='date'
-                                    size='sm'
+                                <Input 
+                                    type="date"
+                                    size="sm"
                                     onChange={(e)=>{console.log(e.target.value)}}
+                                    value={dateRange.visibleTimeStart.format("YYYY-MM-DD")}
                                 />
                             </Box>
                             <Box mr={4}>
@@ -134,7 +153,9 @@ const PlanPage:VFC = () => {
                                     mainAreaH={winH}
                                     groups={groupList}
                                     items={itemList}
-                                    getData={getData}
+                                    dateRange={dateRange}
+                                    handleSetDateRange={handleSetDateRange}
+                                    getData={getTimeLineData}
                                 />
                             }
                         </TabPanel>
@@ -144,7 +165,9 @@ const PlanPage:VFC = () => {
                                     mainAreaH={winH}
                                     groups={groupList}
                                     items={itemList}
-                                    getData={getData}
+                                    dateRange={dateRange}
+                                    handleSetDateRange={handleSetDateRange}
+                                    getData={getTimeLineData}
                                 />
                             }
                         </TabPanel>

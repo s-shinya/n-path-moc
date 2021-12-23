@@ -2,9 +2,14 @@ import { Moment } from 'moment'
 
 export type TimeLineType = {
     mainAreaH: number;
-    groups:TimeLineGroupsType;
-    items:TimeLineItemsType;
-    getData:(type:number, startDate:Moment, finishDate:Moment)=>void;
+    groups: TimeLineGroupsType;
+    items: TimeLineItemsType;
+    dateRange: {
+        visibleTimeStart:Moment, 
+        visibleTimeEnd:Moment,
+    };
+    handleSetDateRange: (visibleTimeStart:Moment, visibleTimeEnd:Moment)=>void,
+    getData: (type:number, startDate:Moment, finishDate:Moment)=>void;
 };
 
 export type TimeLineGroupsType = {
