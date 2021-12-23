@@ -10,6 +10,7 @@ export type TimeLineType = {
     };
     handleSetDateRange: (visibleTimeStart:Moment, visibleTimeEnd:Moment)=>void,
     getData: GetTimelineDataType;
+    onItemSelect: (itemId:number)=>void,
 };
 
 export type GetTimelineDataType = (startDate:Moment, finishDate:Moment, yDataType?: string)=>void;

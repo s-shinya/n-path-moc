@@ -10,7 +10,7 @@ import ColorBox from '../../Atoms/ColorBox';
 import { TimeLineType } from '../../../types/TimeLineType';
 
 const TimeLineLongTerm: VFC<TimeLineType> = (props) => {
-    const {mainAreaH, groups, items, dateRange, handleSetDateRange, getData} = props;
+    const {mainAreaH, groups, items, dateRange, handleSetDateRange, getData, onItemSelect} = props;
 
     const onClickPrev = ()=>{
         const startDate: Moment = dateRange.visibleTimeStart.add(-1, 'year');
@@ -25,10 +25,6 @@ const TimeLineLongTerm: VFC<TimeLineType> = (props) => {
         getData(startDate, finishDate)
         handleSetDateRange(startDate, finishDate);
     }
-
-    const onItemSelect = useCallback((itemId, e, time) => {
-        alert(`onItemSelect：${itemId}`)
-    }, [])
 
     return (
         <>

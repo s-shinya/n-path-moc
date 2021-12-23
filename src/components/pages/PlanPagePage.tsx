@@ -135,6 +135,13 @@ const PlanPage:VFC = () => {
         setDateRange({...dateRange, ...{visibleTimeStart, visibleTimeEnd,}})
     }
 
+    /**
+     * タイムライン選択
+     */
+    const onItemSelect = (itemId:number) => {
+        alert(`onItemSelect：${itemId}`);
+    }
+
     return (
         <>
             <MainTemplate>
@@ -191,6 +198,7 @@ const PlanPage:VFC = () => {
                                     dateRange={dateRange}
                                     handleSetDateRange={handleSetDateRange}
                                     getData={getTimeLineData}
+                                    onItemSelect={onItemSelect}
                                 />
                             }
                         </TabPanel>
@@ -203,6 +211,7 @@ const PlanPage:VFC = () => {
                                     dateRange={dateRange}
                                     handleSetDateRange={handleSetDateRange}
                                     getData={getTimeLineData}
+                                    onItemSelect={onItemSelect}
                                 />
                             }
                         </TabPanel>
@@ -215,6 +224,7 @@ const PlanPage:VFC = () => {
                                     dateRange={dateRange}
                                     handleSetDateRange={handleSetDateRange}
                                     getData={getTimeLineData}
+                                    onItemSelect={onItemSelect}
                                 />
                             }
                         </TabPanel>

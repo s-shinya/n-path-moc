@@ -10,7 +10,7 @@ import ColorBox from '../../Atoms/ColorBox';
 import { TimeLineType } from '../../../types/TimeLineType';
 
 const TimeLineWeek: VFC<TimeLineType> = (props) => {
-    const {mainAreaH, groups, items, dateRange, handleSetDateRange, getData} = props;
+    const {mainAreaH, groups, items, dateRange, handleSetDateRange, getData, onItemSelect} = props;
     const [disableYType, setDisableYType] = useState(DISABLE_TIMELINE_Y_TYPE.CONSTRUCTION);
 
     const onChangeRadio = (v:string) => {
@@ -31,10 +31,6 @@ const TimeLineWeek: VFC<TimeLineType> = (props) => {
         getData(startDate, finishDate, disableYType)
         handleSetDateRange(startDate, finishDate);
     }
-
-    const onItemSelect = useCallback((itemId, e, time) => {
-        alert(`onItemSelect：${itemId}`)
-    }, [])
 
     return (
         <>
