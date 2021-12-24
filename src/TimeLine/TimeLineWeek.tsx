@@ -5,7 +5,7 @@ import { TestTimeLine } from '../TestTimeLine';
 import moment, { Moment } from 'moment'
 import { TestTimeLine2 } from '../TestTimeLine2';
 import { PageTurnButtonArea } from '../PageTurnButtonArea';
-import { CALENDAR_PERIOD } from './Const';
+import { CALENDAR_TAB } from './Const';
 
 // const groups = [
 //     { 
@@ -296,7 +296,7 @@ export const TimeLineWeek: VFC = () => {
                     secondaryDateHeaderLabelFormat="DD"
                     isRightSidebar={false}
                     sidebarTitle="ユーザー名"
-                    calendarPeriod={CALENDAR_PERIOD.WEEK}
+                    calendarPeriod={CALENDAR_TAB.WEEK}
                     onItemSelect={onItemSelect}
                 />
             </div>

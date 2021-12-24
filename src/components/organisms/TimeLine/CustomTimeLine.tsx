@@ -5,7 +5,7 @@ import React, { useCallback, useEffect, useRef, useState, VFC } from 'react';
 // import 'react-calendar-timeline/lib/Timeline.css'
 import moment, { Moment } from 'moment'
 import TimeLine, { CustomMarker, DateHeader, SidebarHeader, TimelineHeaders, ReactCalendarTimelineProps, ReactCalendarGroupRendererProps, ReactCalendarItemRendererProps, CustomHeader, Id, ItemContext, GetItemsProps, GetResizeProps, ItemRendererGetResizePropsReturnType } from 'react-calendar-timeline';
-import { CALENDAR_PERIOD } from '../../../constants/const';
+import { CALENDAR_TAB } from '../../../constants/const';
 import { Box, Flex, Image, Text, Tooltip } from '@chakra-ui/react';
 import { useWindowSize } from '../../../hooks/useWindowSize';
 
@@ -346,7 +346,7 @@ const CustomTimeLine: VFC<Props> = (props) => {
                             }}
                         </SidebarHeader>
                     }
-                    {calendarPeriod !== CALENDAR_PERIOD.WEEK ?
+                    {calendarPeriod !== CALENDAR_TAB.WEEK ?
                         <DateHeader 
                             unit="primaryHeader" 
                             labelFormat={primaryDateHeaderLabelFormat}

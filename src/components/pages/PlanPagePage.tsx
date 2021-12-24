@@ -36,7 +36,7 @@ import TimeLineLongTerm  from '../organisms/TimeLine/TimeLineLongTerm';
 import TimeLineMonth  from '../organisms/TimeLine/TimeLineMonth';
 import TimeLineWeek  from '../organisms/TimeLine/TimeLineWeek';
 import PersonalCalendar  from '../organisms/TimeLine/PersonalCalendar';
-import { CALENDAR_PERIOD, DISABLE_TIMELINE_Y_TYPE } from '../../constants/const';
+import { CALENDAR_TAB, DISABLE_TIMELINE_Y_TYPE } from '../../constants/const';
 import CButton from '../Atoms/CButton';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import { LONG_TERM_GROUPS_DATA, LONG_TERM_ITEMS_DATA, MONTH_GROUPS_DATA_BY_CONSTRUCTION, MONTH_GROUPS_DATA_BY_PEOPLE, MONTH_ITEMS_DATA_BY_CONSTRUCTION, MONTH_ITEMS_DATA_BY_PEOPLE, WEEK_GROUPS_DATA_BY_CONSTRUCTION, WEEK_GROUPS_DATA_BY_PEOPLE, WEEK_ITEMS_DATA_BY_CONSTRUCTION, WEEK_ITEMS_DATA_BY_PEOPLE } from '../../constants/testData';
@@ -46,7 +46,7 @@ import moment, { Moment } from 'moment'
 
 
 const PlanPage:VFC = () => {
-    const [tabIndex, setTabIndex] = useState<number>(CALENDAR_PERIOD.LONG_TERM);
+    const [tabIndex, setTabIndex] = useState<number>(CALENDAR_TAB.LONG_TERM);
     const [dateRange, setDateRange] = useState<{visibleTimeStart:Moment, visibleTimeEnd:Moment}>({
         visibleTimeStart:moment().startOf("year"),//1年ごと
         visibleTimeEnd:moment().endOf("year")
@@ -74,7 +74,7 @@ const PlanPage:VFC = () => {
 
         //TODO:本来はAPIで出し訳
         switch(tabIndex){
-            case CALENDAR_PERIOD.MONTH:
+            case CALENDAR_TAB.MONTH:
                 if(yDataType === DISABLE_TIMELINE_Y_TYPE.CONSTRUCTION){
                     setGroupList(MONTH_GROUPS_DATA_BY_CONSTRUCTION);
                     setItemList(MONTH_ITEMS_DATA_BY_CONSTRUCTION);
@@ -83,7 +83,7 @@ const PlanPage:VFC = () => {
                     setItemList(MONTH_ITEMS_DATA_BY_PEOPLE);
                 }
                 break;
-            case CALENDAR_PERIOD.WEEK:
+            case CALENDAR_TAB.WEEK:
                 if(yDataType === DISABLE_TIMELINE_Y_TYPE.CONSTRUCTION){
                     setGroupList(WEEK_GROUPS_DATA_BY_CONSTRUCTION);
                     setItemList(WEEK_ITEMS_DATA_BY_CONSTRUCTION);
@@ -100,7 +100,7 @@ const PlanPage:VFC = () => {
      */
     const onChangeTab = (idx:number) => {
         switch(idx){
-            case CALENDAR_PERIOD.LONG_TERM:
+            case CALENDAR_TAB.LONG_TERM:
                 setGroupList(LONG_TERM_GROUPS_DATA);
                 setItemList(LONG_TERM_ITEMS_DATA);
                 setDateRange({...dateRange, ...{
@@ -108,7 +108,7 @@ const PlanPage:VFC = () => {
                     visibleTimeEnd:moment().endOf('year')
                 }})
                 break;
-            case CALENDAR_PERIOD.MONTH:
+            case CALENDAR_TAB.MONTH:
                 setGroupList(MONTH_GROUPS_DATA_BY_CONSTRUCTION);
                 setItemList(MONTH_ITEMS_DATA_BY_CONSTRUCTION);
                 setDateRange({...dateRange, ...{
@@ -116,7 +116,7 @@ const PlanPage:VFC = () => {
                     visibleTimeEnd:moment().endOf('month')
                 }})
                 break;
-            case CALENDAR_PERIOD.WEEK:
+            case CALENDAR_TAB.WEEK:
                 setGroupList(WEEK_GROUPS_DATA_BY_PEOPLE);
                 setItemList(WEEK_ITEMS_DATA_BY_PEOPLE);
                 setDateRange({...dateRange, ...{
@@ -163,34 +163,36 @@ const PlanPage:VFC = () => {
                             <Tab _focus={{focus:"none"}}>日</Tab>
                             <Tab _focus={{focus:"none"}}>個人</Tab>
                         </Flex>
-                        <Flex mr={4}>
-                            <Box mr={4}>
-                                <Input 
-                                    type="date"
-                                    size="sm"
-                                    onChange={(e)=>{console.log(e.target.value)}}
-                                    value={dateRange.visibleTimeStart.format("YYYY-MM-DD")}
-                                />
-                            </Box>
-                            <Box mr={4}>
-                                <Select 
-                                    placeholder='部署' 
-                                    size='sm' 
-                                    onChange={(e)=>{console.log(e.target.value)}}
-                                >
-                                    <option value='1'>東京事業所</option>
-                                    <option value='2'>名古屋事業所</option>
-                                </Select>
-                            </Box>
-                            <CButton 
-                                size='sm'
-                                onClick={()=>alert('クリック')}
-                            >適用</CButton>
-                        </Flex>
+                        {tabIndex !== CALENDAR_TAB.PERSONAL &&
+                            <Flex mr={4}>
+                                <Box mr={4}>
+                                    <Input 
+                                        type="date"
+                                        size="sm"
+                                        onChange={(e)=>{console.log(e.target.value)}}
+                                        value={dateRange.visibleTimeStart.format("YYYY-MM-DD")}
+                                    />
+                                </Box>
+                                        <Box mr={4}>
+                                            <Select 
+                                                placeholder='部署' 
+                                                size='sm' 
+                                                onChange={(e)=>{console.log(e.target.value)}}
+                                            >
+                                                <option value='1'>東京事業所</option>
+                                                <option value='2'>名古屋事業所</option>
+                                            </Select>
+                                        </Box>
+                                        <CButton 
+                                            size='sm'
+                                            onClick={()=>alert('クリック')}
+                                        >適用</CButton>
+                            </Flex>
+                    }
                     </TabList>
                     <TabPanels pt={10}>
                         <TabPanel>
-                            {tabIndex === CALENDAR_PERIOD.LONG_TERM &&
+                            {tabIndex === CALENDAR_TAB.LONG_TERM &&
                                 <TimeLineLongTerm 
                                     mainAreaH={winH}
                                     groups={groupList}
@@ -203,7 +205,7 @@ const PlanPage:VFC = () => {
                             }
                         </TabPanel>
                         <TabPanel>
-                            {tabIndex === CALENDAR_PERIOD.MONTH &&
+                            {tabIndex === CALENDAR_TAB.MONTH &&
                                 <TimeLineMonth 
                                     mainAreaH={winH}
                                     groups={groupList}
@@ -216,7 +218,7 @@ const PlanPage:VFC = () => {
                             }
                         </TabPanel>
                         <TabPanel>
-                            {tabIndex === CALENDAR_PERIOD.WEEK &&
+                            {tabIndex === CALENDAR_TAB.WEEK &&
                                 <TimeLineWeek 
                                     mainAreaH={winH}
                                     groups={groupList}
@@ -229,12 +231,12 @@ const PlanPage:VFC = () => {
                             }
                         </TabPanel>
                         <TabPanel>
-                            {tabIndex === CALENDAR_PERIOD.DATE &&
+                            {tabIndex === CALENDAR_TAB.DATE &&
                                 <>日計画</>
                             }
                         </TabPanel>
                         <TabPanel>
-                            {tabIndex === CALENDAR_PERIOD.PERSONAL &&
+                            {tabIndex === CALENDAR_TAB.PERSONAL &&
                                 <PersonalCalendar/>
                             }
                         </TabPanel>

@@ -4,7 +4,7 @@ import React, { useCallback, useState, VFC } from 'react';
 import moment, { Moment } from 'moment'
 import CustomTimeLine from './CustomTimeLine';
 import PageTurnButtons from '../../molecules/PageTurnButtons';
-import { CALENDAR_PERIOD } from '../../../constants/const';
+import { CALENDAR_TAB } from '../../../constants/const';
 import { Flex, Box, Text, Stack } from '@chakra-ui/react';
 import ColorBox from '../../Atoms/ColorBox';
 import { TimeLineType } from '../../../types/TimeLineType';
@@ -63,7 +63,7 @@ const TimeLineLongTerm: VFC<TimeLineType> = (props) => {
                 sidebarTitle="工事案件名"
                 isRightSidebar={true}
                 rightSidebarTitle="窓口"
-                calendarPeriod={CALENDAR_PERIOD.LONG_TERM}
+                calendarPeriod={CALENDAR_TAB.LONG_TERM}
                 onItemSelect={onItemSelect}
             />
         </>

@@ -5,7 +5,7 @@ import { TestTimeLine } from '../TestTimeLine';
 import moment, { Moment } from 'moment'
 import { TestTimeLine2 } from '../TestTimeLine2';
 import { PageTurnButtonArea } from '../PageTurnButtonArea';
-import { CALENDAR_PERIOD } from './Const';
+import { CALENDAR_TAB } from './Const';
 
 // const groups = [
 //     { 
@@ -327,7 +327,7 @@ export const TimeLineLongTerm: VFC = () => {
                     sidebarTitle="工事案件名"
                     isRightSidebar={true}
                     rightSidebarTitle="窓口"
-                    calendarPeriod={CALENDAR_PERIOD.LONG_TERM}
+                    calendarPeriod={CALENDAR_TAB.LONG_TERM}
                     onItemSelect={onItemSelect}
                 />
             </div>

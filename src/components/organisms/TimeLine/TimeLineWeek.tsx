@@ -4,7 +4,7 @@ import React, { useCallback, useState, VFC } from 'react';
 import moment, { Moment } from 'moment'
 import CustomTimeLine from './CustomTimeLine';
 import PageTurnButtons  from '../../molecules/PageTurnButtons';
-import { CALENDAR_PERIOD, DISABLE_TIMELINE_Y_TYPE } from '../../../constants/const';
+import { CALENDAR_TAB, DISABLE_TIMELINE_Y_TYPE } from '../../../constants/const';
 import { Box, Flex, Radio, RadioGroup, Stack, Text } from '@chakra-ui/react';
 import ColorBox from '../../Atoms/ColorBox';
 import { TimeLineType } from '../../../types/TimeLineType';
@@ -72,7 +72,7 @@ const TimeLineWeek: VFC<TimeLineType> = (props) => {
                 secondaryDateHeaderLabelFormat="DD"
                 isRightSidebar={false}
                 sidebarTitle={disableYType === DISABLE_TIMELINE_Y_TYPE.CONSTRUCTION ? '工事案件名' : 'ユーザー名'}
-                calendarPeriod={CALENDAR_PERIOD.WEEK}
+                calendarPeriod={CALENDAR_TAB.WEEK}
                 onItemSelect={onItemSelect}
             />
         </>

@@ -5,7 +5,7 @@ import React, { useCallback, useState, VFC } from 'react';
 // import 'react-calendar-timeline/lib/Timeline.css'
 import moment, { Moment } from 'moment'
 import TimeLine, { CustomMarker, DateHeader, SidebarHeader, TimelineHeaders, ReactCalendarTimelineProps, ReactCalendarGroupRendererProps, ReactCalendarItemRendererProps, CustomHeader, Id, ItemContext, GetItemsProps, GetResizeProps, ItemRendererGetResizePropsReturnType } from 'react-calendar-timeline';
-import { CALENDAR_PERIOD } from './TimeLine/Const';
+import { CALENDAR_TAB } from './TimeLine/Const';
 
 // type ItemRendererProps = ReactCalendarItemRendererProps
 // type ItemRendererProps = any
@@ -246,7 +246,7 @@ export const TestTimeLine2: VFC<Props> = (props) => {
                         }}
                     </SidebarHeader>
                 }
-                {calendarPeriod !== CALENDAR_PERIOD.WEEK ?
+                {calendarPeriod !== CALENDAR_TAB.WEEK ?
                     <DateHeader 
                         unit="primaryHeader" 
                         labelFormat={primaryDateHeaderLabelFormat}

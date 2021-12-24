@@ -114,6 +114,7 @@ const PersonalCalendar: VFC = () => {
 
                 // initialDate='2021-01-01'
                 datesSet={handleDatesSet}
+                dayHeaderContent
 
                 // eventsSet={handleChangeEvents}//イベントが変わった時
                 // customButtons={{
