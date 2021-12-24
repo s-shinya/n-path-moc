@@ -16,7 +16,7 @@ export const LONG_TERM_GROUPS_DATA = [
     },
     { 
         id: 3, 
-        title: '中毒電力(株)三隅火力発電所 バイオマス 計測盤搬入' ,
+        title: '中国電力(株)三隅火力発電所 バイオマス 計測盤搬入' ,
         rightTitle: '広島',
     },
     { 
@@ -206,7 +206,7 @@ export const MONTH_GROUPS_DATA_BY_CONSTRUCTION = [
     },
     { 
         id: 3, 
-        title: '中毒電力(株)三隅火力発電所 バイオマス 計測盤搬入' ,
+        title: '中国電力(株)三隅火力発電所 バイオマス 計測盤搬入' ,
         rightTitle: '広島',
     },
     { 
@@ -335,6 +335,29 @@ export const MONTH_ITEMS_DATA_BY_CONSTRUCTION = [
         is_start_hide: true,
         end_label: moment('2021-12-20 00:00:00'),
         is_end_hide: false,
+        is_personnel_shortage: true,
+        personnel_shortage_list: [
+            {
+                date: '12/01',
+                shortage_count: 1,
+            },
+            {
+                date: '12/03',
+                shortage_count: 3,
+            },
+            {
+                date: '12/11',
+                shortage_count: 3,
+            },
+            {
+                date: '12/12',
+                shortage_count: 3,
+            },
+            {
+                date: '12/13',
+                shortage_count: 3,
+            },
+        ]
     },
     {
         id: 2,
@@ -342,9 +365,9 @@ export const MONTH_ITEMS_DATA_BY_CONSTRUCTION = [
         title: '',
         start_time: moment('2021-12-10 00:00:00').valueOf(),
         end_time: moment('2021-12-11 23:59:59').valueOf(),
-        bgColor: "#9DECF9",
+        bgColor: "#FEB2B2",
         selectedBgColor: "rgb(255, 193, 7)",
-        color: "#065666",
+        color: "#63171B",
         start_label: moment('2021-12-10 00:00:00'),
         is_start_hide: false,
         end_label: moment('2021-10-11 00:00:00'),
@@ -493,9 +516,9 @@ export const MONTH_ITEMS_DATA_BY_PEOPLE = [
         title: '広島西郵便局',
         start_time: moment('2021-12-10 00:00:00').valueOf(),
         end_time: moment('2021-12-11 23:59:59').valueOf(),
-        bgColor: "#9DECF9",
+        bgColor: "#FEB2B2",
         selectedBgColor: "rgb(255, 193, 7)",
-        color: "#065666",
+        color: "#63171B",
         start_label: moment('2021-12-10 00:00:00'),
         is_start_hide: false,
         end_label: moment('2021-10-11 00:00:00'),
@@ -507,9 +530,9 @@ export const MONTH_ITEMS_DATA_BY_PEOPLE = [
         title: '広島西郵便局',
         start_time: moment('2021-12-10 00:00:00').valueOf(),
         end_time: moment('2021-12-11 23:59:59').valueOf(),
-        bgColor: "#9DECF9",
+        bgColor: "#FEB2B2",
         selectedBgColor: "rgb(255, 193, 7)",
-        color: "#065666",
+        color: "#63171B",
         start_label: moment('2021-12-10 00:00:00'),
         is_start_hide: false,
         end_label: moment('2021-10-11 00:00:00'),
@@ -562,7 +585,7 @@ export const WEEK_GROUPS_DATA_BY_CONSTRUCTION = [
     },
     { 
         id: 3, 
-        title: '中毒電力(株)三隅火力発電所 バイオマス 計測盤搬入' ,
+        title: '中国電力(株)三隅火力発電所 バイオマス 計測盤搬入' ,
         rightTitle: '広島',
     },
     { 
@@ -691,6 +714,29 @@ export const WEEK_ITEMS_DATA_BY_CONSTRUCTION = [
         is_start_hide: true,
         end_label: moment('2022-01-02 00:00:00'),
         is_end_hide: true,
+        is_personnel_shortage: true,
+        personnel_shortage_list: [
+            {
+                date: '12/28',
+                shortage_count: 1,
+            },
+            {
+                date: '12/29',
+                shortage_count: 3,
+            },
+            {
+                date: '12/30',
+                shortage_count: 3,
+            },
+            {
+                date: '01/01',
+                shortage_count: 3,
+            },
+            {
+                date: '01/02',
+                shortage_count: 3,
+            },
+        ]
     },
     {
         id: 2,

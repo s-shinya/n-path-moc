@@ -6,7 +6,7 @@ import React, { useCallback, useEffect, useRef, useState, VFC } from 'react';
 import moment, { Moment } from 'moment'
 import TimeLine, { CustomMarker, DateHeader, SidebarHeader, TimelineHeaders, ReactCalendarTimelineProps, ReactCalendarGroupRendererProps, ReactCalendarItemRendererProps, CustomHeader, Id, ItemContext, GetItemsProps, GetResizeProps, ItemRendererGetResizePropsReturnType } from 'react-calendar-timeline';
 import { CALENDAR_PERIOD } from '../../../constants/const';
-import { Box } from '@chakra-ui/react';
+import { Box, Flex, Image, Text, Tooltip } from '@chakra-ui/react';
 import { useWindowSize } from '../../../hooks/useWindowSize';
 
 // type ItemRendererProps = ReactCalendarItemRendererProps
@@ -32,6 +32,11 @@ interface TimelineItemBase<DateType> {
     start_label?: Moment;
     is_end_hide?: boolean;
     end_label?: Moment;
+    is_personnel_shortage?: boolean;
+    personnel_shortage_list?: {
+        date: string;
+        shortage_count: number;
+    }[];
 }
 interface CReactCalendarItemRendererProps{
     item: TimelineItemBase<any>;
@@ -51,12 +56,14 @@ interface CReactCalendarItemRendererProps{
         style: React.CSSProperties;
     };
     getResizeProps: (propsOverride?: GetResizeProps) => ItemRendererGetResizePropsReturnType;
+    // onItemSelect: ReactCalendarTimelineProps['onItemSelect'];
+    onItemSelect: (itemId:number)=>void;
 }
 type ItemRendererProps = CReactCalendarItemRendererProps;
 
 
 const ItemRenderer:VFC<ItemRendererProps> = (props) => {
-    const { item, itemContext, getItemProps, getResizeProps } = props
+    const { item, itemContext, getItemProps, getResizeProps, onItemSelect} = props
     const { left: leftResizeProps, right: rightResizeProps } = getResizeProps();
     const backgroundColor = itemContext.selected ? (itemContext.dragging ? item.selectedBgColor : item.selectedBgColor) : item.bgColor;
     const textColor = itemContext.selected ? '#975A16' : item.color;
@@ -74,6 +81,7 @@ const ItemRenderer:VFC<ItemRendererProps> = (props) => {
         endLabelBgColor = '#EDF2F7';
         endLabelBorder = "1px solid #E2E8F0";
     }
+    console.log();
 
     return (
         <div
@@ -93,6 +101,7 @@ const ItemRenderer:VFC<ItemRendererProps> = (props) => {
             //     alert("on item click"+ item);
             // }
             })}
+            title=''// デフォルトtooltip消す
         >
             {itemContext.useResizeHandle ? <div {...leftResizeProps} /> : null}
     
@@ -105,8 +114,35 @@ const ItemRenderer:VFC<ItemRendererProps> = (props) => {
                     whiteSpace: "nowrap",
                 }}
             >
-                {/* {itemContext.title} */}
-                {item.title}
+                <Flex direction="row">
+                    {item.is_personnel_shortage &&
+                        <Tooltip 
+                            hasArrow 
+                            label={item.personnel_shortage_list?.map((v, idx)=>(
+                                <React.Fragment key={idx}>{v.date} -{v.shortage_count}名 <br/></React.Fragment>
+                            ))}
+                        >
+                            <Flex>
+                                <Image 
+                                    src="./assets/personnel_shortage.svg"
+                                    boxSize={3}
+                                    // onClick={()=>{alert('人員不足')}}
+                                    // _hover={{
+                                    //     backgroundColor: "red"
+                                    // }}
+                                    zIndex={10000}
+                                    mr={1}
+                                />
+                                <Text>人員が不足してる日があります</Text>
+                            </Flex>
+                        </Tooltip>
+                    }
+                    <Text 
+                        w="100%"
+                        onClick={()=>onItemSelect(Number(item.id))}
+                    >{item.title}</Text>
+                    {/* {itemContext.title} */}
+                </Flex>
             </div>
                 
                 {/* ラベル */}
@@ -155,7 +191,7 @@ const ItemRenderer:VFC<ItemRendererProps> = (props) => {
                         </div>
                     </div>
                 }
-    
+
             {itemContext.useResizeHandle ? <div {...rightResizeProps} /> : null}
         </div>
     );
@@ -200,7 +236,8 @@ type Props = {
     isRightSidebar: boolean;
     rightSidebarTitle?: string;
     calendarPeriod: number;
-    onItemSelect: ReactCalendarTimelineProps['onItemSelect'];
+    // onItemSelect: ReactCalendarTimelineProps['onItemSelect'];
+    onItemSelect: (itemId:number)=>void;
 }
 const CustomTimeLine: VFC<Props> = (props) => {
     const {
@@ -235,7 +272,8 @@ const CustomTimeLine: VFC<Props> = (props) => {
             <TimeLine
                 // groupRenderer= {GroupRenderer}
                 selected={[]}//選択状態にさせないようにする
-                itemRenderer = {ItemRenderer}
+                // itemRenderer = {ItemRenderer}
+                itemRenderer = {(props)=><ItemRenderer {...props} onItemSelect={onItemSelect} />}
                 groups={groups}
                 items={items}
                 // sidebarWidth={300}
@@ -244,7 +282,7 @@ const CustomTimeLine: VFC<Props> = (props) => {
                 canMove={false} //itemを動かす
                 canResize={false} //itemの伸び縮み方向
                 canChangeGroup={false}//グループ間の移動禁止
-                onItemSelect={onItemSelect}//選択時（対象データを編集データとして保持）
+                // onItemSelect={onItemSelect}//選択時（対象データを編集データとして保持）
                 // onItemDeselect={(e)=>{}}//選択解除時（変更内容を登録）
                 // onBoundsChange={()=>{}//カレンダー変えた時
                 onTimeChange={(visibleTimeStart, visibleTimeEnd, updateScrollCanvas)=>{//左右に引っ張ってscrollさせない

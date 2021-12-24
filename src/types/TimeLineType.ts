@@ -35,4 +35,11 @@ export type TimeLineItemsType = {
     start_label?: Moment;//ライン上部に表示する日付
     is_end_hide?: boolean;
     end_label?: Moment;
+
+    //下記ユーザー別で人員不足の時
+    is_personnel_shortage?: boolean;
+    personnel_shortage_list?: {
+        date: string;
+        shortage_count: number;
+    }[];
 }[];
