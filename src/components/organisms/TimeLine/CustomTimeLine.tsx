@@ -81,7 +81,6 @@ const ItemRenderer:VFC<ItemRendererProps> = (props) => {
         endLabelBgColor = '#EDF2F7';
         endLabelBorder = "1px solid #E2E8F0";
     }
-    console.log();
 
     return (
         <div
@@ -115,6 +114,7 @@ const ItemRenderer:VFC<ItemRendererProps> = (props) => {
                 }}
             >
                 <Flex direction="row">
+                    {/* y軸が案件名の時のみ */}
                     {item.is_personnel_shortage &&
                         <Tooltip 
                             hasArrow 
@@ -133,14 +133,17 @@ const ItemRenderer:VFC<ItemRendererProps> = (props) => {
                                     zIndex={10000}
                                     mr={1}
                                 />
-                                <Text>人員が不足してる日があります</Text>
+                                {/* <Text>人員が不足してる日があります</Text> */}
                             </Flex>
                         </Tooltip>
                     }
-                    <Text 
+                    <Box 
                         w="100%"
                         onClick={()=>onItemSelect(Number(item.id))}
-                    >{item.title}</Text>
+                        h={8}
+                    >
+                        <Text>{item.title}</Text>
+                    </Box>
                     {/* {itemContext.title} */}
                 </Flex>
             </div>

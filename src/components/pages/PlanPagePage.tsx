@@ -117,8 +117,8 @@ const PlanPage:VFC = () => {
                 }})
                 break;
             case CALENDAR_TAB.WEEK:
-                setGroupList(WEEK_GROUPS_DATA_BY_PEOPLE);
-                setItemList(WEEK_ITEMS_DATA_BY_PEOPLE);
+                setGroupList(WEEK_GROUPS_DATA_BY_CONSTRUCTION);
+                setItemList(WEEK_ITEMS_DATA_BY_CONSTRUCTION);
                 setDateRange({...dateRange, ...{
                     visibleTimeStart:moment().startOf('week'),
                     visibleTimeEnd:moment().endOf('week')

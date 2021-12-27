@@ -29,8 +29,8 @@ const TimeLineLongTerm: VFC<TimeLineType> = (props) => {
     return (
         <>
             <Flex justifyContent='space-between' alignItems='center' mb={2}>
-                <Box w='30%'></Box>
-                <Stack direction='row' w='30%' justifyContent="center">
+                <Box w='20%'></Box>
+                <Stack direction='row' w='40%' justifyContent="center">
                     <Flex alignItems='center'>
                         <ColorBox bg='blue'/>
                         <Text ml={1}>工事受注案件</Text>
@@ -44,7 +44,7 @@ const TimeLineLongTerm: VFC<TimeLineType> = (props) => {
                         <Text ml={1}>工事完了案件</Text>
                     </Flex>
                 </Stack>
-                <Box w='30%' textAlign='right'>
+                <Box w='20%' textAlign='right'>
                     <PageTurnButtons 
                         onClickPrev={onClickPrev}
                         onClickNext={onClickNext}
