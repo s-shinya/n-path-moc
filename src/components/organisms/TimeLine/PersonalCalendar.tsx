@@ -6,11 +6,10 @@ import allLocales from '@fullcalendar/core/locales-all'; //日本語表記に必
 import { useCallback, VFC } from "react";
 import { Box, Flex, Stack, Text, VStack } from '@chakra-ui/react';
 import ColorBox from '../../Atoms/ColorBox';
-import { PERSONAL_CALENDAR, PERSONAL_CALENDAR_NEXT, PERSONAL_CALENDAR_PREV } from '../../../constants/testData';
+import { ADD_EVENT, PERSONAL_CALENDAR } from '../../../constants/testData';
 
 const PersonalCalendar: VFC = () => {
     const [currentEvents, setCurrentEvents] = useState<EventInput[]>([]);
-    const [testCount, setTestCount] = useState<number>(0);
 
     // /**
     //  * 日付変わったときのイベント取得
@@ -28,27 +27,30 @@ const PersonalCalendar: VFC = () => {
     //     console.log('handleDateSelect');
     //     console.log(selectInfo);
     //     let title = prompt("イベントのタイトルを入力してください")?.trim();
-    //     let calendarApi = selectInfo.view.calendar;
-    //     calendarApi.unselect();
-    //     if (title) {
-    //     calendarApi.addEvent({
-    //         id: "4",
-    //         title,
-    //         start: selectInfo.startStr,
-    //         end: selectInfo.endStr,
-    //         allDay: selectInfo.allDay,
-    //     });
-    //     }
+    //     // let calendarApi = selectInfo.view.calendar;
+    //     // calendarApi.unselect();
+    //     // if (title) {
+    //     // calendarApi.addEvent({
+    //     //     id: "4",
+    //     //     title,
+    //     //     start: selectInfo.startStr,
+    //     //     end: selectInfo.endStr,
+    //     //     allDay: selectInfo.allDay,
+    //     // });
+    //     // }
     // }
 
-    // /**
-    //  * 日付クリック
-    //  */
-    // const handleDateClick = (arg: DateClickArg) => {
-    //     console.log('handleDateClick');
-    //     console.log(arg);
-    //     alert(arg.dateStr);
-    // }
+    /**
+     * 日付クリック
+     */
+    const handleDateClick = (arg: DateClickArg) => {
+        console.log('handleDateClick');
+        console.log(arg);
+        console.log(currentEvents);
+        console.log(ADD_EVENT);
+        alert(arg.dateStr);
+        setCurrentEvents(currentEvents.concat(ADD_EVENT))
+    }
 
     /**
      * 日付変更時
@@ -57,15 +59,7 @@ const PersonalCalendar: VFC = () => {
         //TODO：本来はAPIで日付の期間のイベントを取得する
         console.log('datesSet');
         console.log(arg);
-        if(testCount===0) setCurrentEvents(PERSONAL_CALENDAR)
-        if(testCount===1) setCurrentEvents(PERSONAL_CALENDAR_NEXT)
-        if(testCount===2) setCurrentEvents(PERSONAL_CALENDAR)
-        if(testCount===3) setCurrentEvents(PERSONAL_CALENDAR_PREV)
-        if(testCount===4) setCurrentEvents(PERSONAL_CALENDAR)
-        // setCurrentEvents(PERSONAL_CALENDAR)
-
-        const n = testCount + 1;
-        setTestCount(n);
+        setCurrentEvents(PERSONAL_CALENDAR)
     }
 
     /**
@@ -82,27 +76,27 @@ const PersonalCalendar: VFC = () => {
     }
 
     return(
-        <Box position="relative">
-            {/* PCの時 */}
-            <Box 
-                display={{base:'none', md:'flex'}} 
-                position="absolute" 
-                justifyContent='center' 
-                alignItems='center'
-                w="100%" 
-                minH={"40px"} 
-            >
-                <Stack direction='row' w='40%' justifyContent="center">
-                    <Flex alignItems='center'>
-                        <ColorBox bg='green'/>
-                        <Text ml={1}>工事受注活動案件</Text>
-                    </Flex>
-                    <Flex alignItems='center'>
-                        <ColorBox bg='red'/>
-                        <Text ml={1}>工事完了案件</Text>
-                    </Flex>
-                </Stack>
-            </Box>
+        // <Box position="relative">
+        //     {/* PCの時 */}
+        //     <Box 
+        //         display={{base:'none', md:'flex'}} 
+        //         position="absolute" 
+        //         justifyContent='center' 
+        //         alignItems='center'
+        //         w="100%" 
+        //         minH={"40px"} 
+        //     >
+        //         <Stack direction='row' w='40%' justifyContent="center">
+        //             <Flex alignItems='center'>
+        //                 <ColorBox bg='green'/>
+        //                 <Text ml={1}>工事受注活動案件</Text>
+        //             </Flex>
+        //             <Flex alignItems='center'>
+        //                 <ColorBox bg='red'/>
+        //                 <Text ml={1}>工事完了案件</Text>
+        //             </Flex>
+        //         </Stack>
+        //     </Box>
             <FullCalendar 
                 locales={allLocales}
                 locale="ja"
@@ -114,7 +108,9 @@ const PersonalCalendar: VFC = () => {
 
                 // initialDate='2021-01-01'
                 datesSet={handleDatesSet}
-                dayHeaderContent
+                // dayHeaderContent={()=>(
+                //     <p>a</p>
+                // )}
 
                 // eventsSet={handleChangeEvents}//イベントが変わった時
                 // customButtons={{
@@ -129,7 +125,7 @@ const PersonalCalendar: VFC = () => {
                 //     end: 'prev,next'
                 // }}
 
-                // dateClick={handleDateClick}
+                dateClick={handleDateClick}
                 // selectable={true}
                 // select={handleDateSelect}
 
@@ -139,22 +135,22 @@ const PersonalCalendar: VFC = () => {
                 // titleFormat={}
             />
 
-            {/* スマホ/タブレットの時 */}
-            <VStack 
-                display={{md:'none'}} 
-                alignItems='start'
-                mt={4} 
-            >
-                <Flex alignItems='center'>
-                    <ColorBox bg='green'/>
-                    <Text ml={1}>工事受注活動案件</Text>
-                </Flex>
-                <Flex alignItems='center'>
-                    <ColorBox bg='red'/>
-                    <Text ml={1}>工事完了案件</Text>
-                </Flex>
-            </VStack>
-        </Box>
+            // {/* スマホ/タブレットの時 */}
+        //     <VStack 
+        //         display={{md:'none'}} 
+        //         alignItems='start'
+        //         mt={4} 
+        //     >
+        //         <Flex alignItems='center'>
+        //             <ColorBox bg='green'/>
+        //             <Text ml={1}>工事受注活動案件</Text>
+        //         </Flex>
+        //         <Flex alignItems='center'>
+        //             <ColorBox bg='red'/>
+        //             <Text ml={1}>工事完了案件</Text>
+        //         </Flex>
+        //     </VStack>
+        // </Box>
     )
 
 }

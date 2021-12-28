@@ -842,14 +842,14 @@ export const PERSONAL_CALENDAR = [
     {
         id: "1",
         title: "山陽特殊製鋼姫路",
-        start: "2021-12-01",
-        end: "2021-12-02",// 終了日 + 1日
+        // start: "2021-12-01",
+        // end: "2021-12-02",// 終了日 + 1日
         color: '#FEB2B2',
         textColor: '#63171B',
-        borderColor: '#63171B'
-        // start: "2021-12-01 12:10",
-        // end: "2021-12-05 12:10",
-        // allDay : false
+        borderColor: '#63171B',
+        start: "2021-12-01 12:00",
+        end: "2021-12-01 17:10",
+        allDay : true
     },
     {
         id: "2",
@@ -869,34 +869,24 @@ export const PERSONAL_CALENDAR = [
         textColor: '#1C4532',
         borderColor: '#1C4532',
     },
-];
-
-export const PERSONAL_CALENDAR_NEXT = [
     {
-        id: "1",
-        title: "テストNEXT",
-        start: "2022-01-01",
-        end: "2022-01-02",// 終了日 + 1日
-        color: '#FEB2B2',
-        textColor: '#63171B',
-        borderColor: '#63171B'
-        // start: "2021-12-01 12:10",
-        // end: "2021-12-05 12:10",
-        // allDay : false
+        id: "4",
+        title: "休み",
+        start: "2021-12-06",
+        end: "2021-12-06",
+        color: '#E2E8F0',
+        textColor: '#4A5568',
+        borderColor: '#4A5568',
+        allDay : true
     },
 ];
-
-export const PERSONAL_CALENDAR_PREV = [
-    {
-        id: "1",
-        title: "テストPREV",
-        start: "2021-11-01",
-        end: "2021-11-02",// 終了日 + 1日
-        color: '#FEB2B2',
-        textColor: '#63171B',
-        borderColor: '#63171B'
-        // start: "2021-12-01 12:10",
-        // end: "2021-12-05 12:10",
-        // allDay : false
-    },
-];
+export const ADD_EVENT = {
+    id: "10",
+    title: "休み",
+    start: "2021-12-09 09:00",
+    end: "2021-12-09 13:00",
+    color: '#E2E8F0',
+    textColor: '#4A5568',
+    borderColor: '#4A5568',
+    allDay : true
+}
