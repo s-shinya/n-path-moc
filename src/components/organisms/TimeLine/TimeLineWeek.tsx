@@ -68,6 +68,7 @@ const TimeLineWeek: VFC<TimeLineType> = (props) => {
                 groups={groups}
                 items={items}
                 dateRange={dateRange}
+                unit='week'
                 primaryDateHeaderLabelFormat="YYYY-MM"
                 secondaryDateHeaderLabelFormat="DD(ddd)"
                 isRightSidebar={false}

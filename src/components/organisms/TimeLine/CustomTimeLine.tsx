@@ -5,7 +5,7 @@ import React, { useCallback, useEffect, useRef, useState, VFC } from 'react';
 // import 'react-calendar-timeline/lib/Timeline.css'
 import 'moment/locale/ja'//moment 日本語化
 import moment, { Moment } from 'moment'
-import TimeLine, { CustomMarker, DateHeader, SidebarHeader, TimelineHeaders, ReactCalendarTimelineProps, ReactCalendarGroupRendererProps, ReactCalendarItemRendererProps, CustomHeader, Id, ItemContext, GetItemsProps, GetResizeProps, ItemRendererGetResizePropsReturnType } from 'react-calendar-timeline';
+import TimeLine, { CustomMarker, DateHeader, SidebarHeader, TimelineHeaders, ReactCalendarTimelineProps, ReactCalendarGroupRendererProps, ReactCalendarItemRendererProps, CustomHeader, Id, ItemContext, GetItemsProps, GetResizeProps, ItemRendererGetResizePropsReturnType, Unit } from 'react-calendar-timeline';
 import { CALENDAR_TAB } from '../../../constants/const';
 import { Box, Flex, Image, Text, Tooltip } from '@chakra-ui/react';
 import { useWindowSize } from '../../../hooks/useWindowSize';
@@ -234,6 +234,7 @@ type Props = {
         end_label?: Moment;
     }[]; 
     dateRange: {visibleTimeStart:Moment, visibleTimeEnd:Moment};
+    unit?: 'primaryHeader' | Unit;
     primaryDateHeaderLabelFormat: string;
     secondaryDateHeaderLabelFormat: string;
     sidebarTitle: string;
@@ -254,6 +255,7 @@ const CustomTimeLine: VFC<Props> = (props) => {
         sidebarTitle,
         rightSidebarTitle,
         isRightSidebar,
+        unit,
         calendarPeriod ,
         onItemSelect
     } = props;
@@ -265,6 +267,7 @@ const CustomTimeLine: VFC<Props> = (props) => {
         if(timeLineRef.current?.getBoundingClientRect().bottom) setTimeLineTop(timeLineRef.current.getBoundingClientRect().top);
     }, []);
 
+    console.log(unit)
     return (
         <Box 
             ref={timeLineRef}
@@ -350,18 +353,11 @@ const CustomTimeLine: VFC<Props> = (props) => {
                             }}
                         </SidebarHeader>
                     }
-                    {calendarPeriod !== CALENDAR_TAB.WEEK ?
-                        <DateHeader 
-                            unit="primaryHeader" 
-                            labelFormat={primaryDateHeaderLabelFormat}
-                        />
-                    :
-                        <DateHeader 
-                            unit="week" 
-                            style={{color: 'white'}}
-                            labelFormat={primaryDateHeaderLabelFormat}
-                        />
-                    }
+                    <DateHeader 
+                        unit={unit}
+                        labelFormat={primaryDateHeaderLabelFormat}
+                        style={(unit === 'week')?{color: 'white'}:{}}
+                    />
                     <DateHeader 
                         labelFormat={secondaryDateHeaderLabelFormat}
                         style={{backgroundColor: 'rgb(240, 240, 240)'}}
@@ -370,6 +366,10 @@ const CustomTimeLine: VFC<Props> = (props) => {
             </TimeLine>
         </Box>
     )
+}
+
+CustomTimeLine.defaultProps={
+    unit: "primaryHeader"
 }
 
 export default CustomTimeLine;
