@@ -9,6 +9,7 @@ import TimeLine, { CustomMarker, DateHeader, SidebarHeader, TimelineHeaders, Rea
 import { CALENDAR_TAB } from '../../../constants/const';
 import { Box, Flex, Image, Text, Tooltip } from '@chakra-ui/react';
 import { useWindowSize } from '../../../hooks/useWindowSize';
+import { MoonIcon } from '@chakra-ui/icons';
 
 // type ItemRendererProps = ReactCalendarItemRendererProps
 // type ItemRendererProps = any
@@ -38,6 +39,7 @@ interface TimelineItemBase<DateType> {
         date: string;
         shortage_count: number;
     }[];
+    is_night_work?: boolean;
 }
 interface CReactCalendarItemRendererProps{
     item: TimelineItemBase<any>;
@@ -138,14 +140,15 @@ const ItemRenderer:VFC<ItemRendererProps> = (props) => {
                             </Flex>
                         </Tooltip>
                     }
-                    <Box 
+                    <Flex 
                         w="100%"
                         onClick={()=>onItemSelect(Number(item.id))}
                         h={8}
                     >
+                        {(item.is_night_work) && <MoonIcon color='gray.600'/>}
                         <Text>{item.title}</Text>
-                    </Box>
-                    {/* {itemContext.title} */}
+                        {/* {itemContext.title} */}
+                    </Flex>
                 </Flex>
             </div>
                 

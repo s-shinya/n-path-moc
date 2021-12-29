@@ -566,6 +566,21 @@ export const MONTH_ITEMS_DATA_BY_PEOPLE = [
         end_label: moment('2022-01-01 00:00:00'),
         is_end_hide: true,
     },
+    {
+        id: 6,
+        group: 3,
+        title: '広島西郵便局',
+        start_time: moment('2021-12-27 22:00:00').valueOf(),
+        end_time: moment('2021-12-28 05:59:59').valueOf(),
+        bgColor: "#FEB2B2",
+        selectedBgColor: "rgb(255, 193, 7)",
+        color: "#63171B",
+        start_label: moment('2021-12-27 00:00:00'),
+        is_start_hide: false,
+        end_label: moment('2021-12-28 00:00:00'),
+        is_end_hide: false,
+        is_night_work: true,
+    },
 ];
 
 
@@ -835,6 +850,21 @@ export const WEEK_ITEMS_DATA_BY_PEOPLE = [
         end_label: moment('2021-12-29 00:00:00'),
         is_end_hide: false,
     },
+    {
+        id: 6,
+        group: 3,
+        title: '広島西郵便局',
+        start_time: moment('2021-12-27 22:00:00').valueOf(),
+        end_time: moment('2021-12-28 05:59:59').valueOf(),
+        bgColor: "#FEB2B2",
+        selectedBgColor: "rgb(255, 193, 7)",
+        color: "#63171B",
+        start_label: moment('2021-12-27 00:00:00'),
+        is_start_hide: false,
+        end_label: moment('2021-12-28 00:00:00'),
+        is_end_hide: false,
+        is_night_work: true,
+    },
 ];
 
 
@@ -871,7 +901,7 @@ export const PERSONAL_CALENDAR = [
     },
     {
         id: "4",
-        title: "休み",
+        title: "休み（終日）",
         start: "2021-12-06",
         end: "2021-12-06",
         color: '#E2E8F0',
@@ -879,6 +909,16 @@ export const PERSONAL_CALENDAR = [
         borderColor: '#4A5568',
         allDay : true
     },
+    {
+        id: "5",
+        title: "休み(09:00〜13:00)",
+        start: "2021-12-20 09:00",
+        end: "2021-12-21 13:00",
+        color: '#E2E8F0',
+        textColor: '#4A5568',
+        borderColor: '#4A5568',
+        allDay : true
+    }
 ];
 export const ADD_EVENT = {
     id: "10",
