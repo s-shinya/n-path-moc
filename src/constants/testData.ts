@@ -595,14 +595,14 @@ export const WEEK_ITEMS_DATA_BY_CONSTRUCTION = [
         id: 1,
         group: 1,
         title: '人員が不足してる日があります',
-        start_time: moment('2021-12-26  00:00:00').valueOf(),//ライン表示の開始日（画面跨ぐ場合は考慮する）
-        end_time: moment('2022-01-01  23:59:59').valueOf(),
+        start_time: moment('2021-12-25  00:00:00').valueOf(),//ライン表示の開始日（画面跨ぐ場合は考慮する）
+        end_time: moment('2021-12-31  23:59:59').valueOf(),
         bgColor: "#FEB2B2",
         selectedBgColor: "rgb(255, 193, 7)",
         color: "#63171B",
-        start_label:moment('2021-12-25 00:00:00'),//ライン上部に表示する日付
+        start_label:moment('2021-12-24 00:00:00'),//ライン上部に表示する日付
         is_start_hide: true,
-        end_label: moment('2022-01-02 00:00:00'),
+        end_label: moment('2022-01-01 00:00:00'),
         is_end_hide: true,
         is_personnel_shortage: true,
         personnel_shortage_list: [
@@ -647,13 +647,13 @@ export const WEEK_ITEMS_DATA_BY_CONSTRUCTION = [
         group: 3,
         title: '',
         start_time: moment('2021-12-29 00:00:00').valueOf(),
-        end_time: moment('2022-01-01 23:59:59').valueOf(),
+        end_time: moment('2021-12-31 23:59:59').valueOf(),
         bgColor: "#9AE6B4",
         selectedBgColor: "rgb(255, 193, 7)",
         color: "#1C4532",
         start_label: moment('2021-12-29 00:00:00'),
         is_start_hide: false,
-        end_label: moment('2022-01-01 00:00:00'),
+        end_label: moment('2021-12-31 00:00:00'),
         is_end_hide: false,
     },
 ];
@@ -769,14 +769,14 @@ export const WEEK_ITEMS_DATA_BY_PEOPLE = [
         id: 1,
         group: 1,
         title: '山陽特殊製鋼姫路',
-        start_time: moment('2021-12-26  00:00:00').valueOf(),//ライン表示の開始日（画面跨ぐ場合は考慮する）
-        end_time: moment('2022-01-01  23:59:59').valueOf(),
+        start_time: moment('2021-12-25  00:00:00').valueOf(),//ライン表示の開始日（画面跨ぐ場合は考慮する）
+        end_time: moment('2021-12-31  23:59:59').valueOf(),
         bgColor: "#FEB2B2",
         selectedBgColor: "rgb(255, 193, 7)",
         color: "#63171B",
-        start_label:moment('2021-12-25 00:00:00'),//ライン上部に表示する日付
+        start_label:moment('2021-12-24 00:00:00'),//ライン上部に表示する日付
         is_start_hide: true,
-        end_label: moment('2022-01-02 00:00:00'),
+        end_label: moment('2022-01-01 00:00:00'),
         is_end_hide: true,
     },
     {
@@ -812,13 +812,13 @@ export const WEEK_ITEMS_DATA_BY_PEOPLE = [
         group: 3,
         title: '中部国際医療センター',
         start_time: moment('2021-12-29 00:00:00').valueOf(),
-        end_time: moment('2022-01-01 23:59:59').valueOf(),
+        end_time: moment('2021-12-31 23:59:59').valueOf(),
         bgColor: "#9AE6B4",
         selectedBgColor: "rgb(255, 193, 7)",
         color: "#1C4532",
         start_label: moment('2021-12-29 00:00:00'),
         is_start_hide: false,
-        end_label: moment('2022-01-01 00:00:00'),
+        end_label: moment('2021-12-31 00:00:00'),
         is_end_hide: false,
     },
     {

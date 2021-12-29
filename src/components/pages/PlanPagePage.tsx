@@ -125,8 +125,8 @@ const PlanPage:VFC = () => {
                 setGroupList(WEEK_GROUPS_DATA_BY_CONSTRUCTION);
                 setItemList(WEEK_ITEMS_DATA_BY_CONSTRUCTION);
                 setDateRange({...dateRange, ...{
-                    visibleTimeStart:moment().startOf('week'),
-                    visibleTimeEnd:moment().endOf('week')
+                    visibleTimeStart:moment().startOf('week').add(-1, 'day'),
+                    visibleTimeEnd:moment().endOf('week').add(-1, 'day')
                 }})
                 break;
         }
