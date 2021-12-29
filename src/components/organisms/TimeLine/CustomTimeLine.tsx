@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useRef, useState, VFC } from 'react';
 // make sure you include the timeline stylesheet or the timeline will not be styled
 // import 'react-calendar-timeline/lib/Timeline.css'
+import 'moment/locale/ja'//moment 日本語化
 import moment, { Moment } from 'moment'
 import TimeLine, { CustomMarker, DateHeader, SidebarHeader, TimelineHeaders, ReactCalendarTimelineProps, ReactCalendarGroupRendererProps, ReactCalendarItemRendererProps, CustomHeader, Id, ItemContext, GetItemsProps, GetResizeProps, ItemRendererGetResizePropsReturnType } from 'react-calendar-timeline';
 import { CALENDAR_TAB } from '../../../constants/const';
@@ -360,7 +361,6 @@ const CustomTimeLine: VFC<Props> = (props) => {
                             style={{color: 'white'}}
                             labelFormat={primaryDateHeaderLabelFormat}
                         />
-                    
                     }
                     <DateHeader 
                         labelFormat={secondaryDateHeaderLabelFormat}

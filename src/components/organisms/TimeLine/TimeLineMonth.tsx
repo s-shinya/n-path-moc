@@ -68,7 +68,7 @@ const TimeLineMonth: VFC<TimeLineType> = (props) => {
                 groups={groups}
                 items={items}
                 dateRange={dateRange}
-                primaryDateHeaderLabelFormat="yyyy-MM"
+                primaryDateHeaderLabelFormat="YYYY-MM"
                 secondaryDateHeaderLabelFormat="DD"
                 isRightSidebar={false}
                 sidebarTitle={disableYType === DISABLE_TIMELINE_Y_TYPE.CONSTRUCTION ? '工事案件名' : 'ユーザー名'}

@@ -68,8 +68,8 @@ const TimeLineWeek: VFC<TimeLineType> = (props) => {
                 groups={groups}
                 items={items}
                 dateRange={dateRange}
-                primaryDateHeaderLabelFormat="yyyy-MM"
-                secondaryDateHeaderLabelFormat="DD"
+                primaryDateHeaderLabelFormat="YYYY-MM"
+                secondaryDateHeaderLabelFormat="DD(ddd)"
                 isRightSidebar={false}
                 sidebarTitle={disableYType === DISABLE_TIMELINE_Y_TYPE.CONSTRUCTION ? '工事案件名' : 'ユーザー名'}
                 calendarPeriod={CALENDAR_TAB.WEEK}

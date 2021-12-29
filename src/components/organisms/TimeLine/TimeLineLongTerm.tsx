@@ -56,9 +56,7 @@ const TimeLineLongTerm: VFC<TimeLineType> = (props) => {
                 groups={groups}
                 items={items}
                 dateRange={dateRange}
-                // primaryDateHeaderLabelFormat="yyyy/MM"
-                // secondaryDateHeaderLabelFormat="DD"
-                primaryDateHeaderLabelFormat="yyyy"
+                primaryDateHeaderLabelFormat="YYYY"
                 secondaryDateHeaderLabelFormat="MM"
                 sidebarTitle="工事案件名"
                 isRightSidebar={true}

@@ -60,6 +60,11 @@ const PlanPage:VFC = () => {
         setItemList(LONG_TERM_ITEMS_DATA);
     },[])
 
+    // console.log('AAA');
+    // console.log(moment().startOf('isoWeek').format("YYYY/MM/DD HH:mm:ss"));
+    // console.log(moment().startOf('week').format("YYYY/MM/DD HH:mm:ss"));
+    // console.log(moment().startOf('week').format("YYYY/MM/DD HH:mm:ss"));
+
     /**
      * データ取得
      */
