@@ -72,7 +72,6 @@ const TimeLineMonth: VFC<TimeLineType> = (props) => {
                 secondaryDateHeaderLabelFormat="DD"
                 isRightSidebar={false}
                 sidebarTitle={disableYType === DISABLE_TIMELINE_Y_TYPE.CONSTRUCTION ? '工事案件名' : 'ユーザー名'}
-                calendarPeriod={CALENDAR_TAB.MONTH}
                 onItemSelect={onItemSelect}
             />
         </>

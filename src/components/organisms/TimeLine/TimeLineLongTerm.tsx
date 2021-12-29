@@ -61,7 +61,6 @@ const TimeLineLongTerm: VFC<TimeLineType> = (props) => {
                 sidebarTitle="工事案件名"
                 isRightSidebar={true}
                 rightSidebarTitle="窓口"
-                calendarPeriod={CALENDAR_TAB.LONG_TERM}
                 onItemSelect={onItemSelect}
             />
         </>

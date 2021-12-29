@@ -240,7 +240,6 @@ type Props = {
     sidebarTitle: string;
     isRightSidebar: boolean;
     rightSidebarTitle?: string;
-    calendarPeriod: number;
     // onItemSelect: ReactCalendarTimelineProps['onItemSelect'];
     onItemSelect: (itemId:number)=>void;
 }
@@ -256,7 +255,6 @@ const CustomTimeLine: VFC<Props> = (props) => {
         rightSidebarTitle,
         isRightSidebar,
         unit,
-        calendarPeriod ,
         onItemSelect
     } = props;
     
@@ -267,7 +265,6 @@ const CustomTimeLine: VFC<Props> = (props) => {
         if(timeLineRef.current?.getBoundingClientRect().bottom) setTimeLineTop(timeLineRef.current.getBoundingClientRect().top);
     }, []);
 
-    console.log(unit)
     return (
         <Box 
             ref={timeLineRef}
