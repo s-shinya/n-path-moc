@@ -76,27 +76,27 @@ const PersonalCalendar: VFC = () => {
     }
 
     return(
-        // <Box position="relative">
-        //     {/* PCの時 */}
-        //     <Box 
-        //         display={{base:'none', md:'flex'}} 
-        //         position="absolute" 
-        //         justifyContent='center' 
-        //         alignItems='center'
-        //         w="100%" 
-        //         minH={"40px"} 
-        //     >
-        //         <Stack direction='row' w='40%' justifyContent="center">
-        //             <Flex alignItems='center'>
-        //                 <ColorBox bg='green'/>
-        //                 <Text ml={1}>工事受注活動案件</Text>
-        //             </Flex>
-        //             <Flex alignItems='center'>
-        //                 <ColorBox bg='red'/>
-        //                 <Text ml={1}>工事完了案件</Text>
-        //             </Flex>
-        //         </Stack>
-        //     </Box>
+        <Box position="relative">
+            {/* PCの時 */}
+            <Box 
+                display={{base:'none', md:'flex'}} 
+                position="absolute" 
+                justifyContent='center' 
+                alignItems='center'
+                w="100%" 
+                minH={"40px"} 
+            >
+                <Stack direction='row' w='40%' justifyContent="center">
+                    <Flex alignItems='center'>
+                        <ColorBox bg='green'/>
+                        <Text ml={1}>工事依頼書承認済案件</Text>
+                    </Flex>
+                    <Flex alignItems='center'>
+                        <ColorBox bg='red'/>
+                        <Text ml={1}>工事完了案件</Text>
+                    </Flex>
+                </Stack>
+            </Box>
             <FullCalendar 
                 locales={allLocales}
                 locale="ja"
@@ -135,22 +135,22 @@ const PersonalCalendar: VFC = () => {
                 // titleFormat={}
             />
 
-            // {/* スマホ/タブレットの時 */}
-        //     <VStack 
-        //         display={{md:'none'}} 
-        //         alignItems='start'
-        //         mt={4} 
-        //     >
-        //         <Flex alignItems='center'>
-        //             <ColorBox bg='green'/>
-        //             <Text ml={1}>工事受注活動案件</Text>
-        //         </Flex>
-        //         <Flex alignItems='center'>
-        //             <ColorBox bg='red'/>
-        //             <Text ml={1}>工事完了案件</Text>
-        //         </Flex>
-        //     </VStack>
-        // </Box>
+            {/* スマホ/タブレットの時 */}
+            <VStack 
+                display={{md:'none'}} 
+                alignItems='start'
+                mt={4} 
+            >
+                <Flex alignItems='center'>
+                    <ColorBox bg='green'/>
+                    <Text ml={1}>工事依頼書承認済案件</Text>
+                </Flex>
+                <Flex alignItems='center'>
+                    <ColorBox bg='red'/>
+                    <Text ml={1}>工事完了案件</Text>
+                </Flex>
+            </VStack>
+        </Box>
     )
 
 }

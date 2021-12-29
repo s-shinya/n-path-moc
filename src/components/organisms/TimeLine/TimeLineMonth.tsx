@@ -49,7 +49,7 @@ const TimeLineMonth: VFC<TimeLineType> = (props) => {
                 <Stack direction='row' w='30%' justifyContent="center">
                     <Flex alignItems='center'>
                         <ColorBox bg='green'/>
-                        <Text ml={1}>工事受注活動案件</Text>
+                        <Text ml={1}>工事依頼書承認済案件</Text>
                     </Flex>
                     <Flex alignItems='center'>
                         <ColorBox bg='red'/>
@@ -68,6 +68,7 @@ const TimeLineMonth: VFC<TimeLineType> = (props) => {
                 groups={groups}
                 items={items}
                 dateRange={dateRange}
+                calendarPeriod={CALENDAR_TAB.MONTH}
                 primaryDateHeaderLabelFormat="YYYY-M"
                 secondaryDateHeaderLabelFormat="DD"
                 isRightSidebar={false}

@@ -240,6 +240,7 @@ type Props = {
     sidebarTitle: string;
     isRightSidebar: boolean;
     rightSidebarTitle?: string;
+    calendarPeriod: number;
     // onItemSelect: ReactCalendarTimelineProps['onItemSelect'];
     onItemSelect: (itemId:number)=>void;
 }
@@ -255,6 +256,7 @@ const CustomTimeLine: VFC<Props> = (props) => {
         rightSidebarTitle,
         isRightSidebar,
         unit,
+        calendarPeriod,
         onItemSelect
     } = props;
     
@@ -350,10 +352,40 @@ const CustomTimeLine: VFC<Props> = (props) => {
                             }}
                         </SidebarHeader>
                     }
-                    <DateHeader 
-                        unit={unit}
+                    {/* <DateHeader 
+                        unit={'primaryHeader'}
                         labelFormat={primaryDateHeaderLabelFormat}
                         style={(unit === 'week')?{color: 'white'}:{}}
+                    /> */}
+                    <DateHeader 
+                        unit={'primaryHeader'}
+                        labelFormat={primaryDateHeaderLabelFormat}
+                        // style={(unit === 'week')?{color: 'white'}:{}}
+                        intervalRenderer={(props)=>{
+                            // const title: any = props?.intervalContext.interval.startTime;
+                            // console.log(test.format('YYYY-MM'));
+                            const title = (calendarPeriod === CALENDAR_TAB.LONG_TERM) 
+                            ? dateRange.visibleTimeStart.format('YYYY')
+                            : dateRange.visibleTimeStart.format('YYYY-MM')
+                            const d = props?.getIntervalProps()
+                            return(
+                                <div
+                                    {...{
+                                        key: d?.key,
+                                        style: {
+                                            left: '50%',
+                                            position: 'relative',
+                                            display: 'flex',
+                                            alignItems:'center',
+                                            height: '30px',
+                                            color: 'white',
+                                            fontSize: '14px',
+                                        },
+                                        // onClick: () => null, // NOTE override click to prevent zooming out
+                                    }}
+                                >{title}</div>
+                            )
+                        }}
                     />
                     <DateHeader 
                         labelFormat={secondaryDateHeaderLabelFormat}

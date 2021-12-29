@@ -49,7 +49,7 @@ const TimeLineWeek: VFC<TimeLineType> = (props) => {
                 <Stack direction='row' w='30%' justifyContent="center">
                     <Flex alignItems='center'>
                         <ColorBox bg='green'/>
-                        <Text ml={1}>工事受注活動案件</Text>
+                        <Text ml={1}>工事依頼書承認済案件</Text>
                     </Flex>
                     <Flex alignItems='center'>
                         <ColorBox bg='red'/>
@@ -68,7 +68,8 @@ const TimeLineWeek: VFC<TimeLineType> = (props) => {
                 groups={groups}
                 items={items}
                 dateRange={dateRange}
-                unit='week'
+                // unit='week'
+                calendarPeriod={CALENDAR_TAB.WEEK}
                 primaryDateHeaderLabelFormat="YYYY-M"
                 secondaryDateHeaderLabelFormat="DD(ddd)"
                 isRightSidebar={false}

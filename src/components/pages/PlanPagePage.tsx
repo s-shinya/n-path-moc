@@ -1,25 +1,4 @@
 import React, { useState, VFC, useRef, useEffect } from 'react';
-// import '../organisms/TimeLine/Style.scss'
-// import '../organisms/TimeLine/fullcalenndar.css'
-// import '../../Style.scss'
-// import '@fullcalendar/common/main.css'
-// import './TimeLine/fullcalenndar.css'
-// import '../../TimeLine/fullcalenndar.css'
-
-// import { PersonalCalendar } from './TimeLine/PersonalCalendar';
-// import { TimeLineLongTerm } from './TimeLine/TimeLineLongTerm';
-// import { TimeLineMonth } from './TimeLine/TimeLineMonth';
-// import { TimeLineWeek } from './TimeLine/TimeLineWeek';
-// import {
-//     Box,
-//     Stack,
-//     Heading,
-//     Flex,
-//     Text,
-//     Button,
-//     useDisclosure
-// } from "@chakra-ui/react";
-
 import {
     Tabs,
     Tab,
@@ -29,7 +8,8 @@ import {
     Flex,
     Box,
     Select,
-    Input
+    Input,
+    Stack
 } from "@chakra-ui/react";
 import MainTemplate from '../templates/MainTemplate';
 import TimeLineLongTerm  from '../organisms/TimeLine/TimeLineLongTerm';
@@ -42,8 +22,6 @@ import { useWindowSize } from '../../hooks/useWindowSize';
 import { LONG_TERM_GROUPS_DATA, LONG_TERM_ITEMS_DATA, MONTH_GROUPS_DATA_BY_CONSTRUCTION, MONTH_GROUPS_DATA_BY_PEOPLE, MONTH_ITEMS_DATA_BY_CONSTRUCTION, MONTH_ITEMS_DATA_BY_PEOPLE, WEEK_GROUPS_DATA_BY_CONSTRUCTION, WEEK_GROUPS_DATA_BY_PEOPLE, WEEK_ITEMS_DATA_BY_CONSTRUCTION, WEEK_ITEMS_DATA_BY_PEOPLE } from '../../constants/testData';
 import { GetTimelineDataType, TimeLineGroupsType, TimeLineItemsType } from '../../types/TimeLineType';
 import moment, { Moment } from 'moment'
-
-
 
 const PlanPage:VFC = () => {
     const [tabIndex, setTabIndex] = useState<number>(CALENDAR_TAB.LONG_TERM);
@@ -59,11 +37,6 @@ const PlanPage:VFC = () => {
         setGroupList(LONG_TERM_GROUPS_DATA);
         setItemList(LONG_TERM_ITEMS_DATA);
     },[])
-
-    // console.log('AAA');
-    // console.log(moment().startOf('isoWeek').format("YYYY/MM/DD HH:mm:ss"));
-    // console.log(moment().startOf('week').format("YYYY/MM/DD HH:mm:ss"));
-    // console.log(moment().startOf('week').format("YYYY/MM/DD HH:mm:ss"));
 
     /**
      * データ取得
@@ -169,8 +142,8 @@ const PlanPage:VFC = () => {
                             <Tab _focus={{focus:"none"}}>個人</Tab>
                         </Flex>
                         {tabIndex !== CALENDAR_TAB.PERSONAL &&
-                            <Flex mr={4}>
-                                <Box mr={4}>
+                            <Stack direction='row' mr={4}>
+                                <Box>
                                     <Input 
                                         type="date"
                                         size="sm"
@@ -178,21 +151,37 @@ const PlanPage:VFC = () => {
                                         value={dateRange.visibleTimeStart.format("YYYY-MM-DD")}
                                     />
                                 </Box>
-                                        <Box mr={4}>
-                                            <Select 
-                                                placeholder='部署' 
-                                                size='sm' 
-                                                onChange={(e)=>{console.log(e.target.value)}}
-                                            >
-                                                <option value='1'>東京事業所</option>
-                                                <option value='2'>名古屋事業所</option>
-                                            </Select>
-                                        </Box>
-                                        <CButton 
-                                            size='sm'
-                                            onClick={()=>alert('クリック')}
-                                        >適用</CButton>
-                            </Flex>
+                                <Box>
+                                    <Select 
+                                        placeholder='部署' 
+                                        size='sm' 
+                                        onChange={(e)=>{console.log(e.target.value)}}
+                                    >
+                                        <option value='1'>東京事業所</option>
+                                        <option value='2'>名古屋事業所</option>
+                                    </Select>
+                                </Box>
+                                <Box>
+                                    <Select 
+                                        placeholder='課' 
+                                        size='sm' 
+                                        onChange={(e)=>{console.log(e.target.value)}}
+                                    >
+                                        <option value='1'>工事一課</option>
+                                        <option value='2'>工事二課</option>
+                                    </Select>
+                                </Box>
+                                <CButton 
+                                    size='sm'
+                                    onClick={()=>alert('適用')}
+                                >適用</CButton>
+                                <CButton 
+                                    size='sm'
+                                    backgroundColor='gray.400'
+                                    _hover={{backgroundColor:'gray.500'}}
+                                    onClick={()=>alert('クリア')}
+                                >クリア</CButton>
+                            </Stack>
                     }
                     </TabList>
                     <TabPanels pt={10}>
