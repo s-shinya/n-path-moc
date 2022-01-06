@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import FullCalendar, {EventInput, EventSourceInput, EventApi, EventSourceApi, DateSelectArg, EventClickArg, DatesSetArg} from "@fullcalendar/react";
+import FullCalendar, {EventInput, EventSourceInput, EventApi, EventSourceApi, DateSelectArg, EventClickArg, DatesSetArg, EventContentArg} from "@fullcalendar/react";
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import interactionPlugin, { DateClickArg } from "@fullcalendar/interaction"; // 日付クリックイベントに必要
 import allLocales from '@fullcalendar/core/locales-all'; //日本語表記に必要
@@ -7,6 +7,43 @@ import { useCallback, VFC } from "react";
 import { Box, Flex, Stack, Text, VStack } from '@chakra-ui/react';
 import ColorBox from '../../Atoms/ColorBox';
 import { ADD_EVENT, PERSONAL_CALENDAR } from '../../../constants/testData';
+import { MoonIcon } from '@chakra-ui/icons';
+
+type EventInfoProps = Omit<EventContentArg, 'event'> & {
+    event: Omit<EventApi, 'extendedProps'> & {
+        extendedProps: {
+            is_night_work?:boolean;
+            is_personal_schedule?:boolean;
+            identification_id?:number;
+        }
+    }
+}
+type RenderEventContentProps = {
+    eventInfo:EventInfoProps;
+    onClick:(id:number, isPersonalSchedule?:boolean)=>void
+}
+
+const RenderEventContent:VFC<RenderEventContentProps> = (props) => {
+    const {eventInfo, onClick} = props;
+    return(
+        <Stack 
+            direction='row' 
+            spacing={1} 
+            pl={1} 
+            alignItems='center' 
+            justifyContent='start' 
+            _hover={{cursor: 'pointer'}}
+            onClick={()=>onClick(eventInfo.event.extendedProps.identification_id!, eventInfo.event.extendedProps.is_personal_schedule)}
+        >
+            {(eventInfo.event.extendedProps.is_night_work) && <MoonIcon color='gray.600'/>}
+            <Text 
+                overflow='hidden'
+                textOverflow='ellipsis'
+                // whiteSpace='pre-wrap' //折り返す場合
+            > {eventInfo.event.title}</Text>
+        </Stack>
+    )
+}
 
 const PersonalCalendar: VFC = () => {
     const [currentEvents, setCurrentEvents] = useState<EventInput[]>([]);
@@ -62,17 +99,22 @@ const PersonalCalendar: VFC = () => {
         setCurrentEvents(PERSONAL_CALENDAR)
     }
 
-    /**
-     * イベント選択時（閲覧や編集や削除）
-     */
-    const handleEventClick = (clickInfo: EventClickArg) => {
-        console.log('handleEventClick');
-        console.log(clickInfo);
-        console.log("events_id:", clickInfo.event._def.publicId);
-        alert(clickInfo.event._def.publicId);
-        // if (window.confirm(`このイベント「${clickInfo.event.title}」を削除しますか`)) {
-        //     clickInfo.event.remove();
-        // }
+    // /**
+    //  * イベント選択時（閲覧や編集や削除）
+    //  */
+    // const handleEventClick = (clickInfo: EventClickArg) => {
+    //     console.log('handleEventClick');
+    //     console.log(clickInfo);
+    //     console.log("events_id:", clickInfo.event._def.publicId);
+    //     alert(clickInfo.event._def.publicId);
+    //     // if (window.confirm(`このイベント「${clickInfo.event.title}」を削除しますか`)) {
+    //     //     clickInfo.event.remove();
+    //     // }
+    // }
+    const onClickEvent = (id:number, isPersonalSchedule?:boolean) => {
+        (isPersonalSchedule)
+        ? alert(`個人予定${id}`)
+        : alert(`工事案件${id}`)
     }
 
     return(
@@ -129,10 +171,12 @@ const PersonalCalendar: VFC = () => {
                 // selectable={true}
                 // select={handleDateSelect}
 
-                editable={true}
-                eventClick={handleEventClick}
+                // eventClick={handleEventClick}
+                editable={false}
                 height="auto"
                 // titleFormat={}
+
+                eventContent={(eventInfo)=>(<RenderEventContent eventInfo={eventInfo} onClick={onClickEvent} />)}
             />
 
             {/* スマホ/タブレットの時 */}
