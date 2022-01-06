@@ -19,15 +19,15 @@ const TimeLineMonth: VFC<TimeLineType> = (props) => {
     }
 
     const onClickPrev = () => {
-        const startDate: Moment = dateRange.visibleTimeStart.add(-1, 'month');
-        const finishDate: Moment = dateRange.visibleTimeEnd.add(-1, 'month');
+        const startDate: Moment = dateRange.visibleTimeStart.add(-1, 'month').startOf('month');
+        const finishDate: Moment = dateRange.visibleTimeEnd.add(-1, 'month').endOf('month');
         getData(startDate, finishDate, disableYType)
         handleSetDateRange(startDate, finishDate);
     }
 
     const onClickNext = () => {
-        const startDate: Moment = dateRange.visibleTimeStart.add(1, 'month');
-        const finishDate: Moment = dateRange.visibleTimeEnd.add(1, 'month');
+        const startDate: Moment = dateRange.visibleTimeStart.add(1, 'month').startOf('month');
+        const finishDate: Moment = dateRange.visibleTimeEnd.add(1, 'month').endOf('month');
         getData(startDate, finishDate, disableYType)
         handleSetDateRange(startDate, finishDate);
     }
