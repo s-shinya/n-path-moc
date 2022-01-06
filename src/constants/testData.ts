@@ -962,87 +962,91 @@ export const WEEK_ITEMS_DATA_BY_PEOPLE = [
 
 export const PERSONAL_CALENDAR = [
     {
-        // id: "1",
         title: "山陽特殊製鋼姫路",
         // start: "2021-12-01",
         // end: "2021-12-02",// 終了日 + 1日
+        start: `${y}-${m}-01`,
+        // end: `${y}-${m}-01`, //時間指定のときのみ
+        allDay : true,
         color: '#FEB2B2',
         textColor: '#63171B',
         borderColor: '#63171B',
-        start: `${y}-${m}-01 12:00`,
-        end: `${y}-${m}-01 17:10`,
-        allDay : true,
-        identification_id: 1 //工事案件複数同じものと個人予定のid(重複する可能性あり) 
+        identification_id: 1 //工事案件と個人予定のid(重複する可能性あり) 、工事案件はユーザーの予定にあるものなので同じ工事案件でもIDが異なる
     },
     {
-        // id: "2",
-        title: "広島西郵便局",
-        start: `${y}-${m}-01`,
-        end: `${y}-${m}-05`,
-        color: '#9AE6B4',
-        textColor: '#1C4532',
-        borderColor: '#1C4532',
+        title: "山陽特殊製鋼姫路(22:00〜06:00)",
+        start: `${y}-${m}-05 22:00`,
+        end: `${y}-${m}-05 06:00`,
+        allDay : true,
+        color: '#FEB2B2',
+        textColor: '#63171B',
+        borderColor: '#63171B',
+        is_personal_schedule: false,
+        is_night_work: true,
         identification_id: 2
     },
     {
-        // id: "3",
         title: "広島西郵便局",
-        start: `${y}-${m}-07`,
-        end: `${y}-${m}-09`,
+        start: `${y}-${m}-01`,
+        // end: `${y}-${m}-01`,
+        allDay : true,
         color: '#9AE6B4',
         textColor: '#1C4532',
         borderColor: '#1C4532',
         identification_id: 3
     },
     {
-        // id: "4",
-        title: "休み(終日)",
-        start: `${y}-${m}-06`,
-        end: `${y}-${m}-06`,
-        color: '#E2E8F0',
-        textColor: '#4A5568',
-        borderColor: '#4A5568',
+        title: "広島西郵便局",
+        start: `${y}-${m}-02 18:00`,
+        end: `${y}-${m}-02 09:00`,
         allDay : true,
-        is_personal_schedule: true,
-        identification_id: 1
-    },
-    {
-        // id: "5",
-        title: "休み(09:00〜13:00)",
-        // start: `${y}-${m}-20 09:00`,
-        // end: `${y}-${m}-21 13:00`,
-        start: `${y}-${m}-20`,
-        end: `${y}-${m}-21`,
-        color: '#E2E8F0',
-        textColor: '#4A5568',
-        borderColor: '#4A5568',
-        allDay : true,
-        is_personal_schedule: true,
-        identification_id: 2
-    },
-    {
-        // id: "6",
-        title: "山陽特殊製鋼姫路(22:00〜06:00)",
-        start: `${y}-${m}-05`,
-        end: `${y}-${m}-06`,
         color: '#9AE6B4',
         textColor: '#1C4532',
         borderColor: '#1C4532',
+        identification_id: 4
+    },
+    {
+        title: "広島西郵便局",
+        start: `${y}-${m}-07 18:00`,
+        end: `${y}-${m}-07 09:00`,
         allDay : true,
-        is_personal_schedule: false,
-        is_night_work: true,
+        color: '#9AE6B4',
+        textColor: '#1C4532',
+        borderColor: '#1C4532',
+        identification_id: 5
+    },
+    {
+        title: "休み(終日)",
+        start: `${y}-${m}-06`,
+        // end: `${y}-${m}-06`,
+        allDay : true,
+        color: '#E2E8F0',
+        textColor: '#4A5568',
+        borderColor: '#4A5568',
+        is_personal_schedule: true,
         identification_id: 6
-    }
+    },
+    {
+        title: "休み(09:00〜13:00)",
+        start: `${y}-${m}-20 09:00`,
+        end: `${y}-${m}-21 13:00`,
+        allDay : true,
+        color: '#E2E8F0',
+        textColor: '#4A5568',
+        borderColor: '#4A5568',
+        is_personal_schedule: true,
+        identification_id: 7
+    },
 ];
 export const ADD_EVENT = {
     id: "10",
     title: "休みだよ",
     start: `${y}-${m}-09 09:00`,
     end: `${y}-${m}-09 13:00`,
+    allDay : true,
     color: '#E2E8F0',
     textColor: '#4A5568',
     borderColor: '#4A5568',
-    allDay : true,
     is_personal_schedule: true,
     identification_id: 3
 }
