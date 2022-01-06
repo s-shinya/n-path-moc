@@ -16,11 +16,11 @@ import TimeLineLongTerm  from '../organisms/TimeLine/TimeLineLongTerm';
 import TimeLineMonth  from '../organisms/TimeLine/TimeLineMonth';
 import TimeLineWeek  from '../organisms/TimeLine/TimeLineWeek';
 import PersonalCalendar  from '../organisms/TimeLine/PersonalCalendar';
-import { CALENDAR_TAB, DISABLE_TIMELINE_Y_TYPE } from '../../constants/const';
+import { CALENDAR_TAB, DISPLAY_TIMELINE_Y_TYPE } from '../../constants/const';
 import CButton from '../Atoms/CButton';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import { LONG_TERM_GROUPS_DATA, LONG_TERM_ITEMS_DATA, MONTH_GROUPS_DATA_BY_CONSTRUCTION, MONTH_GROUPS_DATA_BY_PEOPLE, MONTH_ITEMS_DATA_BY_CONSTRUCTION, MONTH_ITEMS_DATA_BY_PEOPLE, WEEK_GROUPS_DATA_BY_CONSTRUCTION, WEEK_GROUPS_DATA_BY_PEOPLE, WEEK_ITEMS_DATA_BY_CONSTRUCTION, WEEK_ITEMS_DATA_BY_PEOPLE } from '../../constants/testData';
-import { GetTimelineDataType, TimeLineGroupsType, TimeLineItemsType } from '../../types/TimeLineType';
+import { GetTimelineDataType, TimeLineGroupsType, TimeLineItemType } from '../../types/TimeLineType';
 import moment, { Moment } from 'moment'
 
 const PlanPage:VFC = () => {
@@ -31,7 +31,7 @@ const PlanPage:VFC = () => {
     });
     const { winH } = useWindowSize();
     const [groupList,setGroupList] = useState<TimeLineGroupsType>([])
-    const [itemList,setItemList] = useState<TimeLineItemsType>([]);
+    const [itemList,setItemList] = useState<TimeLineItemType[]>([]);
 
     useEffect(()=>{
         setGroupList(LONG_TERM_GROUPS_DATA);
@@ -44,7 +44,7 @@ const PlanPage:VFC = () => {
     const getTimeLineData:GetTimelineDataType = (
         startDate, 
         finishDate, 
-        yDataType = DISABLE_TIMELINE_Y_TYPE.CONSTRUCTION
+        yDataType = DISPLAY_TIMELINE_Y_TYPE.CONSTRUCTION
     ) => {
         console.log('新しいデータを取得します');
         console.log(tabIndex);
@@ -53,7 +53,7 @@ const PlanPage:VFC = () => {
         //TODO:本来はAPIで出し訳
         switch(tabIndex){
             case CALENDAR_TAB.MONTH:
-                if(yDataType === DISABLE_TIMELINE_Y_TYPE.CONSTRUCTION){
+                if(yDataType === DISPLAY_TIMELINE_Y_TYPE.CONSTRUCTION){
                     setGroupList(MONTH_GROUPS_DATA_BY_CONSTRUCTION);
                     setItemList(MONTH_ITEMS_DATA_BY_CONSTRUCTION);
                 }else{
@@ -62,7 +62,7 @@ const PlanPage:VFC = () => {
                 }
                 break;
             case CALENDAR_TAB.WEEK:
-                if(yDataType === DISABLE_TIMELINE_Y_TYPE.CONSTRUCTION){
+                if(yDataType === DISPLAY_TIMELINE_Y_TYPE.CONSTRUCTION){
                     setGroupList(WEEK_GROUPS_DATA_BY_CONSTRUCTION);
                     setItemList(WEEK_ITEMS_DATA_BY_CONSTRUCTION);
                 }else{
@@ -114,10 +114,13 @@ const PlanPage:VFC = () => {
     }
 
     /**
-     * タイムライン選択
+     * 詳細データ取得
      */
-    const onItemSelect = (itemId:number) => {
-        alert(`onItemSelect：${itemId}`);
+    const getItemDate = (itemId:number, isPersonalSchedule?:boolean) => {
+        //TODO:API
+        (isPersonalSchedule)
+        ? alert(`個人予定取得 ID:${itemId}`)
+        : alert(`工事案件詳細 ID:${itemId}`)
     }
 
     return (
@@ -194,7 +197,7 @@ const PlanPage:VFC = () => {
                                     dateRange={dateRange}
                                     handleSetDateRange={handleSetDateRange}
                                     getData={getTimeLineData}
-                                    onItemSelect={onItemSelect}
+                                    getItemDate={getItemDate}
                                 />
                             }
                         </TabPanel>
@@ -207,7 +210,7 @@ const PlanPage:VFC = () => {
                                     dateRange={dateRange}
                                     handleSetDateRange={handleSetDateRange}
                                     getData={getTimeLineData}
-                                    onItemSelect={onItemSelect}
+                                    getItemDate={getItemDate}
                                 />
                             }
                         </TabPanel>
@@ -220,7 +223,7 @@ const PlanPage:VFC = () => {
                                     dateRange={dateRange}
                                     handleSetDateRange={handleSetDateRange}
                                     getData={getTimeLineData}
-                                    onItemSelect={onItemSelect}
+                                    getItemDate={getItemDate}
                                 />
                             }
                         </TabPanel>

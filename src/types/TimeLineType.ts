@@ -3,14 +3,14 @@ import { Moment } from 'moment'
 export type TimeLineType = {
     mainAreaH: number;
     groups: TimeLineGroupsType;
-    items: TimeLineItemsType;
+    items: TimeLineItemType[];
     dateRange: {
         visibleTimeStart:Moment, 
         visibleTimeEnd:Moment,
     };
     handleSetDateRange: (visibleTimeStart:Moment, visibleTimeEnd:Moment)=>void,
     getData: GetTimelineDataType;
-    onItemSelect: (itemId:number)=>void,
+    getItemDate: (itemId:number, isPersonalSchedule?:boolean)=>void,
 };
 
 export type GetTimelineDataType = (startDate:Moment, finishDate:Moment, yDataType?: string)=>void;
@@ -21,7 +21,7 @@ export type TimeLineGroupsType = {
     rightTitle?: string;
 }[];
 
-export type TimeLineItemsType = {
+export type TimeLineItemType = {
     id: number; 
     group: number; 
     title: string; 
@@ -42,4 +42,9 @@ export type TimeLineItemsType = {
         date: string;
         shortage_count: number;
     }[];
-}[];
+    is_night_work?: boolean;
+    is_personal_schedule?: boolean;
+    identification_id: number;
+};
+
+export type getTimeLineItem = Pick<TimeLineItemType, 'id' | 'identification_id' | 'is_personal_schedule'>

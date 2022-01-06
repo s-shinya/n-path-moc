@@ -9,6 +9,7 @@ import { CALENDAR_TAB } from '../../../constants/const';
 import { Box, Flex, Image, Text, Tooltip } from '@chakra-ui/react';
 import { useWindowSize } from '../../../hooks/useWindowSize';
 import { MoonIcon } from '@chakra-ui/icons';
+import { getTimeLineItem, TimeLineItemType, TimeLineType } from '../../../types/TimeLineType';
 
 // type ItemRendererProps = ReactCalendarItemRendererProps
 // type ItemRendererProps = any
@@ -26,19 +27,18 @@ interface TimelineItemBase<DateType> {
     itemProps?: React.HTMLAttributes<HTMLDivElement> | undefined;
 
     //カスタム
-    color:string;
-    selectedBgColor:string;
-    bgColor:string;
-    is_start_hide?:boolean;
-    start_label?: Moment;
-    is_end_hide?: boolean;
-    end_label?: Moment;
-    is_personnel_shortage?: boolean;
-    personnel_shortage_list?: {
-        date: string;
-        shortage_count: number;
-    }[];
-    is_night_work?: boolean;
+    color: TimeLineItemType['color'];
+    selectedBgColor: TimeLineItemType['selectedBgColor'];
+    bgColor: TimeLineItemType['bgColor'];
+    is_start_hide?: TimeLineItemType['is_start_hide'];
+    start_label?: TimeLineItemType['start_label'];
+    is_end_hide?: TimeLineItemType['is_end_hide'];
+    end_label?: TimeLineItemType['end_label'];
+    is_personnel_shortage?: TimeLineItemType['is_personnel_shortage'];
+    personnel_shortage_list?: TimeLineItemType['personnel_shortage_list'];
+    is_night_work?: TimeLineItemType['is_night_work'];
+    is_personal_schedule?: TimeLineItemType['is_personal_schedule'];
+    identification_id: TimeLineItemType['identification_id'];
 }
 interface CReactCalendarItemRendererProps{
     item: TimelineItemBase<any>;
@@ -58,8 +58,7 @@ interface CReactCalendarItemRendererProps{
         style: React.CSSProperties;
     };
     getResizeProps: (propsOverride?: GetResizeProps) => ItemRendererGetResizePropsReturnType;
-    // onItemSelect: ReactCalendarTimelineProps['onItemSelect'];
-    onItemSelect: (itemId:number)=>void;
+    onItemSelect: (item:getTimeLineItem) => void;
 }
 type ItemRendererProps = CReactCalendarItemRendererProps;
 
@@ -105,7 +104,7 @@ const ItemRenderer:VFC<ItemRendererProps> = (props) => {
             title=''// デフォルトtooltip消す
         >
             {itemContext.useResizeHandle ? <div {...leftResizeProps} /> : null}
-    
+
             <div
                 style={{
                     height: itemContext.dimensions.height,
@@ -118,14 +117,14 @@ const ItemRenderer:VFC<ItemRendererProps> = (props) => {
                 <Flex direction="row">
                     {/* y軸が案件名の時のみ */}
                     {item.is_personnel_shortage &&
-                        <Tooltip 
-                            hasArrow 
+                        <Tooltip
+                            hasArrow
                             label={item.personnel_shortage_list?.map((v, idx)=>(
                                 <React.Fragment key={idx}>{v.date} -{v.shortage_count}名 <br/></React.Fragment>
                             ))}
                         >
                             <Flex>
-                                <Image 
+                                <Image
                                     src="./assets/personnel_shortage.svg"
                                     boxSize={3}
                                     // onClick={()=>{alert('人員不足')}}
@@ -139,9 +138,15 @@ const ItemRenderer:VFC<ItemRendererProps> = (props) => {
                             </Flex>
                         </Tooltip>
                     }
-                    <Flex 
+                    <Flex
                         w="100%"
-                        onClick={()=>onItemSelect(Number(item.id))}
+                        onClick={()=>{
+                            onItemSelect({
+                                id:Number(item.id), 
+                                identification_id: item.identification_id, 
+                                is_personal_schedule: item.is_personal_schedule
+                            })
+                        }}
                         h={8}
                     >
                         {(item.is_night_work) && <MoonIcon color='gray.600'/>}
@@ -150,7 +155,7 @@ const ItemRenderer:VFC<ItemRendererProps> = (props) => {
                     </Flex>
                 </Flex>
             </div>
-                
+
                 {/* ラベル */}
                 {(startLabel !== null && endLabel !== null) &&
                     <div
@@ -161,7 +166,7 @@ const ItemRenderer:VFC<ItemRendererProps> = (props) => {
                             position:'absolute',
                             top:'-9px',
                             left:'50%',
-                            transform: 'translate(-50%,-50%)', 
+                            transform: 'translate(-50%,-50%)',
                             color:'#2D3748',//gray.700
                             whiteSpace: "nowrap",
                             // backgroundColor:'red'
@@ -176,7 +181,7 @@ const ItemRenderer:VFC<ItemRendererProps> = (props) => {
                                 backgroundColor:startLabelBgColor,
                                 borderRadius: '50%',
                                 height: '16px',
-                                width:'16px', 
+                                width:'16px',
                                 border: startLabelBorder
                             }}
                         >
@@ -189,7 +194,7 @@ const ItemRenderer:VFC<ItemRendererProps> = (props) => {
                                 backgroundColor:endLabelBgColor,
                                 borderRadius: '50%',
                                 height: '16px',
-                                width:'16px', 
+                                width:'16px',
                                 border: endLabelBorder
                             }}
                         >
@@ -217,24 +222,11 @@ const ItemRenderer:VFC<ItemRendererProps> = (props) => {
 type Props = {
     mainAreaH: number; //表示領域の高さ
     groups: {
-        id: number; 
-        title: string; 
+        id: number;
+        title: string;
         rightTitle?: string
     }[];
-    items: { 
-        id: number; 
-        group: number; 
-        title: string; 
-        start_time: number; 
-        end_time: number; 
-        bgColor: string; 
-        selectedBgColor: string; 
-        color: string; 
-        is_start_hide?:boolean;
-        start_label?: Moment;
-        is_end_hide?: boolean;
-        end_label?: Moment;
-    }[]; 
+    items: TimeLineItemType[];
     dateRange: {visibleTimeStart:Moment, visibleTimeEnd:Moment};
     unit?: 'primaryHeader' | Unit;
     primaryDateHeaderLabelFormat: string;
@@ -243,8 +235,7 @@ type Props = {
     isRightSidebar: boolean;
     rightSidebarTitle?: string;
     calendarPeriod: number;
-    // onItemSelect: ReactCalendarTimelineProps['onItemSelect'];
-    onItemSelect: (itemId:number)=>void;
+    onItemSelect: (item:getTimeLineItem) => void;
 }
 const CustomTimeLine: VFC<Props> = (props) => {
     const {
@@ -261,7 +252,7 @@ const CustomTimeLine: VFC<Props> = (props) => {
         calendarPeriod,
         onItemSelect
     } = props;
-    
+
     //タイムライン表示のtopの位置
     const [timeLineTop, setTimeLineTop] = useState<number>(0);
     const timeLineRef= useRef<null | HTMLDivElement>(null);
@@ -270,12 +261,12 @@ const CustomTimeLine: VFC<Props> = (props) => {
     }, []);
 
     return (
-        <Box 
+        <Box
             ref={timeLineRef}
-            position='relative' 
-            maxH={mainAreaH - timeLineTop} 
+            position='relative'
+            maxH={mainAreaH - timeLineTop}
             overflowY='scroll'
-            bg='white' 
+            bg='white'
         >
             <TimeLine
                 // groupRenderer= {GroupRenderer}
@@ -322,7 +313,7 @@ const CustomTimeLine: VFC<Props> = (props) => {
                 // rightSidebarContent={<div>right</div>}
                 // itemTouchSendsClick={false}
             >
-                <TimelineHeaders 
+                <TimelineHeaders
                     style={{//header固定
                         position: 'sticky',
                         top: 0,
@@ -354,19 +345,19 @@ const CustomTimeLine: VFC<Props> = (props) => {
                             }}
                         </SidebarHeader>
                     }
-                    {/* <DateHeader 
+                    {/* <DateHeader
                         unit={'primaryHeader'}
                         labelFormat={primaryDateHeaderLabelFormat}
                         style={(unit === 'week')?{color: 'white'}:{}}
                     /> */}
-                    <DateHeader 
+                    <DateHeader
                         unit={'primaryHeader'}
                         labelFormat={primaryDateHeaderLabelFormat}
                         // style={(unit === 'week')?{color: 'white'}:{}}
                         intervalRenderer={(props)=>{
                             // const title: any = props?.intervalContext.interval.startTime;
                             // console.log(test.format('YYYY-MM'));
-                            const title = (calendarPeriod === CALENDAR_TAB.LONG_TERM) 
+                            const title = (calendarPeriod === CALENDAR_TAB.LONG_TERM)
                             ? dateRange.visibleTimeStart.format('YYYY')
                             : dateRange.visibleTimeStart.format('YYYY-MM')
                             const d = props?.getIntervalProps()
@@ -389,7 +380,7 @@ const CustomTimeLine: VFC<Props> = (props) => {
                             )
                         }}
                     />
-                    <DateHeader 
+                    <DateHeader
                         labelFormat={secondaryDateHeaderLabelFormat}
                         style={{backgroundColor: 'rgb(240, 240, 240)'}}
                     />

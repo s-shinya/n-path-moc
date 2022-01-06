@@ -5,7 +5,7 @@ export const CALENDAR_TAB = {
     DATE : 3,
     PERSONAL : 4,
 }
-export const DISABLE_TIMELINE_Y_TYPE = {
+export const DISPLAY_TIMELINE_Y_TYPE = {
     CONSTRUCTION : '1',
     USER : '2',
 }

@@ -136,6 +136,7 @@ export const LONG_TERM_GROUPS_DATA = [
 export const LONG_TERM_ITEMS_DATA = [
     {
         id: 1,
+        identification_id: 1,
         group: 1,
         title: "",
         start_time: moment(`${y}-${m}-01 00:00:00`).valueOf(), //ライン表示の開始日（画面跨ぐ場合は考慮する）
@@ -150,6 +151,7 @@ export const LONG_TERM_ITEMS_DATA = [
     },
     {
         id: 2,
+        identification_id: 2,
         group: 2,
         title: "",
         start_time: moment(`${y}-10-10 00:00:00`).valueOf(),
@@ -178,6 +180,7 @@ export const LONG_TERM_ITEMS_DATA = [
     // },
     {
         id: 3,
+        identification_id: 3,
         group: 3,
         title: "",
         start_time: moment(`${y}-11-10 00:00:00`).valueOf(),
@@ -327,6 +330,7 @@ export const MONTH_GROUPS_DATA_BY_CONSTRUCTION = [
 export const MONTH_ITEMS_DATA_BY_CONSTRUCTION = [
     {
         id: 1,
+        identification_id: 1,
         group: 1,
         title: '人員が不足してる日があります',
         start_time: moment(`${y}-${m}-01 00:00:00`).valueOf(),//ライン表示の開始日（画面跨ぐ場合は考慮する）
@@ -364,6 +368,7 @@ export const MONTH_ITEMS_DATA_BY_CONSTRUCTION = [
     },
     {
         id: 2,
+        identification_id: 2,
         group: 2,
         title: '',
         start_time: moment(`${y}-${m}-10 00:00:00`).valueOf(),
@@ -378,6 +383,7 @@ export const MONTH_ITEMS_DATA_BY_CONSTRUCTION = [
     },
     {
         id: 3,
+        identification_id: 3,
         group: 3,
         title: '',
         start_time: moment(`${y}-${m}-13 00:00:00`).valueOf(),
@@ -500,7 +506,8 @@ export const MONTH_GROUPS_DATA_BY_PEOPLE = [
 
 export const MONTH_ITEMS_DATA_BY_PEOPLE = [
     {
-        id: 1,
+        id: 1,//連番（工事案件複数とユーザーIDが混合するため）
+        identification_id: 1, //プロジェクトか個人予定のid(重複する可能性あり) 
         group: 1,
         title: '山陽特殊製鋼姫路',
         start_time: moment(`${y}-${m}-01 00:00:00`).valueOf(),//ライン表示の開始日（画面跨ぐ場合は考慮する）
@@ -515,6 +522,7 @@ export const MONTH_ITEMS_DATA_BY_PEOPLE = [
     },
     {
         id: 2,
+        identification_id: 2,
         group: 2,
         title: '広島西郵便局',
         start_time: moment(`${y}-${m}-10 00:00:00`).valueOf(),
@@ -529,6 +537,7 @@ export const MONTH_ITEMS_DATA_BY_PEOPLE = [
     },
     {
         id: 4,
+        identification_id: 2,
         group: 3,
         title: '広島西郵便局',
         start_time: moment(`${y}-${m}-10 00:00:00`).valueOf(),
@@ -543,6 +552,7 @@ export const MONTH_ITEMS_DATA_BY_PEOPLE = [
     },
     {
         id: 3,
+        identification_id: 3,
         group: 3,
         title: '中部国際医療センター',
         start_time: moment(`${y}-${m}-13 00:00:00`).valueOf(),
@@ -557,6 +567,7 @@ export const MONTH_ITEMS_DATA_BY_PEOPLE = [
     },
     {
         id: 5,
+        identification_id: 3,
         group: 3,
         title: '中部国際医療センター',
         start_time: moment(`${y}-${m}-18 00:00:00`).valueOf(),
@@ -571,6 +582,7 @@ export const MONTH_ITEMS_DATA_BY_PEOPLE = [
     },
     {
         id: 6,
+        identification_id: 2,
         group: 3,
         title: '広島西郵便局',
         start_time: moment(`${y}-${m}-27 22:00:00`).valueOf(),
@@ -586,6 +598,7 @@ export const MONTH_ITEMS_DATA_BY_PEOPLE = [
     },
     {
         id: 7,//終日
+        identification_id: 1,
         group: 3,
         title: '休み(終日)',
         start_time: moment(`${y}-${m}-16 00:00:00`).valueOf(),
@@ -602,6 +615,7 @@ export const MONTH_ITEMS_DATA_BY_PEOPLE = [
     },
     {
         id: 8,//時間指定（午前）
+        identification_id: 2,
         group: 3,
         title: '休み(09:00〜13:00)',
         start_time: moment(`${y}-${m}-17 09:00:00`).valueOf(),
@@ -643,6 +657,7 @@ export const WEEK_GROUPS_DATA_BY_CONSTRUCTION = [
 export const WEEK_ITEMS_DATA_BY_CONSTRUCTION = [
     {
         id: 1,
+        identification_id: 1,
         group: 1,
         title: '人員が不足してる日があります',
         start_time: moment(`${y}-${m}-08  00:00:00`).valueOf(),//ライン表示の開始日（画面跨ぐ場合は考慮する）
@@ -680,6 +695,7 @@ export const WEEK_ITEMS_DATA_BY_CONSTRUCTION = [
     },
     {
         id: 2,
+        identification_id: 2,
         group: 2,
         title: '',
         start_time: moment(`${y}-${m}-10 00:00:00`).valueOf(),
@@ -694,6 +710,7 @@ export const WEEK_ITEMS_DATA_BY_CONSTRUCTION = [
     },
     {
         id: 3,
+        identification_id: 3,
         group: 3,
         title: '',
         start_time: moment(`${y}-${m}-12 00:00:00`).valueOf(),
@@ -817,6 +834,7 @@ export const WEEK_GROUPS_DATA_BY_PEOPLE = [
 export const WEEK_ITEMS_DATA_BY_PEOPLE = [
     {
         id: 1,
+        identification_id: 1,
         group: 1,
         title: '山陽特殊製鋼姫路',
         start_time: moment(`${y}-01-08  00:00:00`).valueOf(),//ライン表示の開始日（画面跨ぐ場合は考慮する）
@@ -831,6 +849,7 @@ export const WEEK_ITEMS_DATA_BY_PEOPLE = [
     },
     {
         id: 2,
+        identification_id: 2,
         group: 2,
         title: '広島西郵便局',
         start_time: moment(`${y}-01-10 00:00:00`).valueOf(),
@@ -845,6 +864,7 @@ export const WEEK_ITEMS_DATA_BY_PEOPLE = [
     },
     {
         id: 4,
+        identification_id: 2,
         group: 3,
         title: '広島西郵便局',
         start_time: moment(`${y}-01-10 00:00:00`).valueOf(),
@@ -859,6 +879,7 @@ export const WEEK_ITEMS_DATA_BY_PEOPLE = [
     },
     {
         id: 3,
+        identification_id: 3,
         group: 3,
         title: '中部国際医療センター',
         start_time: moment(`${y}-01-12 00:00:00`).valueOf(),
@@ -873,6 +894,7 @@ export const WEEK_ITEMS_DATA_BY_PEOPLE = [
     },
     {
         id: 5,
+        identification_id: 4,
         group: 3,
         title: 'あいうえお',
         start_time: moment(`${y}-01-12 00:00:00`).valueOf(),
@@ -887,6 +909,7 @@ export const WEEK_ITEMS_DATA_BY_PEOPLE = [
     },
     {
         id: 6,
+        identification_id: 2,
         group: 3,
         title: '広島西郵便局',
         start_time: moment(`${y}-01-10 22:00:00`).valueOf(),
@@ -902,6 +925,7 @@ export const WEEK_ITEMS_DATA_BY_PEOPLE = [
     },
     {
         id: 7,//終日
+        identification_id: 1,
         group: 3,
         title: '休み(終日)',
         start_time: moment(`${y}-01-08 00:00:00`).valueOf(),
@@ -918,6 +942,7 @@ export const WEEK_ITEMS_DATA_BY_PEOPLE = [
     },
     {
         id: 8,//時間指定（午前）
+        identification_id: 2,
         group: 3,
         title: '休み(09:00〜13:00)',
         start_time: moment(`${y}-01-09 09:00:00`).valueOf(),
@@ -947,7 +972,7 @@ export const PERSONAL_CALENDAR = [
         start: `${y}-${m}-01 12:00`,
         end: `${y}-${m}-01 17:10`,
         allDay : true,
-        identification_id: 1 //プロジェクトか個人予定のid(重複する可能性あり) 
+        identification_id: 1 //工事案件複数同じものと個人予定のid(重複する可能性あり) 
     },
     {
         // id: "2",
@@ -971,7 +996,7 @@ export const PERSONAL_CALENDAR = [
     },
     {
         // id: "4",
-        title: "休み（終日）",
+        title: "休み(終日)",
         start: `${y}-${m}-06`,
         end: `${y}-${m}-06`,
         color: '#E2E8F0',

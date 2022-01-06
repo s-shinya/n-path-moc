@@ -6,10 +6,10 @@ import PageTurnButtons from '../../molecules/PageTurnButtons';
 import { CALENDAR_TAB } from '../../../constants/const';
 import { Flex, Box, Text, Stack } from '@chakra-ui/react';
 import ColorBox from '../../Atoms/ColorBox';
-import { TimeLineType } from '../../../types/TimeLineType';
+import { getTimeLineItem, TimeLineType } from '../../../types/TimeLineType';
 
 const TimeLineLongTerm: VFC<TimeLineType> = (props) => {
-    const {mainAreaH, groups, items, dateRange, handleSetDateRange, getData, onItemSelect} = props;
+    const {mainAreaH, groups, items, dateRange, handleSetDateRange, getData, getItemDate} = props;
 
     const onClickPrev = ()=>{
         const startDate: Moment = dateRange.visibleTimeStart.add(-1, 'year');
@@ -24,6 +24,8 @@ const TimeLineLongTerm: VFC<TimeLineType> = (props) => {
         getData(startDate, finishDate)
         handleSetDateRange(startDate, finishDate);
     }
+
+    const onItemSelect = (data:getTimeLineItem) => getItemDate(data.identification_id, false);
 
     return (
         <>

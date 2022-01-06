@@ -3,32 +3,38 @@ import React, { useCallback, useState, VFC } from 'react';
 import moment, { Moment } from 'moment'
 import CustomTimeLine from './CustomTimeLine';
 import PageTurnButtons  from '../../molecules/PageTurnButtons';
-import { CALENDAR_TAB, DISABLE_TIMELINE_Y_TYPE } from '../../../constants/const';
+import { CALENDAR_TAB, DISPLAY_TIMELINE_Y_TYPE } from '../../../constants/const';
 import { Box, Flex, Radio, RadioGroup, Stack, Text } from '@chakra-ui/react';
 import ColorBox from '../../Atoms/ColorBox';
-import { TimeLineType } from '../../../types/TimeLineType';
+import { getTimeLineItem, TimeLineType } from '../../../types/TimeLineType';
 
 const TimeLineWeek: VFC<TimeLineType> = (props) => {
-    const {mainAreaH, groups, items, dateRange, handleSetDateRange, getData, onItemSelect} = props;
-    const [disableYType, setDisableYType] = useState(DISABLE_TIMELINE_Y_TYPE.CONSTRUCTION);
+    const {mainAreaH, groups, items, dateRange, handleSetDateRange, getData, getItemDate} = props;
+    const [displayYType, setDisplayYType] = useState(DISPLAY_TIMELINE_Y_TYPE.CONSTRUCTION);
 
     const onChangeRadio = (v:string) => {
         getData(dateRange.visibleTimeStart, dateRange.visibleTimeEnd, v)
-        setDisableYType(v);
+        setDisplayYType(v);
     }
 
     const onClickPrev = ()=>{
         const startDate: Moment = dateRange.visibleTimeStart.add(-1, 'week');
         const finishDate: Moment = dateRange.visibleTimeEnd.add(-1, 'week');
-        getData(startDate, finishDate, disableYType)
+        getData(startDate, finishDate, displayYType)
         handleSetDateRange(startDate, finishDate);
     }
 
     const onClickNext = ()=>{
         const startDate: Moment = dateRange.visibleTimeStart.add(1, 'week');
         const finishDate: Moment = dateRange.visibleTimeEnd.add(1, 'week');
-        getData(startDate, finishDate, disableYType)
+        getData(startDate, finishDate, displayYType)
         handleSetDateRange(startDate, finishDate);
+    }
+
+    const onItemSelect = (data:getTimeLineItem) => {
+        (displayYType === DISPLAY_TIMELINE_Y_TYPE.CONSTRUCTION)
+        ? getItemDate(data.identification_id, false)
+        : getItemDate(data.identification_id, data.is_personal_schedule);
     }
 
     return (
@@ -36,7 +42,7 @@ const TimeLineWeek: VFC<TimeLineType> = (props) => {
             <Flex justifyContent='space-between' alignItems='center' mb={2}>
                 <Box w='30%'>
                     <RadioGroup 
-                        value={disableYType}
+                        value={displayYType}
                         onChange={(v)=>onChangeRadio(v)} 
                     >
                         <Stack direction='row'>
@@ -72,7 +78,7 @@ const TimeLineWeek: VFC<TimeLineType> = (props) => {
                 primaryDateHeaderLabelFormat="YYYY-M"
                 secondaryDateHeaderLabelFormat="DD(ddd)"
                 isRightSidebar={false}
-                sidebarTitle={disableYType === DISABLE_TIMELINE_Y_TYPE.CONSTRUCTION ? '工事案件名' : 'ユーザー名'}
+                sidebarTitle={displayYType === DISPLAY_TIMELINE_Y_TYPE.CONSTRUCTION ? '工事案件名' : 'ユーザー名'}
                 onItemSelect={onItemSelect}
             />
         </>
