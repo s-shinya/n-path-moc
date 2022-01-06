@@ -584,6 +584,36 @@ export const MONTH_ITEMS_DATA_BY_PEOPLE = [
         is_end_hide: false,
         is_night_work: true,
     },
+    {
+        id: 7,//終日
+        group: 3,
+        title: '休み(終日)',
+        start_time: moment(`${y}-${m}-16 00:00:00`).valueOf(),
+        end_time: moment(`${y}-${m}-16 23:59:59`).valueOf(),
+        bgColor: "#E2E8F0",
+        selectedBgColor: "rgb(255, 193, 7)",
+        color: "#4A5568",
+        start_label: moment(`${y}-${m}-16 00:00:00`),
+        is_start_hide: false,
+        end_label: moment(`${y}-${m}-16 00:00:00`),
+        is_end_hide: false,
+        is_night_work: false,
+    },
+    {
+        id: 8,//時間指定（午前）
+        group: 3,
+        title: '休み(09:00〜13:00)',
+        start_time: moment(`${y}-${m}-17 09:00:00`).valueOf(),
+        end_time: moment(`${y}-${m}-17 13:00:00`).valueOf(),
+        bgColor: "#E2E8F0",
+        selectedBgColor: "rgb(255, 193, 7)",
+        color: "#4A5568",
+        start_label: moment(`${y}-${m}-17 00:00:00`),
+        is_start_hide: false,
+        end_label: moment(`${y}-${m}-17 00:00:00`),
+        is_end_hide: false,
+        is_night_work: false,
+    },
 ];
 
 
@@ -867,6 +897,36 @@ export const WEEK_ITEMS_DATA_BY_PEOPLE = [
         end_label: moment(`${y}-01-11 00:00:00`),
         is_end_hide: false,
         is_night_work: true,
+    },
+    {
+        id: 7,//終日
+        group: 3,
+        title: '休み(終日)',
+        start_time: moment(`${y}-01-08 00:00:00`).valueOf(),
+        end_time: moment(`${y}-01-08 23:59:59`).valueOf(),
+        bgColor: "#E2E8F0",
+        selectedBgColor: "rgb(255, 193, 7)",
+        color: "#4A5568",
+        start_label: moment(`${y}-01-08 00:00:00`),
+        is_start_hide: false,
+        end_label: moment(`${y}-01-08 00:00:00`),
+        is_end_hide: false,
+        is_night_work: false,
+    },
+    {
+        id: 8,//時間指定（午前）
+        group: 3,
+        title: '休み(09:00〜13:00)',
+        start_time: moment(`${y}-01-09 09:00:00`).valueOf(),
+        end_time: moment(`${y}-01-09 13:00:00`).valueOf(),
+        bgColor: "#E2E8F0",
+        selectedBgColor: "rgb(255, 193, 7)",
+        color: "#4A5568",
+        start_label: moment(`${y}-01-09 00:00:00`),
+        is_start_hide: false,
+        end_label: moment(`${y}-01-09 00:00:00`),
+        is_end_hide: false,
+        is_night_work: false,
     },
 ];
 
