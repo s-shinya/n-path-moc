@@ -1,4 +1,3 @@
-/* tslint:disable @typescript-eslint/no-unused-vars */
 
 import React, { useCallback, useEffect, useRef, useState, VFC } from 'react';
 // make sure you include the timeline stylesheet or the timeline will not be styled

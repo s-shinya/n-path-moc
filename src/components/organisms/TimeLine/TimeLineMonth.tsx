@@ -1,4 +1,3 @@
-/* tslint:disable */
 
 import React, { useCallback, useState, VFC } from 'react';
 import moment, { Moment } from 'moment'
