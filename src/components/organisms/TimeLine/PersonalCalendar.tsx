@@ -14,13 +14,12 @@ type EventInfoProps = Omit<EventContentArg, 'event'> & {
         extendedProps: {
             is_night_work?:boolean;
             is_personal_schedule?:boolean;
-            identification_id?:number;
         }
     }
 }
 type RenderEventContentProps = {
     eventInfo:EventInfoProps;
-    onClick:(id:number, isPersonalSchedule?:boolean)=>void
+    onClick:(id:string)=>void
 }
 
 const RenderEventContent:VFC<RenderEventContentProps> = (props) => {
@@ -33,7 +32,10 @@ const RenderEventContent:VFC<RenderEventContentProps> = (props) => {
             alignItems='center' 
             justifyContent='start' 
             _hover={{cursor: 'pointer'}}
-            onClick={()=>onClick(eventInfo.event.extendedProps.identification_id!, eventInfo.event.extendedProps.is_personal_schedule)}
+            onClick={()=>{
+                console.log(eventInfo);
+                onClick(eventInfo.event.id)
+            }}
         >
             {(eventInfo.event.extendedProps.is_night_work) && <MoonIcon color='gray.600'/>}
             <Text 
@@ -111,10 +113,11 @@ const PersonalCalendar: VFC = () => {
     //     //     clickInfo.event.remove();
     //     // }
     // }
-    const onClickEvent = (id:number, isPersonalSchedule?:boolean) => {
-        (isPersonalSchedule)
-        ? alert(`個人予定${id}`)
-        : alert(`工事案件${id}`)
+    const onClickEvent = (id:string) => {
+        alert(`個人のスケジュール${id}`);
+        // (isPersonalSchedule)
+        // ? alert(`個人予定${id}`)
+        // : alert(`工事案件${id}`)
     }
 
     return(
